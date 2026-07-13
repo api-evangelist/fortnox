@@ -1,0 +1,135 @@
+aid: fortnox
+name: Fortnox
+review:
+  question: Does Fortnox expose a documented public WebSocket API?
+  answer: true
+  date: '2026-07-12'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: true
+  asyncapiScopeNote: |
+    Fortnox documents a real, duplex WebSocket API at wss://ws.fortnox.se/topics-v1
+    (the "Topics" service). It is a genuine WebSocket (wss://) transport - not
+    SSE, long-polling, or webhooks - so under API Evangelist scope an AsyncAPI 2.6
+    document was authored at asyncapi/fortnox-asyncapi.yml modeling the WebSocket
+    server, the client "add-tenants-v1" subscribe command, and the pushed change
+    notification event. WebSocket precision is therefore true.
+findings:
+  summary: |
+    Yes. Fortnox exposes two distinct public API surfaces. (1) A REST API at
+    https://api.fortnox.se/3/ for accounting/ERP data (invoices, customers,
+    articles, orders, offers, vouchers, accounts, suppliers, supplier invoices,
+    projects, financial years), authenticated with OAuth2 Authorization Code
+    Flow - every request carries an Access-Token (Bearer JWT, 1h) header plus a
+    Client-Secret header. (2) A documented duplex WebSocket API at
+    wss://ws.fortnox.se/topics-v1 (the "Topics" service) that pushes minimal
+    change-notification events per domain topic so integrations can react to
+    changes instead of polling. The WebSocket is Kafka-backed, uses
+    at-least-once delivery with per-topic offsets, and supports replay up to 14
+    days. This is a real wss:// endpoint, so the WebSocket answer is true.
+  openSource: |
+    Fortnox is a proprietary commercial SaaS. There is no open-source server.
+    Integration requires a registered developer application in the Fortnox
+    Developer Portal, OAuth2 authorization by the end customer, and (for the
+    marketplace) revenue-share terms. Fortnox publishes SDK/community client
+    libraries and third-party OAuth2 strategies exist, but the platform itself
+    is closed source.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.fortnox.se/3
+      documented: true
+      note: Primary accounting/ERP REST API. OAuth2 Authorization Code Flow; Access-Token (Bearer JWT) + Client-Secret headers on every request.
+    - protocol: WebSocket
+      scheme: wss
+      baseURL: wss://ws.fortnox.se/topics-v1
+      documented: true
+      note: Real duplex WebSocket "Topics" event stream. Kafka-backed change notifications per domain topic; at-least-once delivery, per-topic offsets, up to 14-day replay. Modeled in asyncapi/fortnox-asyncapi.yml.
+  endpointsConfirmedRest:
+    - GET    https://api.fortnox.se/3/invoices
+    - POST   https://api.fortnox.se/3/invoices
+    - GET    https://api.fortnox.se/3/invoices/{DocumentNumber}
+    - PUT    https://api.fortnox.se/3/invoices/{DocumentNumber}
+    - GET    https://api.fortnox.se/3/customers
+    - POST   https://api.fortnox.se/3/customers
+    - GET    https://api.fortnox.se/3/customers/{CustomerNumber}
+    - PUT    https://api.fortnox.se/3/customers/{CustomerNumber}
+    - DELETE https://api.fortnox.se/3/customers/{CustomerNumber}
+    - GET    https://api.fortnox.se/3/articles
+    - POST   https://api.fortnox.se/3/articles
+    - GET    https://api.fortnox.se/3/articles/{ArticleNumber}
+    - PUT    https://api.fortnox.se/3/articles/{ArticleNumber}
+    - DELETE https://api.fortnox.se/3/articles/{ArticleNumber}
+    - GET    https://api.fortnox.se/3/orders
+    - POST   https://api.fortnox.se/3/orders
+    - GET    https://api.fortnox.se/3/orders/{DocumentNumber}
+    - PUT    https://api.fortnox.se/3/orders/{DocumentNumber}
+    - GET    https://api.fortnox.se/3/offers
+    - POST   https://api.fortnox.se/3/offers
+    - GET    https://api.fortnox.se/3/offers/{DocumentNumber}
+    - PUT    https://api.fortnox.se/3/offers/{DocumentNumber}
+    - GET    https://api.fortnox.se/3/vouchers
+    - POST   https://api.fortnox.se/3/vouchers
+    - GET    https://api.fortnox.se/3/vouchers/{VoucherSeries}/{VoucherNumber}
+    - GET    https://api.fortnox.se/3/accounts
+    - POST   https://api.fortnox.se/3/accounts
+    - GET    https://api.fortnox.se/3/accounts/{Number}
+    - PUT    https://api.fortnox.se/3/accounts/{Number}
+    - GET    https://api.fortnox.se/3/financialyears
+    - POST   https://api.fortnox.se/3/financialyears
+    - GET    https://api.fortnox.se/3/suppliers
+    - POST   https://api.fortnox.se/3/suppliers
+    - GET    https://api.fortnox.se/3/suppliers/{SupplierNumber}
+    - PUT    https://api.fortnox.se/3/suppliers/{SupplierNumber}
+    - GET    https://api.fortnox.se/3/supplierinvoices
+    - POST   https://api.fortnox.se/3/supplierinvoices
+    - GET    https://api.fortnox.se/3/supplierinvoices/{GivenNumber}
+    - GET    https://api.fortnox.se/3/projects
+    - POST   https://api.fortnox.se/3/projects
+    - GET    https://api.fortnox.se/3/projects/{ProjectNumber}
+    - PUT    https://api.fortnox.se/3/projects/{ProjectNumber}
+    - DELETE https://api.fortnox.se/3/projects/{ProjectNumber}
+  endpointsConfirmedWebSocket:
+    - CONNECT wss://ws.fortnox.se/topics-v1
+    - "SEND {\"command\":\"add-tenants-v1\", ...} to subscribe tenants/integration keys to the stream"
+  oauthEndpoints:
+    - GET  https://apps.fortnox.se/oauth-v1/auth
+    - POST https://apps.fortnox.se/oauth-v1/token
+  modeledVsConfirmed: |
+    Base hosts, OAuth2 flow, the header pair (Access-Token + Client-Secret),
+    rate limits, the REST resource paths above, and the WebSocket endpoint,
+    subscribe command, topic list, and event shape are all confirmed from
+    Fortnox's own developer documentation and live TLS/DNS probes. The
+    OpenAPI document ships a solid, representative subset (a handful of the
+    ~40+ REST resources) with pragmatic field-level schemas; exhaustive
+    per-field property coverage for every resource is modeled/summarized, not
+    transcribed field-for-field, and is flagged as such in the OpenAPI
+    description. No endpoint, host, or auth mechanism in this entry is
+    fabricated.
+sources:
+  - url: https://www.fortnox.se/developer
+    type: Documentation
+    note: Developer landing - OAuth2 authorization, rate limits, scopes, websockets, pricing models.
+  - url: https://api.fortnox.se/apidocs
+    type: APIReference
+    note: Official REST API reference; base https://api.fortnox.se/3/; OpenAPI available.
+  - url: https://www.fortnox.se/developer/authorization
+    type: Documentation
+    note: OAuth2 Authorization Code Flow; Client-Id/Client-Secret; token lifetimes (auth code 10m, access 1h, refresh 45d).
+  - url: https://www.fortnox.se/developer/authorization/get-access-token
+    type: Documentation
+    note: Token endpoint POST https://apps.fortnox.se/oauth-v1/token; Basic auth with client credentials.
+  - url: https://www.fortnox.se/developer/guides-and-good-to-know/rate-limits-for-fortnox-api
+    type: Documentation
+    note: 25 requests / 5s sliding window = 300 requests/minute per access-token (per client-id + tenant); 429 on exceed.
+  - url: https://www.fortnox.se/developer/guides-and-good-to-know/websockets
+    type: Documentation
+    note: Real duplex WebSocket at wss://ws.fortnox.se/topics-v1; Kafka-backed; add-tenants-v1 command; topic list; event schema; 14-day replay.
+actions:
+  asyncapiPath: asyncapi/fortnox-asyncapi.yml
+  apisYmlUpdated: true
+  reason: |
+    Fortnox exposes a genuine documented WebSocket API (wss://ws.fortnox.se/topics-v1),
+    so the review answer is true and an AsyncAPI 2.6 document was authored for the
+    WebSocket "Topics" event stream (server, add-tenants-v1 subscribe command, and
+    pushed change-notification event). The REST accounting/ERP surface is captured
+    in the OpenAPI document and the apis.yml lists both surfaces.

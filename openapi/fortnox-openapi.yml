@@ -1,0 +1,1351 @@
+openapi: 3.0.3
+info:
+  title: Fortnox REST API (Representative Subset)
+  description: >-
+    Grounded OpenAPI description of the Fortnox REST API - the Swedish cloud
+    accounting/ERP platform for SMBs and accounting bureaus. Base URL is
+    https://api.fortnox.se/3/. Authentication is OAuth2 Authorization Code Flow:
+    each request carries the Access-Token (Bearer JWT, 1h) header plus the
+    Client-Secret header issued to your Fortnox app. The old fixed
+    Access-Token/Client-Secret integration keys were deprecated 2025-04-30.
+
+
+    SCOPE / FIDELITY NOTE: The Fortnox API exposes 40+ resources. This document
+    ships a solid, representative SUBSET (Invoices, Customers, Articles, Orders,
+    Offers, Vouchers, Accounts, Financial Years, Suppliers, Supplier Invoices,
+    Projects) with pragmatic, partial field-level schemas. Paths, methods,
+    identifiers, the wrapper-object response envelope (e.g. { "Invoice": {...} },
+    { "Invoices": [...] }), and auth are grounded in Fortnox's developer
+    documentation. Per-field property coverage is intentionally partial and
+    MODELED/summarized from the docs, not transcribed field-for-field for every
+    resource. Verify exact field sets and validation against
+    https://api.fortnox.se/apidocs before production use.
+  version: '3.0'
+  contact:
+    name: Fortnox Developer
+    url: https://www.fortnox.se/developer
+  license:
+    name: Fortnox API License / Terms
+    url: https://www.fortnox.se/developer
+servers:
+  - url: https://api.fortnox.se/3
+    description: Fortnox REST API v3
+security:
+  - accessToken: []
+    clientSecret: []
+tags:
+  - name: Invoices
+    description: Accounts-receivable customer invoices.
+  - name: Customers
+    description: Customer register.
+  - name: Articles
+    description: Article (product/service) register.
+  - name: Orders
+    description: Sales orders.
+  - name: Offers
+    description: Offers (quotations).
+  - name: Vouchers
+    description: Accounting vouchers (journal entries).
+  - name: Accounts
+    description: Chart of accounts.
+  - name: Financial Years
+    description: Financial (accounting) years.
+  - name: Suppliers
+    description: Supplier register.
+  - name: Supplier Invoices
+    description: Inbound accounts-payable supplier invoices.
+  - name: Projects
+    description: Projects for tagging and reporting.
+paths:
+  /invoices:
+    get:
+      operationId: listInvoices
+      tags: [Invoices]
+      summary: List invoices
+      description: Lists invoices. Supports filtering and pagination via query parameters.
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/limit'
+        - name: filter
+          in: query
+          description: Predefined filter such as cancelled, fullypaid, unpaid, unpaidoverdue, unbooked.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of invoices.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Invoices:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/InvoiceListItem'
+                  MetaInformation:
+                    $ref: '#/components/schemas/MetaInformation'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+    post:
+      operationId: createInvoice
+      tags: [Invoices]
+      summary: Create an invoice
+      description: Creates a new invoice. The payload is wrapped in an `Invoice` object.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Invoice:
+                  $ref: '#/components/schemas/Invoice'
+      responses:
+        '201':
+          $ref: '#/components/responses/InvoiceResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /invoices/{DocumentNumber}:
+    parameters:
+      - $ref: '#/components/parameters/DocumentNumber'
+    get:
+      operationId: getInvoice
+      tags: [Invoices]
+      summary: Retrieve an invoice
+      responses:
+        '200':
+          $ref: '#/components/responses/InvoiceResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateInvoice
+      tags: [Invoices]
+      summary: Update an invoice
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Invoice:
+                  $ref: '#/components/schemas/Invoice'
+      responses:
+        '200':
+          $ref: '#/components/responses/InvoiceResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /customers:
+    get:
+      operationId: listCustomers
+      tags: [Customers]
+      summary: List customers
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: A list of customers.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Customers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Customer'
+                  MetaInformation:
+                    $ref: '#/components/schemas/MetaInformation'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createCustomer
+      tags: [Customers]
+      summary: Create a customer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Customer:
+                  $ref: '#/components/schemas/Customer'
+      responses:
+        '201':
+          $ref: '#/components/responses/CustomerResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /customers/{CustomerNumber}:
+    parameters:
+      - $ref: '#/components/parameters/CustomerNumber'
+    get:
+      operationId: getCustomer
+      tags: [Customers]
+      summary: Retrieve a customer
+      responses:
+        '200':
+          $ref: '#/components/responses/CustomerResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateCustomer
+      tags: [Customers]
+      summary: Update a customer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Customer:
+                  $ref: '#/components/schemas/Customer'
+      responses:
+        '200':
+          $ref: '#/components/responses/CustomerResponse'
+    delete:
+      operationId: deleteCustomer
+      tags: [Customers]
+      summary: Delete a customer
+      responses:
+        '204':
+          description: Customer deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /articles:
+    get:
+      operationId: listArticles
+      tags: [Articles]
+      summary: List articles
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: A list of articles.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Articles:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Article'
+                  MetaInformation:
+                    $ref: '#/components/schemas/MetaInformation'
+    post:
+      operationId: createArticle
+      tags: [Articles]
+      summary: Create an article
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Article:
+                  $ref: '#/components/schemas/Article'
+      responses:
+        '201':
+          $ref: '#/components/responses/ArticleResponse'
+  /articles/{ArticleNumber}:
+    parameters:
+      - name: ArticleNumber
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      operationId: getArticle
+      tags: [Articles]
+      summary: Retrieve an article
+      responses:
+        '200':
+          $ref: '#/components/responses/ArticleResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateArticle
+      tags: [Articles]
+      summary: Update an article
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Article:
+                  $ref: '#/components/schemas/Article'
+      responses:
+        '200':
+          $ref: '#/components/responses/ArticleResponse'
+    delete:
+      operationId: deleteArticle
+      tags: [Articles]
+      summary: Delete an article
+      responses:
+        '204':
+          description: Article deleted.
+  /orders:
+    get:
+      operationId: listOrders
+      tags: [Orders]
+      summary: List orders
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: A list of orders.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Orders:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/OrderListItem'
+                  MetaInformation:
+                    $ref: '#/components/schemas/MetaInformation'
+    post:
+      operationId: createOrder
+      tags: [Orders]
+      summary: Create an order
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Order:
+                  $ref: '#/components/schemas/Order'
+      responses:
+        '201':
+          $ref: '#/components/responses/OrderResponse'
+  /orders/{DocumentNumber}:
+    parameters:
+      - $ref: '#/components/parameters/DocumentNumber'
+    get:
+      operationId: getOrder
+      tags: [Orders]
+      summary: Retrieve an order
+      responses:
+        '200':
+          $ref: '#/components/responses/OrderResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateOrder
+      tags: [Orders]
+      summary: Update an order
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Order:
+                  $ref: '#/components/schemas/Order'
+      responses:
+        '200':
+          $ref: '#/components/responses/OrderResponse'
+  /offers:
+    get:
+      operationId: listOffers
+      tags: [Offers]
+      summary: List offers
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: A list of offers.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Offers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/OfferListItem'
+                  MetaInformation:
+                    $ref: '#/components/schemas/MetaInformation'
+    post:
+      operationId: createOffer
+      tags: [Offers]
+      summary: Create an offer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Offer:
+                  $ref: '#/components/schemas/Offer'
+      responses:
+        '201':
+          $ref: '#/components/responses/OfferResponse'
+  /offers/{DocumentNumber}:
+    parameters:
+      - $ref: '#/components/parameters/DocumentNumber'
+    get:
+      operationId: getOffer
+      tags: [Offers]
+      summary: Retrieve an offer
+      responses:
+        '200':
+          $ref: '#/components/responses/OfferResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /vouchers:
+    get:
+      operationId: listVouchers
+      tags: [Vouchers]
+      summary: List vouchers
+      parameters:
+        - name: financialyear
+          in: query
+          description: Financial year ID to scope the vouchers to.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: A list of vouchers.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Vouchers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Voucher'
+                  MetaInformation:
+                    $ref: '#/components/schemas/MetaInformation'
+    post:
+      operationId: createVoucher
+      tags: [Vouchers]
+      summary: Create a voucher
+      description: Posts a double-entry voucher into a voucher series.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Voucher:
+                  $ref: '#/components/schemas/Voucher'
+      responses:
+        '201':
+          $ref: '#/components/responses/VoucherResponse'
+  /vouchers/{VoucherSeries}/{VoucherNumber}:
+    parameters:
+      - name: VoucherSeries
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: VoucherNumber
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: financialyear
+        in: query
+        schema:
+          type: integer
+    get:
+      operationId: getVoucher
+      tags: [Vouchers]
+      summary: Retrieve a voucher
+      responses:
+        '200':
+          $ref: '#/components/responses/VoucherResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /accounts:
+    get:
+      operationId: listAccounts
+      tags: [Accounts]
+      summary: List accounts
+      parameters:
+        - name: financialyear
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: A list of accounts.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Accounts:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Account'
+                  MetaInformation:
+                    $ref: '#/components/schemas/MetaInformation'
+    post:
+      operationId: createAccount
+      tags: [Accounts]
+      summary: Create an account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Account:
+                  $ref: '#/components/schemas/Account'
+      responses:
+        '201':
+          $ref: '#/components/responses/AccountResponse'
+  /accounts/{Number}:
+    parameters:
+      - name: Number
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: financialyear
+        in: query
+        schema:
+          type: integer
+    get:
+      operationId: getAccount
+      tags: [Accounts]
+      summary: Retrieve an account
+      responses:
+        '200':
+          $ref: '#/components/responses/AccountResponse'
+    put:
+      operationId: updateAccount
+      tags: [Accounts]
+      summary: Update an account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Account:
+                  $ref: '#/components/schemas/Account'
+      responses:
+        '200':
+          $ref: '#/components/responses/AccountResponse'
+  /financialyears:
+    get:
+      operationId: listFinancialYears
+      tags: [Financial Years]
+      summary: List financial years
+      responses:
+        '200':
+          description: A list of financial years.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  FinancialYears:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FinancialYear'
+                  MetaInformation:
+                    $ref: '#/components/schemas/MetaInformation'
+    post:
+      operationId: createFinancialYear
+      tags: [Financial Years]
+      summary: Create a financial year
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                FinancialYear:
+                  $ref: '#/components/schemas/FinancialYear'
+      responses:
+        '201':
+          description: Financial year created.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  FinancialYear:
+                    $ref: '#/components/schemas/FinancialYear'
+  /suppliers:
+    get:
+      operationId: listSuppliers
+      tags: [Suppliers]
+      summary: List suppliers
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: A list of suppliers.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Suppliers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Supplier'
+                  MetaInformation:
+                    $ref: '#/components/schemas/MetaInformation'
+    post:
+      operationId: createSupplier
+      tags: [Suppliers]
+      summary: Create a supplier
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Supplier:
+                  $ref: '#/components/schemas/Supplier'
+      responses:
+        '201':
+          $ref: '#/components/responses/SupplierResponse'
+  /suppliers/{SupplierNumber}:
+    parameters:
+      - name: SupplierNumber
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      operationId: getSupplier
+      tags: [Suppliers]
+      summary: Retrieve a supplier
+      responses:
+        '200':
+          $ref: '#/components/responses/SupplierResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateSupplier
+      tags: [Suppliers]
+      summary: Update a supplier
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Supplier:
+                  $ref: '#/components/schemas/Supplier'
+      responses:
+        '200':
+          $ref: '#/components/responses/SupplierResponse'
+  /supplierinvoices:
+    get:
+      operationId: listSupplierInvoices
+      tags: [Supplier Invoices]
+      summary: List supplier invoices
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: A list of supplier invoices.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  SupplierInvoices:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SupplierInvoice'
+                  MetaInformation:
+                    $ref: '#/components/schemas/MetaInformation'
+    post:
+      operationId: createSupplierInvoice
+      tags: [Supplier Invoices]
+      summary: Create a supplier invoice
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                SupplierInvoice:
+                  $ref: '#/components/schemas/SupplierInvoice'
+      responses:
+        '201':
+          $ref: '#/components/responses/SupplierInvoiceResponse'
+  /supplierinvoices/{GivenNumber}:
+    parameters:
+      - name: GivenNumber
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      operationId: getSupplierInvoice
+      tags: [Supplier Invoices]
+      summary: Retrieve a supplier invoice
+      responses:
+        '200':
+          $ref: '#/components/responses/SupplierInvoiceResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /projects:
+    get:
+      operationId: listProjects
+      tags: [Projects]
+      summary: List projects
+      responses:
+        '200':
+          description: A list of projects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Projects:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Project'
+                  MetaInformation:
+                    $ref: '#/components/schemas/MetaInformation'
+    post:
+      operationId: createProject
+      tags: [Projects]
+      summary: Create a project
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Project:
+                  $ref: '#/components/schemas/Project'
+      responses:
+        '201':
+          $ref: '#/components/responses/ProjectResponse'
+  /projects/{ProjectNumber}:
+    parameters:
+      - name: ProjectNumber
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      operationId: getProject
+      tags: [Projects]
+      summary: Retrieve a project
+      responses:
+        '200':
+          $ref: '#/components/responses/ProjectResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateProject
+      tags: [Projects]
+      summary: Update a project
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Project:
+                  $ref: '#/components/schemas/Project'
+      responses:
+        '200':
+          $ref: '#/components/responses/ProjectResponse'
+    delete:
+      operationId: deleteProject
+      tags: [Projects]
+      summary: Delete a project
+      responses:
+        '204':
+          description: Project deleted.
+components:
+  securitySchemes:
+    accessToken:
+      type: apiKey
+      in: header
+      name: Access-Token
+      description: >-
+        OAuth2 Access-Token (Bearer JWT, valid 1 hour) obtained via the
+        Authorization Code Flow from https://apps.fortnox.se/oauth-v1/token.
+        Sent in the Access-Token header on every request.
+    clientSecret:
+      type: apiKey
+      in: header
+      name: Client-Secret
+      description: >-
+        The Client-Secret issued to your registered Fortnox developer
+        application. Sent in the Client-Secret header alongside the Access-Token
+        on every request.
+  parameters:
+    page:
+      name: page
+      in: query
+      description: Page number for paginated results.
+      schema:
+        type: integer
+        minimum: 1
+    limit:
+      name: limit
+      in: query
+      description: Number of records per page (max 500).
+      schema:
+        type: integer
+        maximum: 500
+    DocumentNumber:
+      name: DocumentNumber
+      in: path
+      required: true
+      description: The document number identifying the invoice/order/offer.
+      schema:
+        type: string
+    CustomerNumber:
+      name: CustomerNumber
+      in: path
+      required: true
+      description: The customer number.
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid Access-Token / Client-Secret.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Malformed request or validation error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    TooManyRequests:
+      description: >-
+        Rate limit exceeded (300 requests/minute per access-token; ~25 per 5s
+        sliding window).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InvoiceResponse:
+      description: A single invoice.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Invoice:
+                $ref: '#/components/schemas/Invoice'
+    CustomerResponse:
+      description: A single customer.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Customer:
+                $ref: '#/components/schemas/Customer'
+    ArticleResponse:
+      description: A single article.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Article:
+                $ref: '#/components/schemas/Article'
+    OrderResponse:
+      description: A single order.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Order:
+                $ref: '#/components/schemas/Order'
+    OfferResponse:
+      description: A single offer.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Offer:
+                $ref: '#/components/schemas/Offer'
+    VoucherResponse:
+      description: A single voucher.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Voucher:
+                $ref: '#/components/schemas/Voucher'
+    AccountResponse:
+      description: A single account.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Account:
+                $ref: '#/components/schemas/Account'
+    SupplierResponse:
+      description: A single supplier.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Supplier:
+                $ref: '#/components/schemas/Supplier'
+    SupplierInvoiceResponse:
+      description: A single supplier invoice.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              SupplierInvoice:
+                $ref: '#/components/schemas/SupplierInvoice'
+    ProjectResponse:
+      description: A single project.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Project:
+                $ref: '#/components/schemas/Project'
+  schemas:
+    MetaInformation:
+      type: object
+      description: Pagination metadata returned on list endpoints.
+      properties:
+        '@TotalResources':
+          type: integer
+        '@TotalPages':
+          type: integer
+        '@CurrentPage':
+          type: integer
+    ErrorResponse:
+      type: object
+      description: Fortnox error envelope.
+      properties:
+        ErrorInformation:
+          type: object
+          properties:
+            Error:
+              type: integer
+            Message:
+              type: string
+            Code:
+              type: integer
+    InvoiceRow:
+      type: object
+      description: A single line item on an invoice, order, or offer.
+      properties:
+        ArticleNumber:
+          type: string
+        Description:
+          type: string
+        DeliveredQuantity:
+          type: string
+        Price:
+          type: number
+        VAT:
+          type: number
+        AccountNumber:
+          type: integer
+        Unit:
+          type: string
+    Invoice:
+      type: object
+      description: >-
+        Accounts-receivable customer invoice. Partial/modeled field set - see
+        https://api.fortnox.se/apidocs for the full schema.
+      properties:
+        DocumentNumber:
+          type: string
+          readOnly: true
+        CustomerNumber:
+          type: string
+        CustomerName:
+          type: string
+        InvoiceDate:
+          type: string
+          format: date
+        DueDate:
+          type: string
+          format: date
+        Currency:
+          type: string
+          example: SEK
+        Total:
+          type: number
+        Balance:
+          type: number
+        Booked:
+          type: boolean
+        Cancelled:
+          type: boolean
+        InvoiceRows:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceRow'
+      required:
+        - CustomerNumber
+    InvoiceListItem:
+      type: object
+      properties:
+        DocumentNumber:
+          type: string
+        CustomerNumber:
+          type: string
+        CustomerName:
+          type: string
+        InvoiceDate:
+          type: string
+          format: date
+        Total:
+          type: number
+        Balance:
+          type: number
+        Currency:
+          type: string
+    Customer:
+      type: object
+      description: A customer in the customer register.
+      properties:
+        CustomerNumber:
+          type: string
+        Name:
+          type: string
+        OrganisationNumber:
+          type: string
+        Email:
+          type: string
+        Address1:
+          type: string
+        City:
+          type: string
+        ZipCode:
+          type: string
+        CountryCode:
+          type: string
+        Currency:
+          type: string
+        VATNumber:
+          type: string
+        Type:
+          type: string
+          enum: [COMPANY, PRIVATE]
+      required:
+        - Name
+    Article:
+      type: object
+      description: A product or service article.
+      properties:
+        ArticleNumber:
+          type: string
+        Description:
+          type: string
+        Type:
+          type: string
+          enum: [STOCK, SERVICE]
+        SalesPrice:
+          type: number
+        PurchasePrice:
+          type: number
+        Unit:
+          type: string
+        QuantityInStock:
+          type: number
+        SalesAccount:
+          type: integer
+        VAT:
+          type: number
+      required:
+        - Description
+    Order:
+      type: object
+      description: A sales order.
+      properties:
+        DocumentNumber:
+          type: string
+          readOnly: true
+        CustomerNumber:
+          type: string
+        CustomerName:
+          type: string
+        OrderDate:
+          type: string
+          format: date
+        DeliveryDate:
+          type: string
+          format: date
+        Currency:
+          type: string
+        Total:
+          type: number
+        OrderRows:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceRow'
+      required:
+        - CustomerNumber
+    OrderListItem:
+      type: object
+      properties:
+        DocumentNumber:
+          type: string
+        CustomerNumber:
+          type: string
+        CustomerName:
+          type: string
+        OrderDate:
+          type: string
+          format: date
+        Total:
+          type: number
+    Offer:
+      type: object
+      description: An offer (quotation).
+      properties:
+        DocumentNumber:
+          type: string
+          readOnly: true
+        CustomerNumber:
+          type: string
+        CustomerName:
+          type: string
+        OfferDate:
+          type: string
+          format: date
+        ExpireDate:
+          type: string
+          format: date
+        Currency:
+          type: string
+        Total:
+          type: number
+        OfferRows:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceRow'
+      required:
+        - CustomerNumber
+    OfferListItem:
+      type: object
+      properties:
+        DocumentNumber:
+          type: string
+        CustomerNumber:
+          type: string
+        CustomerName:
+          type: string
+        OfferDate:
+          type: string
+          format: date
+        Total:
+          type: number
+    VoucherRow:
+      type: object
+      description: A single debit/credit line in a voucher.
+      properties:
+        Account:
+          type: integer
+        Debit:
+          type: number
+        Credit:
+          type: number
+        Description:
+          type: string
+        TransactionInformation:
+          type: string
+    Voucher:
+      type: object
+      description: A double-entry accounting voucher (journal entry).
+      properties:
+        VoucherSeries:
+          type: string
+        VoucherNumber:
+          type: integer
+          readOnly: true
+        TransactionDate:
+          type: string
+          format: date
+        Description:
+          type: string
+        Year:
+          type: integer
+        VoucherRows:
+          type: array
+          items:
+            $ref: '#/components/schemas/VoucherRow'
+      required:
+        - VoucherSeries
+        - TransactionDate
+        - VoucherRows
+    Account:
+      type: object
+      description: An account in the chart of accounts.
+      properties:
+        Number:
+          type: integer
+        Description:
+          type: string
+        Active:
+          type: boolean
+        VATCode:
+          type: string
+        Year:
+          type: integer
+        BalanceBroughtForward:
+          type: number
+      required:
+        - Number
+        - Description
+    FinancialYear:
+      type: object
+      description: A financial (accounting) year.
+      properties:
+        Id:
+          type: integer
+          readOnly: true
+        FromDate:
+          type: string
+          format: date
+        ToDate:
+          type: string
+          format: date
+        AccountingMethod:
+          type: string
+          enum: [ACCRUAL, CASH]
+        accountCharts:
+          type: string
+      required:
+        - FromDate
+        - ToDate
+    Supplier:
+      type: object
+      description: A supplier in the supplier register.
+      properties:
+        SupplierNumber:
+          type: string
+        Name:
+          type: string
+        OrganisationNumber:
+          type: string
+        Email:
+          type: string
+        Address1:
+          type: string
+        City:
+          type: string
+        ZipCode:
+          type: string
+        CountryCode:
+          type: string
+        Currency:
+          type: string
+        BG:
+          type: string
+        PG:
+          type: string
+        VATNumber:
+          type: string
+      required:
+        - Name
+    SupplierInvoice:
+      type: object
+      description: An inbound supplier (accounts-payable) invoice.
+      properties:
+        GivenNumber:
+          type: string
+          readOnly: true
+        SupplierNumber:
+          type: string
+        InvoiceNumber:
+          type: string
+        InvoiceDate:
+          type: string
+          format: date
+        DueDate:
+          type: string
+          format: date
+        Total:
+          type: number
+        VAT:
+          type: number
+        Currency:
+          type: string
+        Booked:
+          type: boolean
+      required:
+        - SupplierNumber
+    Project:
+      type: object
+      description: A project used to tag records for reporting.
+      properties:
+        ProjectNumber:
+          type: string
+        Description:
+          type: string
+        Status:
+          type: string
+          enum: [ONGOING, COMPLETED, NOTSTARTED]
+        StartDate:
+          type: string
+          format: date
+        EndDate:
+          type: string
+          format: date
+        ProjectLeader:
+          type: string
+      required:
+        - Description

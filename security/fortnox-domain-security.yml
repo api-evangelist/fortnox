@@ -1,0 +1,74 @@
+generated: '2026-07-12'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + API/WebSocket hosts
+provider: Fortnox
+providerId: fortnox
+hosts:
+- host: api.fortnox.se
+  https: true
+  tls_version: TLSv1.3
+  cert_issuer: GlobalSign RSA OV SSL CA 2018
+  cert_expires: Dec 25 12:49:54 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+  hsts_include_subdomains: true
+  server: Fortnox
+- host: ws.fortnox.se
+  https: true
+  tls_version: TLSv1.3
+  cert_issuer: GlobalSign RSA OV SSL CA 2018
+  cert_expires: Dec 25 12:49:54 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+  hsts_include_subdomains: true
+  server: Fortnox
+  note: WebSocket Topics endpoint (wss://ws.fortnox.se/topics-v1).
+- host: apps.fortnox.se
+  https: true
+  tls_version: TLSv1.3
+  cert_issuer: GlobalSign RSA OV SSL CA 2018
+  cert_expires: Dec 25 12:49:54 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+  hsts_include_subdomains: true
+  server: Fortnox
+  note: OAuth2 authorization/token host (oauth-v1/auth, oauth-v1/token).
+- host: www.fortnox.se
+  https: true
+  tls_version: TLSv1.3
+  cert_issuer: GlobalSign RSA OV SSL CA 2018
+  cert_expires: Dec 25 12:49:54 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+  hsts_include_subdomains: true
+  server: Fortnox
+- host: developer.fortnox.se
+  https: true
+  tls_version: TLSv1.3
+  cert_issuer: GlobalSign RSA OV SSL CA 2018
+  cert_expires: Dec 25 12:49:54 2026 GMT
+  redirect: https://www.fortnox.se/developer
+domains:
+- domain: fortnox.se
+  dnssec: false
+  spf: true
+  spf_record: 'v=spf1 ip4:168.245.43.210 ip4:168.245.29.251 ip4:149.72.127.118 include:_spf.google.com include:spfa.fortnox.se include:spfb.fortnox.se -all'
+  dmarc: true
+  dmarc_policy: quarantine
+  dmarc_subdomain_policy: quarantine
+  caa:
+  - '0 issue "globalsign.com"'
+  - '0 issue "digicert.com; cansignhttpexchanges=yes"'
+  - '0 issue "letsencrypt.org"'
+  - '0 issue "pki.goog; cansignhttpexchanges=yes"'
+  - '0 issue "ssl.com"'
+  - '0 issue "comodoca.com"'
+  - '0 issue "infocert.it"'
+notes: >-
+  All Fortnox API, WebSocket, OAuth, and web hosts serve TLS 1.3 with GlobalSign
+  OV certificates and enforce HSTS (max-age 31536000, includeSubdomains). The
+  fortnox.se apex publishes SPF (-all), DMARC (p=quarantine), and a restrictive
+  CAA allow-list. DNSSEC was not observed on the apex at probe time.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,176 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Fortnox
+providerId: fortnox
+created: '2026-07-12'
+modified: '2026-07-12'
+reconciled: false
+tags:
+- Accounting
+- ERP
+- Invoicing
+- Bookkeeping
+- Sweden
+- Plans
+- SaaS
+description: >-
+  Fortnox is sold as a per-user, per-month SaaS in Swedish kronor (SEK, excl.
+  VAT). Customers pay a base "Fortnox Access" platform fee plus one or more
+  program/package licenses (invoicing, bookkeeping, bookkeeping plus, complete),
+  scaling by users and add-on modules. The REST API and the WebSocket Topics API
+  are available to registered developer applications; Fortnox does not charge a
+  separate per-request API fee for a customer's own integration - paid
+  third-party integrations are instead distributed via the Fortnox marketplace
+  under a revenue-share. The SEK figures below are representative snapshots from
+  mid-2026 public sources and are NOT reconciled; Fortnox revises pricing often.
+notes: >-
+  Package names, bundling (package license vs. base Access), and prices differ
+  across Fortnox's own product and price-list pages. Verify current SEK rates at
+  https://www.fortnox.se/produkt/prislista before quoting.
+sources:
+- https://www.fortnox.se/produkt/prislista
+- https://www.fortnox.se/produkt/bokforingsprogram
+- https://www.fortnox.se/developer
+plans:
+- id: fortnox-developer-access
+  name: Developer / API Access
+  type: free
+  description: >-
+    Registering a developer application and accessing the REST API
+    (api.fortnox.se/3) and the WebSocket Topics API (ws.fortnox.se/topics-v1)
+    has no standalone subscription fee. Access to a customer's data requires the
+    customer to authorize your app via OAuth2 and to hold the relevant Fortnox
+    licenses. Rate limited to 300 requests/minute per access-token.
+  entries:
+  - label: API Requests
+    name: api_requests
+    type: usage
+    metric: requests
+    limit: 300
+    timeFrame: minute
+    geo: global
+    unit: 1
+    price: no separate API fee (per-access-token rate limit applies)
+    userMultiplied: false
+  elements:
+  - name: REST API (api.fortnox.se/3)
+  - name: WebSocket Topics API
+  - name: OAuth2 Authorization Code Flow
+- id: fortnox-fakturering
+  name: Fakturering (Invoicing)
+  type: paid
+  description: >-
+    Invoicing package for creating and sending customer invoices. Representative
+    entry-level SEK/month (excl. VAT); billed per user and typically on top of
+    the base Fortnox Access fee.
+  entries:
+  - label: Invoicing License
+    name: invoicing_license
+    type: flat
+    metric: user
+    limit: -1
+    timeFrame: month
+    geo: SE
+    unit: 1
+    currency: SEK
+    price: from ~149 SEK/user/month (excl. VAT; representative, not reconciled)
+    userMultiplied: true
+  elements:
+  - name: Customer Invoices
+  - name: Customer Register
+  - name: Articles
+- id: fortnox-bokforing
+  name: Bokforing (Bookkeeping)
+  type: paid
+  description: >-
+    Bookkeeping package for vouchers, chart of accounts, and financial years.
+    Representative entry-level SEK/month (excl. VAT), per user, on top of base
+    Fortnox Access.
+  entries:
+  - label: Bookkeeping License
+    name: bookkeeping_license
+    type: flat
+    metric: user
+    limit: -1
+    timeFrame: month
+    geo: SE
+    unit: 1
+    currency: SEK
+    price: from ~249 SEK/user/month (excl. VAT; representative, not reconciled)
+    userMultiplied: true
+  elements:
+  - name: Vouchers
+  - name: Chart of Accounts
+  - name: Financial Years
+- id: fortnox-bokforing-plus
+  name: Bokforing Plus (Bookkeeping Plus)
+  type: paid
+  description: >-
+    Expanded bookkeeping package adding supplier invoices and further accounting
+    workflows. Representative SEK/month (excl. VAT), per user.
+  entries:
+  - label: Bookkeeping Plus License
+    name: bookkeeping_plus_license
+    type: flat
+    metric: user
+    limit: -1
+    timeFrame: month
+    geo: SE
+    unit: 1
+    currency: SEK
+    price: from ~349 SEK/user/month (excl. VAT; representative, not reconciled)
+    userMultiplied: true
+  elements:
+  - name: Supplier Invoices
+  - name: Suppliers
+  - name: Bookkeeping
+- id: fortnox-komplett
+  name: Komplett (Complete)
+  type: paid
+  description: >-
+    Complete bundle spanning invoicing, bookkeeping, and broader
+    business-administration modules. Representative SEK/month (excl. VAT), per
+    user.
+  entries:
+  - label: Complete License
+    name: complete_license
+    type: flat
+    metric: user
+    limit: -1
+    timeFrame: month
+    geo: SE
+    unit: 1
+    currency: SEK
+    price: from ~549 SEK/user/month (excl. VAT; representative, not reconciled)
+    userMultiplied: true
+  elements:
+  - name: Invoicing
+  - name: Bookkeeping
+  - name: Orders and Offers
+  - name: Projects
+- id: fortnox-marketplace
+  name: Marketplace Revenue Share (Integrators)
+  type: enterprise
+  description: >-
+    Commercial model for third-party integrations distributed via the Fortnox
+    marketplace. The integrator receives ~75% of the integration's revenue;
+    Fortnox retains ~25% for platform, marketing, and recommendation costs.
+  entries:
+  - label: Integration Revenue Share
+    name: revenue_share
+    type: flat
+    metric: revenue
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: developer keeps ~75%, Fortnox retains ~25%
+    userMultiplied: false
+  elements:
+  - name: Marketplace Distribution
+  - name: Recommendation Algorithm
+  - name: Billing and Payouts
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

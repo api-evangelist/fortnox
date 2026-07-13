@@ -1,0 +1,55 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Fortnox
+providerId: fortnox
+created: '2026-07-12'
+modified: '2026-07-12'
+reconciled: true
+tags:
+- Accounting
+- ERP
+- Rate Limiting
+- Quotas
+- Sweden
+description: >-
+  Fortnox rate-limits the REST API per access-token. The documented limit is 300
+  requests per minute per access-token, enforced as a sliding window of roughly
+  25 requests per 5 seconds and scoped per client-id + tenant. Because the limit
+  is per access-token, an integration serving many Fortnox tenants gets an
+  independent 300 requests/minute allowance for each tenant's token. Exceeding
+  the limit returns HTTP 429 (Too Many Requests). In November 2022 Fortnox
+  raised the limit from 4 req/s (240/min) to 5 req/s (300/min).
+notes: >-
+  The limit is keyed on the access-token, not on client IP. The WebSocket Topics
+  API is designed specifically to reduce REST polling and therefore reduce rate
+  pressure. Verify current numbers on the Fortnox rate-limits page as they have
+  changed over time.
+sources:
+- https://www.fortnox.se/developer/guides-and-good-to-know/rate-limits-for-fortnox-api
+- https://www.fortnox.se/developer/blog/fortnox-will-raise-its-api-rate-limit-and-make-changes-to-the-current-sliding-window
+responseCodes:
+  throttled: 429
+limits:
+- name: REST API Requests
+  scope: access-token
+  metric: requests
+  limit: 300
+  timeFrame: minute
+  notes: Per access-token (per client-id + tenant). Enforced as a ~25 requests / 5s sliding window.
+- name: Sliding Window Burst
+  scope: access-token
+  metric: requests
+  limit: 25
+  timeFrame: 5 seconds
+  notes: Short-window burst ceiling underlying the per-minute limit.
+policies:
+- name: Sliding Window
+  description: Requests are counted over a moving 5-second window; sustained rate must average within the window.
+- name: Per-Tenant Isolation
+  description: Each tenant's access-token has its own independent quota, so multi-tenant integrations scale linearly across customers.
+- name: Backoff Strategy
+  description: On HTTP 429, back off (exponential with jitter) and retry; prefer the WebSocket Topics stream over polling to stay under the limit.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

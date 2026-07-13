@@ -1,0 +1,218 @@
+asyncapi: '2.6.0'
+id: 'urn:se:fortnox:ws:topics-v1'
+info:
+  title: Fortnox Topics WebSocket API
+  version: '1.0.0'
+  description: |
+    AsyncAPI 2.6 description of Fortnox's **real duplex WebSocket API** at
+    `wss://ws.fortnox.se/topics-v1` (the "Topics" service). Unlike the REST API
+    at https://api.fortnox.se/3/, this is a genuine WebSocket (wss://) transport
+    - not SSE, long-polling, or webhooks.
+
+    The service is Kafka-backed. A single WebSocket connection can carry many
+    Fortnox tenants (customer integration keys): after connecting, the client
+    sends an `add-tenants-v1` command carrying its Client-Secret and the
+    per-tenant Access-Tokens (optionally including child tenants). Fortnox then
+    pushes **minimal change-notification events** per domain topic (invoices,
+    supplier-invoices, customers, articles, orders, offers, vouchers, projects,
+    and more). Events say *what changed* (topic, type, tenantId, entityId,
+    offset, timestamp) but not the full record - the integration then calls the
+    REST API to fetch details, eliminating the need to poll.
+
+    Delivery is at-least-once (duplicates possible) with a per-topic monotonic
+    `offset` guaranteeing order. Clients may supply per-topic offsets when
+    adding tenants to replay missed events up to 14 days back; offsets older
+    than 14 days reset to the earliest available.
+
+    GROUNDING NOTE: The endpoint, the `add-tenants-v1` command, the topic list,
+    and the event field set are grounded in Fortnox's WebSocket documentation
+    (https://www.fortnox.se/developer/guides-and-good-to-know/websockets). Some
+    optional per-event payload fields (e.g. invoiceId, fullyPaid) vary by event
+    type and are modeled as an open additionalProperties map.
+  contact:
+    name: API Evangelist
+    email: kin@apievangelist.com
+    url: https://apievangelist.com
+  license:
+    name: Fortnox API License / Terms
+    url: https://www.fortnox.se/developer
+  x-transport-notes:
+    transport: WebSocket
+    protocol: wss
+    direction: duplex (client sends commands; server pushes events)
+    endpoint: 'wss://ws.fortnox.se/topics-v1'
+    backing: Apache Kafka
+    delivery: at-least-once (duplicates possible), per-topic ordered by offset
+    replay: up to 14 days via per-topic offsets
+    notWebSocket: false
+    source: https://www.fortnox.se/developer/guides-and-good-to-know/websockets
+defaultContentType: application/json
+servers:
+  topics:
+    url: ws.fortnox.se/topics-v1
+    protocol: wss
+    description: |
+      Fortnox Topics duplex WebSocket endpoint. Connect with `wss://` then send
+      an `add-tenants-v1` command to subscribe one or more tenants' integration
+      keys to the change-notification stream.
+channels:
+  /topics-v1:
+    description: |
+      The single WebSocket channel. The client publishes control commands
+      (currently `add-tenants-v1`) to subscribe tenants and set replay offsets,
+      and subscribes to the resulting change-notification events pushed by
+      Fortnox across all subscribed topics.
+    bindings:
+      ws:
+        bindingVersion: '0.1.0'
+    publish:
+      operationId: sendCommand
+      summary: Send a control command to the WebSocket (e.g. add tenants).
+      description: |
+        Client-to-server. After the WebSocket is open, send an `add-tenants-v1`
+        command carrying your Client-Secret and the per-tenant Access-Tokens.
+        Optionally include per-topic offsets to replay missed events (up to 14
+        days) and `includeChildTenants` to fan out to child tenants.
+      message:
+        $ref: '#/components/messages/AddTenantsCommand'
+    subscribe:
+      operationId: receiveTopicEvent
+      summary: Receive pushed change-notification events.
+      description: |
+        Server-to-client. Once tenants are subscribed, Fortnox pushes a stream
+        of minimal change-notification events. Each event identifies the topic,
+        event type, tenant, and affected entity, plus a per-topic `offset` for
+        ordering and replay. Fetch full data via the REST API when notified.
+      message:
+        $ref: '#/components/messages/TopicEvent'
+components:
+  messages:
+    AddTenantsCommand:
+      name: AddTenantsCommand
+      title: add-tenants-v1 command
+      summary: Subscribe one or more tenants (integration keys) to the stream.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/AddTenantsCommand'
+      examples:
+        - name: addTenants
+          summary: Add two tenants and replay invoices from an offset
+          payload:
+            command: add-tenants-v1
+            includeChildTenants: false
+            clientSecret: 'your-app-client-secret'
+            accessTokens:
+              - 'Bearer eyJhbGciOi...tenantA'
+              - 'Bearer eyJhbGciOi...tenantB'
+    TopicEvent:
+      name: TopicEvent
+      title: Change-notification event
+      summary: A minimal "what changed" event on a domain topic.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/TopicEvent'
+      examples:
+        - name: invoiceCreated
+          summary: An invoice was created
+          payload:
+            topic: invoices
+            offset: '10432'
+            type: invoice-created-v1
+            tenantId: 123456
+            entityId: '4711'
+            timestamp: '2026-07-12T09:30:00Z'
+        - name: supplierInvoicePaid
+          summary: A supplier invoice was fully paid
+          payload:
+            topic: supplier-invoices
+            offset: '55018'
+            type: supplier-invoice-updated-v1
+            tenantId: 123456
+            entityId: '8890'
+            timestamp: '2026-07-12T10:05:12Z'
+            fullyPaid: true
+  schemas:
+    AddTenantsCommand:
+      type: object
+      description: Client command to add tenants (integration keys) to the connection.
+      required:
+        - command
+        - clientSecret
+        - accessTokens
+      properties:
+        command:
+          type: string
+          enum:
+            - add-tenants-v1
+          description: The command identifier.
+        includeChildTenants:
+          type: boolean
+          description: Whether to also subscribe child tenants of the supplied access tokens.
+        clientSecret:
+          type: string
+          description: The Client-Secret of your registered Fortnox developer application.
+        accessTokens:
+          type: array
+          description: Per-tenant OAuth2 Access-Tokens (Bearer JWTs) to subscribe.
+          items:
+            type: string
+        offsets:
+          type: object
+          description: >-
+            Optional per-topic starting offsets for replay (up to 14 days back).
+            Keys are topic names; values are the offset to resume from.
+          additionalProperties:
+            type: string
+    TopicEvent:
+      type: object
+      description: >-
+        A minimal change-notification event. Carries what happened, not the full
+        record; call the REST API to retrieve details. Some event types include
+        additional optional fields (e.g. invoiceId, fullyPaid).
+      required:
+        - topic
+        - offset
+        - type
+        - tenantId
+        - entityId
+        - timestamp
+      additionalProperties: true
+      properties:
+        topic:
+          type: string
+          description: Domain topic the event belongs to.
+          enum:
+            - articles
+            - bureau-activities
+            - bureau-assignments
+            - cost-centers
+            - currencies
+            - customers
+            - financial-years
+            - invoices
+            - offers
+            - orders
+            - projects
+            - suppliers
+            - supplier-invoices
+            - termsofdeliveries
+            - termsofpayments
+            - vouchers
+            - warehouse-stockbalances
+            - waysofdeliveries
+        offset:
+          type: string
+          description: Per-topic monotonic offset for ordering and replay.
+        type:
+          type: string
+          description: Versioned event type (e.g. invoice-created-v1).
+        tenantId:
+          type: integer
+          description: The Fortnox tenant (customer) the event applies to.
+        entityId:
+          type: string
+          description: Identifier of the affected entity within the topic domain.
+        timestamp:
+          type: string
+          format: date-time
+          description: ISO 8601 event creation time.

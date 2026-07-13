@@ -1,0 +1,220 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fortnox REST API",
+    "version": "3.0",
+    "description": "Representative subset of the Fortnox REST API (https://api.fortnox.se/3/). Every request requires the Access-Token (Bearer JWT) and Client-Secret headers from your OAuth2-authorized Fortnox app."
+  },
+  "request": {
+    "headers": [
+      { "name": "Access-Token", "value": "{{accessToken}}" },
+      { "name": "Client-Secret", "value": "{{clientSecret}}" },
+      { "name": "Content-Type", "value": "application/json" },
+      { "name": "Accept", "value": "application/json" }
+    ]
+  },
+  "variables": [
+    { "name": "baseUrl", "value": "https://api.fortnox.se/3" },
+    { "name": "accessToken", "value": "" },
+    { "name": "clientSecret", "value": "" }
+  ],
+  "items": [
+    {
+      "info": { "name": "Invoices", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List invoices", "type": "http" },
+          "http": { "method": "GET", "url": "{{baseUrl}}/invoices" },
+          "docs": "Lists invoices with pagination and optional filter."
+        },
+        {
+          "info": { "name": "Create invoice", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/invoices",
+            "body": { "type": "json", "data": "{\"Invoice\":{\"CustomerNumber\":\"1\",\"InvoiceRows\":[{\"ArticleNumber\":\"1\",\"DeliveredQuantity\":\"1\",\"Price\":100}]}}" }
+          },
+          "docs": "Creates an invoice. Payload wrapped in an Invoice object."
+        },
+        {
+          "info": { "name": "Retrieve invoice", "type": "http" },
+          "http": { "method": "GET", "url": "{{baseUrl}}/invoices/:DocumentNumber" },
+          "docs": "Retrieves a single invoice by document number."
+        },
+        {
+          "info": { "name": "Update invoice", "type": "http" },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/invoices/:DocumentNumber",
+            "body": { "type": "json", "data": "{\"Invoice\":{}}" }
+          },
+          "docs": "Updates an invoice."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Customers", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List customers", "type": "http" },
+          "http": { "method": "GET", "url": "{{baseUrl}}/customers" },
+          "docs": "Lists customers."
+        },
+        {
+          "info": { "name": "Create customer", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/customers",
+            "body": { "type": "json", "data": "{\"Customer\":{\"Name\":\"Acme AB\"}}" }
+          },
+          "docs": "Creates a customer."
+        },
+        {
+          "info": { "name": "Retrieve customer", "type": "http" },
+          "http": { "method": "GET", "url": "{{baseUrl}}/customers/:CustomerNumber" },
+          "docs": "Retrieves a customer by number."
+        },
+        {
+          "info": { "name": "Update customer", "type": "http" },
+          "http": { "method": "PUT", "url": "{{baseUrl}}/customers/:CustomerNumber", "body": { "type": "json", "data": "{\"Customer\":{}}" } },
+          "docs": "Updates a customer."
+        },
+        {
+          "info": { "name": "Delete customer", "type": "http" },
+          "http": { "method": "DELETE", "url": "{{baseUrl}}/customers/:CustomerNumber" },
+          "docs": "Deletes a customer."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Articles", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List articles", "type": "http" },
+          "http": { "method": "GET", "url": "{{baseUrl}}/articles" },
+          "docs": "Lists articles."
+        },
+        {
+          "info": { "name": "Create article", "type": "http" },
+          "http": { "method": "POST", "url": "{{baseUrl}}/articles", "body": { "type": "json", "data": "{\"Article\":{\"Description\":\"Consulting\"}}" } },
+          "docs": "Creates an article."
+        },
+        {
+          "info": { "name": "Retrieve article", "type": "http" },
+          "http": { "method": "GET", "url": "{{baseUrl}}/articles/:ArticleNumber" },
+          "docs": "Retrieves an article."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Orders", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List orders", "type": "http" },
+          "http": { "method": "GET", "url": "{{baseUrl}}/orders" },
+          "docs": "Lists sales orders."
+        },
+        {
+          "info": { "name": "Create order", "type": "http" },
+          "http": { "method": "POST", "url": "{{baseUrl}}/orders", "body": { "type": "json", "data": "{\"Order\":{\"CustomerNumber\":\"1\"}}" } },
+          "docs": "Creates a sales order."
+        },
+        {
+          "info": { "name": "Retrieve order", "type": "http" },
+          "http": { "method": "GET", "url": "{{baseUrl}}/orders/:DocumentNumber" },
+          "docs": "Retrieves an order."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Offers", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List offers", "type": "http" },
+          "http": { "method": "GET", "url": "{{baseUrl}}/offers" },
+          "docs": "Lists offers (quotations)."
+        },
+        {
+          "info": { "name": "Create offer", "type": "http" },
+          "http": { "method": "POST", "url": "{{baseUrl}}/offers", "body": { "type": "json", "data": "{\"Offer\":{\"CustomerNumber\":\"1\"}}" } },
+          "docs": "Creates an offer."
+        },
+        {
+          "info": { "name": "Retrieve offer", "type": "http" },
+          "http": { "method": "GET", "url": "{{baseUrl}}/offers/:DocumentNumber" },
+          "docs": "Retrieves an offer."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Bookkeeping", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List vouchers", "type": "http" },
+          "http": { "method": "GET", "url": "{{baseUrl}}/vouchers" },
+          "docs": "Lists vouchers, optionally scoped by financialyear."
+        },
+        {
+          "info": { "name": "Create voucher", "type": "http" },
+          "http": { "method": "POST", "url": "{{baseUrl}}/vouchers", "body": { "type": "json", "data": "{\"Voucher\":{\"VoucherSeries\":\"A\",\"TransactionDate\":\"2026-07-12\",\"VoucherRows\":[{\"Account\":1930,\"Debit\":100,\"Credit\":0},{\"Account\":3010,\"Debit\":0,\"Credit\":100}]}}" } },
+          "docs": "Posts a double-entry voucher."
+        },
+        {
+          "info": { "name": "List accounts", "type": "http" },
+          "http": { "method": "GET", "url": "{{baseUrl}}/accounts" },
+          "docs": "Lists the chart of accounts."
+        },
+        {
+          "info": { "name": "List financial years", "type": "http" },
+          "http": { "method": "GET", "url": "{{baseUrl}}/financialyears" },
+          "docs": "Lists financial years."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Suppliers & Supplier Invoices", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List suppliers", "type": "http" },
+          "http": { "method": "GET", "url": "{{baseUrl}}/suppliers" },
+          "docs": "Lists suppliers."
+        },
+        {
+          "info": { "name": "Create supplier", "type": "http" },
+          "http": { "method": "POST", "url": "{{baseUrl}}/suppliers", "body": { "type": "json", "data": "{\"Supplier\":{\"Name\":\"Leverantor AB\"}}" } },
+          "docs": "Creates a supplier."
+        },
+        {
+          "info": { "name": "List supplier invoices", "type": "http" },
+          "http": { "method": "GET", "url": "{{baseUrl}}/supplierinvoices" },
+          "docs": "Lists supplier invoices."
+        },
+        {
+          "info": { "name": "Retrieve supplier invoice", "type": "http" },
+          "http": { "method": "GET", "url": "{{baseUrl}}/supplierinvoices/:GivenNumber" },
+          "docs": "Retrieves a supplier invoice."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Projects", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List projects", "type": "http" },
+          "http": { "method": "GET", "url": "{{baseUrl}}/projects" },
+          "docs": "Lists projects."
+        },
+        {
+          "info": { "name": "Create project", "type": "http" },
+          "http": { "method": "POST", "url": "{{baseUrl}}/projects", "body": { "type": "json", "data": "{\"Project\":{\"Description\":\"Website build\"}}" } },
+          "docs": "Creates a project."
+        },
+        {
+          "info": { "name": "Retrieve project", "type": "http" },
+          "http": { "method": "GET", "url": "{{baseUrl}}/projects/:ProjectNumber" },
+          "docs": "Retrieves a project."
+        }
+      ]
+    }
+  ]
+}

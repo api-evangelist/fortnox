@@ -1,0 +1,102 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Fortnox
+providerId: fortnox
+created: '2026-07-12'
+modified: '2026-07-12'
+reconciled: false
+tags:
+- Accounting
+- ERP
+- Invoicing
+- Bookkeeping
+- Sweden
+- Nordics
+- FinOps
+- Cost Management
+- SaaS
+description: >-
+  FinOps view of Fortnox spend. Fortnox is a per-user, per-month SaaS billed in
+  Swedish kronor (SEK, excl. VAT): customers pay a base "Fortnox Access" fee plus
+  one or more program/package licenses (bookkeeping, invoicing, salary, etc.),
+  with charges scaling by users, add-on modules, and usage-based services
+  (e-invoices, payments, interpretation). The API itself has no separate metered
+  API fee for a customer's own use; instead, third-party integrations are
+  distributed through the Fortnox marketplace under a revenue-share (the
+  integrator receives ~75% of the integration's revenue, Fortnox retains ~25%
+  for platform, marketing, and recommendation costs). Exact per-license SEK rates
+  are not reconciled here and change frequently.
+notes: >-
+  Two distinct cost perspectives: (1) a Fortnox CUSTOMER pays SEK per user/month
+  for licenses and add-ons; (2) an INTEGRATION DEVELOPER earns marketplace
+  revenue net of Fortnox's ~25% share and pays no per-request API fee, but must
+  design within the 300 req/min per-token rate limit. Verify current package
+  and license pricing at https://www.fortnox.se/produkt/prislista.
+sources:
+- https://www.fortnox.se/produkt/prislista
+- https://www.fortnox.se/developer
+- https://www.finops.org/framework/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Fortnox
+serviceCategory: Business Applications
+billingModel:
+  pricingCategory: Subscription
+  billingFrequency: Monthly
+  billingCurrency: SEK
+  chargeCategories:
+  - Purchase
+  - Usage
+focusColumns:
+  ServiceName: Fortnox
+  ServiceCategory: Business Applications
+  ProviderName: Fortnox
+  PublisherName: Fortnox
+  InvoiceIssuerName: Fortnox
+  BillingCurrency: SEK
+  ChargeCategory: Purchase
+  PricingCategory: Subscription
+meters:
+- name: user_licenses
+  description: Per-user monthly program/package licenses (SEK/user/month, excl. VAT).
+  unit: users
+  aggregation: sum
+  dimensions:
+  - tenant
+  - package
+- name: platform_access
+  description: Base "Fortnox Access" platform fee per company/month.
+  unit: months
+  aggregation: sum
+  dimensions:
+  - tenant
+- name: usage_services
+  description: Usage-based add-on services such as e-invoices, payments, and interpretation.
+  unit: transactions
+  aggregation: sum
+  dimensions:
+  - tenant
+  - service
+- name: marketplace_revenue_share
+  description: Fortnox's ~25% share of paid third-party integration revenue (developer keeps ~75%).
+  unit: percent
+  aggregation: max
+  dimensions:
+  - integration
+principles:
+- name: Visibility
+  description: Track per-user license counts, base Access fee, and usage-service transactions per Fortnox company (tenant).
+- name: Allocation
+  description: Map licenses and add-on services to the teams/entities using each Fortnox company file.
+- name: Optimization
+  description: Right-size user seats and packages; consolidate add-on services; use the WebSocket Topics stream instead of REST polling to avoid over-provisioning integration infrastructure.
+- name: Accountability
+  description: Review monthly SEK license and usage charges against the Fortnox price list; for integrators, reconcile marketplace payouts net of the platform revenue share.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

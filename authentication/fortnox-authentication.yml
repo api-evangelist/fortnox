@@ -1,0 +1,58 @@
+generated: '2026-07-12'
+method: documented
+source: https://www.fortnox.se/developer/authorization
+provider: Fortnox
+providerId: fortnox
+summary:
+  types:
+  - oauth2
+  - apiKey
+schemes:
+- name: oauth2AuthorizationCode
+  type: oauth2
+  flow: authorizationCode
+  authorizationUrl: https://apps.fortnox.se/oauth-v1/auth
+  tokenUrl: https://apps.fortnox.se/oauth-v1/token
+  description: >-
+    Fortnox uses OAuth2 Authorization Code Flow. The end customer authorizes
+    your registered developer application; you exchange the Authorization-Code
+    (valid 10 minutes) for an Access-Token (Bearer JWT, valid 1 hour) and a
+    Refresh-Token (valid 45 days). Refreshing rotates the Refresh-Token. The
+    legacy fixed Access-Token / Client-Secret integration-key model was fully
+    deprecated on 2025-04-30.
+  tokenLifetimes:
+    authorizationCode: 10 minutes
+    accessToken: 1 hour
+    refreshToken: 45 days
+  sources:
+  - https://www.fortnox.se/developer/authorization
+  - https://www.fortnox.se/developer/authorization/get-access-token
+- name: accessTokenHeader
+  type: apiKey
+  in: header
+  headerName: Access-Token
+  description: >-
+    On every REST call the OAuth2 Access-Token (Bearer JWT) is sent in the
+    Access-Token request header.
+  sources:
+  - https://www.fortnox.se/developer/authorization
+- name: clientSecretHeader
+  type: apiKey
+  in: header
+  headerName: Client-Secret
+  description: >-
+    On every REST call the Client-Secret issued to your Fortnox developer
+    application is sent in the Client-Secret request header, alongside the
+    Access-Token header.
+  sources:
+  - https://www.fortnox.se/developer/authorization
+notes: >-
+  Scopes are granted per Fortnox resource area (e.g. invoice, customer, article,
+  order, offer, bookkeeping, supplier, supplierinvoice, project) and requested
+  during the authorization step. The WebSocket Topics API
+  (wss://ws.fortnox.se/topics-v1) authenticates by sending the Client-Secret and
+  per-tenant Access-Tokens inside the add-tenants-v1 command after the socket
+  opens, rather than via request headers.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

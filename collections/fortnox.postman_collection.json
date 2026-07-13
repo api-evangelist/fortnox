@@ -1,0 +1,297 @@
+{
+  "info": {
+    "name": "Fortnox REST API",
+    "description": "Representative subset of the Fortnox REST API (https://api.fortnox.se/3/). Every request requires the Access-Token (Bearer JWT) and Client-Secret headers from your OAuth2-authorized Fortnox app. Set accessToken and clientSecret collection variables.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://api.fortnox.se/3" },
+    { "key": "accessToken", "value": "" },
+    { "key": "clientSecret", "value": "" }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      { "key": "key", "value": "Access-Token", "type": "string" },
+      { "key": "value", "value": "{{accessToken}}", "type": "string" },
+      { "key": "in", "value": "header", "type": "string" }
+    ]
+  },
+  "item": [
+    {
+      "name": "Invoices",
+      "item": [
+        {
+          "name": "List invoices",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Access-Token", "value": "{{accessToken}}" },
+              { "key": "Client-Secret", "value": "{{clientSecret}}" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}/invoices", "host": ["{{baseUrl}}"], "path": ["invoices"] }
+          }
+        },
+        {
+          "name": "Create invoice",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Access-Token", "value": "{{accessToken}}" },
+              { "key": "Client-Secret", "value": "{{clientSecret}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\"Invoice\":{\"CustomerNumber\":\"1\",\"InvoiceRows\":[{\"ArticleNumber\":\"1\",\"DeliveredQuantity\":\"1\",\"Price\":100}]}}" },
+            "url": { "raw": "{{baseUrl}}/invoices", "host": ["{{baseUrl}}"], "path": ["invoices"] }
+          }
+        },
+        {
+          "name": "Retrieve invoice",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Access-Token", "value": "{{accessToken}}" },
+              { "key": "Client-Secret", "value": "{{clientSecret}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/invoices/:DocumentNumber", "host": ["{{baseUrl}}"], "path": ["invoices", ":DocumentNumber"], "variable": [{ "key": "DocumentNumber", "value": "" }] }
+          }
+        },
+        {
+          "name": "Update invoice",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Access-Token", "value": "{{accessToken}}" },
+              { "key": "Client-Secret", "value": "{{clientSecret}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\"Invoice\":{}}" },
+            "url": { "raw": "{{baseUrl}}/invoices/:DocumentNumber", "host": ["{{baseUrl}}"], "path": ["invoices", ":DocumentNumber"], "variable": [{ "key": "DocumentNumber", "value": "" }] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Customers",
+      "item": [
+        {
+          "name": "List customers",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Access-Token", "value": "{{accessToken}}" },
+              { "key": "Client-Secret", "value": "{{clientSecret}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/customers", "host": ["{{baseUrl}}"], "path": ["customers"] }
+          }
+        },
+        {
+          "name": "Create customer",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Access-Token", "value": "{{accessToken}}" },
+              { "key": "Client-Secret", "value": "{{clientSecret}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\"Customer\":{\"Name\":\"Acme AB\"}}" },
+            "url": { "raw": "{{baseUrl}}/customers", "host": ["{{baseUrl}}"], "path": ["customers"] }
+          }
+        },
+        {
+          "name": "Retrieve customer",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Access-Token", "value": "{{accessToken}}" },
+              { "key": "Client-Secret", "value": "{{clientSecret}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/customers/:CustomerNumber", "host": ["{{baseUrl}}"], "path": ["customers", ":CustomerNumber"], "variable": [{ "key": "CustomerNumber", "value": "" }] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Articles",
+      "item": [
+        {
+          "name": "List articles",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Access-Token", "value": "{{accessToken}}" },
+              { "key": "Client-Secret", "value": "{{clientSecret}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/articles", "host": ["{{baseUrl}}"], "path": ["articles"] }
+          }
+        },
+        {
+          "name": "Create article",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Access-Token", "value": "{{accessToken}}" },
+              { "key": "Client-Secret", "value": "{{clientSecret}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\"Article\":{\"Description\":\"Consulting\"}}" },
+            "url": { "raw": "{{baseUrl}}/articles", "host": ["{{baseUrl}}"], "path": ["articles"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Orders",
+      "item": [
+        {
+          "name": "List orders",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Access-Token", "value": "{{accessToken}}" },
+              { "key": "Client-Secret", "value": "{{clientSecret}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/orders", "host": ["{{baseUrl}}"], "path": ["orders"] }
+          }
+        },
+        {
+          "name": "Create order",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Access-Token", "value": "{{accessToken}}" },
+              { "key": "Client-Secret", "value": "{{clientSecret}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\"Order\":{\"CustomerNumber\":\"1\"}}" },
+            "url": { "raw": "{{baseUrl}}/orders", "host": ["{{baseUrl}}"], "path": ["orders"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Offers",
+      "item": [
+        {
+          "name": "List offers",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Access-Token", "value": "{{accessToken}}" },
+              { "key": "Client-Secret", "value": "{{clientSecret}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/offers", "host": ["{{baseUrl}}"], "path": ["offers"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Bookkeeping",
+      "item": [
+        {
+          "name": "List vouchers",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Access-Token", "value": "{{accessToken}}" },
+              { "key": "Client-Secret", "value": "{{clientSecret}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/vouchers", "host": ["{{baseUrl}}"], "path": ["vouchers"] }
+          }
+        },
+        {
+          "name": "Create voucher",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Access-Token", "value": "{{accessToken}}" },
+              { "key": "Client-Secret", "value": "{{clientSecret}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\"Voucher\":{\"VoucherSeries\":\"A\",\"TransactionDate\":\"2026-07-12\",\"VoucherRows\":[{\"Account\":1930,\"Debit\":100,\"Credit\":0},{\"Account\":3010,\"Debit\":0,\"Credit\":100}]}}" },
+            "url": { "raw": "{{baseUrl}}/vouchers", "host": ["{{baseUrl}}"], "path": ["vouchers"] }
+          }
+        },
+        {
+          "name": "List accounts",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Access-Token", "value": "{{accessToken}}" },
+              { "key": "Client-Secret", "value": "{{clientSecret}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/accounts", "host": ["{{baseUrl}}"], "path": ["accounts"] }
+          }
+        },
+        {
+          "name": "List financial years",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Access-Token", "value": "{{accessToken}}" },
+              { "key": "Client-Secret", "value": "{{clientSecret}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/financialyears", "host": ["{{baseUrl}}"], "path": ["financialyears"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Suppliers & Supplier Invoices",
+      "item": [
+        {
+          "name": "List suppliers",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Access-Token", "value": "{{accessToken}}" },
+              { "key": "Client-Secret", "value": "{{clientSecret}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/suppliers", "host": ["{{baseUrl}}"], "path": ["suppliers"] }
+          }
+        },
+        {
+          "name": "List supplier invoices",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Access-Token", "value": "{{accessToken}}" },
+              { "key": "Client-Secret", "value": "{{clientSecret}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/supplierinvoices", "host": ["{{baseUrl}}"], "path": ["supplierinvoices"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Projects",
+      "item": [
+        {
+          "name": "List projects",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Access-Token", "value": "{{accessToken}}" },
+              { "key": "Client-Secret", "value": "{{clientSecret}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/projects", "host": ["{{baseUrl}}"], "path": ["projects"] }
+          }
+        },
+        {
+          "name": "Create project",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Access-Token", "value": "{{accessToken}}" },
+              { "key": "Client-Secret", "value": "{{clientSecret}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\"Project\":{\"Description\":\"Website build\"}}" },
+            "url": { "raw": "{{baseUrl}}/projects", "host": ["{{baseUrl}}"], "path": ["projects"] }
+          }
+        }
+      ]
+    }
+  ]
+}
