@@ -215,6 +215,8 @@ apis:
     react to changes instead of polling the REST API. Kafka-backed, at-least-once
     delivery, with per-topic offsets and up to 14-day replay.
 common:
+- type: AgenticAccess
+  url: agentic-access/fortnox-agentic-access.yml
 - type: DomainSecurity
   url: security/fortnox-domain-security.yml
 - type: Authentication
