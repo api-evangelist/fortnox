@@ -1,0 +1,200 @@
+openapi: 3.0.3
+info:
+  title: Fortnox REST API (Representative Subset) Accounts Articles API
+  description: 'Grounded OpenAPI description of the Fortnox REST API - the Swedish cloud accounting/ERP platform for SMBs and accounting bureaus. Base URL is https://api.fortnox.se/3/. Authentication is OAuth2 Authorization Code Flow: each request carries the Access-Token (Bearer JWT, 1h) header plus the Client-Secret header issued to your Fortnox app. The old fixed Access-Token/Client-Secret integration keys were deprecated 2025-04-30.
+
+
+    SCOPE / FIDELITY NOTE: The Fortnox API exposes 40+ resources. This document ships a solid, representative SUBSET (Invoices, Customers, Articles, Orders, Offers, Vouchers, Accounts, Financial Years, Suppliers, Supplier Invoices, Projects) with pragmatic, partial field-level schemas. Paths, methods, identifiers, the wrapper-object response envelope (e.g. { "Invoice": {...} }, { "Invoices": [...] }), and auth are grounded in Fortnox''s developer documentation. Per-field property coverage is intentionally partial and MODELED/summarized from the docs, not transcribed field-for-field for every resource. Verify exact field sets and validation against https://api.fortnox.se/apidocs before production use.'
+  version: '3.0'
+  contact:
+    name: Fortnox Developer
+    url: https://www.fortnox.se/developer
+  license:
+    name: Fortnox API License / Terms
+    url: https://www.fortnox.se/developer
+servers:
+- url: https://api.fortnox.se/3
+  description: Fortnox REST API v3
+security:
+- accessToken: []
+  clientSecret: []
+tags:
+- name: Articles
+  description: Article (product/service) register.
+paths:
+  /articles:
+    get:
+      operationId: listArticles
+      tags:
+      - Articles
+      summary: List articles
+      parameters:
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: A list of articles.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Articles:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Article'
+                  MetaInformation:
+                    $ref: '#/components/schemas/MetaInformation'
+    post:
+      operationId: createArticle
+      tags:
+      - Articles
+      summary: Create an article
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Article:
+                  $ref: '#/components/schemas/Article'
+      responses:
+        '201':
+          $ref: '#/components/responses/ArticleResponse'
+  /articles/{ArticleNumber}:
+    parameters:
+    - name: ArticleNumber
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: getArticle
+      tags:
+      - Articles
+      summary: Retrieve an article
+      responses:
+        '200':
+          $ref: '#/components/responses/ArticleResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateArticle
+      tags:
+      - Articles
+      summary: Update an article
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Article:
+                  $ref: '#/components/schemas/Article'
+      responses:
+        '200':
+          $ref: '#/components/responses/ArticleResponse'
+    delete:
+      operationId: deleteArticle
+      tags:
+      - Articles
+      summary: Delete an article
+      responses:
+        '204':
+          description: Article deleted.
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      description: Fortnox error envelope.
+      properties:
+        ErrorInformation:
+          type: object
+          properties:
+            Error:
+              type: integer
+            Message:
+              type: string
+            Code:
+              type: integer
+    Article:
+      type: object
+      description: A product or service article.
+      properties:
+        ArticleNumber:
+          type: string
+        Description:
+          type: string
+        Type:
+          type: string
+          enum:
+          - STOCK
+          - SERVICE
+        SalesPrice:
+          type: number
+        PurchasePrice:
+          type: number
+        Unit:
+          type: string
+        QuantityInStock:
+          type: number
+        SalesAccount:
+          type: integer
+        VAT:
+          type: number
+      required:
+      - Description
+    MetaInformation:
+      type: object
+      description: Pagination metadata returned on list endpoints.
+      properties:
+        '@TotalResources':
+          type: integer
+        '@TotalPages':
+          type: integer
+        '@CurrentPage':
+          type: integer
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ArticleResponse:
+      description: A single article.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Article:
+                $ref: '#/components/schemas/Article'
+  parameters:
+    page:
+      name: page
+      in: query
+      description: Page number for paginated results.
+      schema:
+        type: integer
+        minimum: 1
+    limit:
+      name: limit
+      in: query
+      description: Number of records per page (max 500).
+      schema:
+        type: integer
+        maximum: 500
+  securitySchemes:
+    accessToken:
+      type: apiKey
+      in: header
+      name: Access-Token
+      description: OAuth2 Access-Token (Bearer JWT, valid 1 hour) obtained via the Authorization Code Flow from https://apps.fortnox.se/oauth-v1/token. Sent in the Access-Token header on every request.
+    clientSecret:
+      type: apiKey
+      in: header
+      name: Client-Secret
+      description: The Client-Secret issued to your registered Fortnox developer application. Sent in the Client-Secret header alongside the Access-Token on every request.

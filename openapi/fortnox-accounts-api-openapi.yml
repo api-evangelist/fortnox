@@ -1,0 +1,154 @@
+openapi: 3.0.3
+info:
+  title: Fortnox REST API (Representative Subset) Accounts API
+  description: 'Grounded OpenAPI description of the Fortnox REST API - the Swedish cloud accounting/ERP platform for SMBs and accounting bureaus. Base URL is https://api.fortnox.se/3/. Authentication is OAuth2 Authorization Code Flow: each request carries the Access-Token (Bearer JWT, 1h) header plus the Client-Secret header issued to your Fortnox app. The old fixed Access-Token/Client-Secret integration keys were deprecated 2025-04-30.
+
+
+    SCOPE / FIDELITY NOTE: The Fortnox API exposes 40+ resources. This document ships a solid, representative SUBSET (Invoices, Customers, Articles, Orders, Offers, Vouchers, Accounts, Financial Years, Suppliers, Supplier Invoices, Projects) with pragmatic, partial field-level schemas. Paths, methods, identifiers, the wrapper-object response envelope (e.g. { "Invoice": {...} }, { "Invoices": [...] }), and auth are grounded in Fortnox''s developer documentation. Per-field property coverage is intentionally partial and MODELED/summarized from the docs, not transcribed field-for-field for every resource. Verify exact field sets and validation against https://api.fortnox.se/apidocs before production use.'
+  version: '3.0'
+  contact:
+    name: Fortnox Developer
+    url: https://www.fortnox.se/developer
+  license:
+    name: Fortnox API License / Terms
+    url: https://www.fortnox.se/developer
+servers:
+- url: https://api.fortnox.se/3
+  description: Fortnox REST API v3
+security:
+- accessToken: []
+  clientSecret: []
+tags:
+- name: Accounts
+  description: Chart of accounts.
+paths:
+  /accounts:
+    get:
+      operationId: listAccounts
+      tags:
+      - Accounts
+      summary: List accounts
+      parameters:
+      - name: financialyear
+        in: query
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: A list of accounts.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Accounts:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Account'
+                  MetaInformation:
+                    $ref: '#/components/schemas/MetaInformation'
+    post:
+      operationId: createAccount
+      tags:
+      - Accounts
+      summary: Create an account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Account:
+                  $ref: '#/components/schemas/Account'
+      responses:
+        '201':
+          $ref: '#/components/responses/AccountResponse'
+  /accounts/{Number}:
+    parameters:
+    - name: Number
+      in: path
+      required: true
+      schema:
+        type: integer
+    - name: financialyear
+      in: query
+      schema:
+        type: integer
+    get:
+      operationId: getAccount
+      tags:
+      - Accounts
+      summary: Retrieve an account
+      responses:
+        '200':
+          $ref: '#/components/responses/AccountResponse'
+    put:
+      operationId: updateAccount
+      tags:
+      - Accounts
+      summary: Update an account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Account:
+                  $ref: '#/components/schemas/Account'
+      responses:
+        '200':
+          $ref: '#/components/responses/AccountResponse'
+components:
+  responses:
+    AccountResponse:
+      description: A single account.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Account:
+                $ref: '#/components/schemas/Account'
+  schemas:
+    Account:
+      type: object
+      description: An account in the chart of accounts.
+      properties:
+        Number:
+          type: integer
+        Description:
+          type: string
+        Active:
+          type: boolean
+        VATCode:
+          type: string
+        Year:
+          type: integer
+        BalanceBroughtForward:
+          type: number
+      required:
+      - Number
+      - Description
+    MetaInformation:
+      type: object
+      description: Pagination metadata returned on list endpoints.
+      properties:
+        '@TotalResources':
+          type: integer
+        '@TotalPages':
+          type: integer
+        '@CurrentPage':
+          type: integer
+  securitySchemes:
+    accessToken:
+      type: apiKey
+      in: header
+      name: Access-Token
+      description: OAuth2 Access-Token (Bearer JWT, valid 1 hour) obtained via the Authorization Code Flow from https://apps.fortnox.se/oauth-v1/token. Sent in the Access-Token header on every request.
+    clientSecret:
+      type: apiKey
+      in: header
+      name: Client-Secret
+      description: The Client-Secret issued to your registered Fortnox developer application. Sent in the Client-Secret header alongside the Access-Token on every request.

@@ -1,0 +1,179 @@
+openapi: 3.0.3
+info:
+  title: Fortnox REST API (Representative Subset) Accounts Projects API
+  description: 'Grounded OpenAPI description of the Fortnox REST API - the Swedish cloud accounting/ERP platform for SMBs and accounting bureaus. Base URL is https://api.fortnox.se/3/. Authentication is OAuth2 Authorization Code Flow: each request carries the Access-Token (Bearer JWT, 1h) header plus the Client-Secret header issued to your Fortnox app. The old fixed Access-Token/Client-Secret integration keys were deprecated 2025-04-30.
+
+
+    SCOPE / FIDELITY NOTE: The Fortnox API exposes 40+ resources. This document ships a solid, representative SUBSET (Invoices, Customers, Articles, Orders, Offers, Vouchers, Accounts, Financial Years, Suppliers, Supplier Invoices, Projects) with pragmatic, partial field-level schemas. Paths, methods, identifiers, the wrapper-object response envelope (e.g. { "Invoice": {...} }, { "Invoices": [...] }), and auth are grounded in Fortnox''s developer documentation. Per-field property coverage is intentionally partial and MODELED/summarized from the docs, not transcribed field-for-field for every resource. Verify exact field sets and validation against https://api.fortnox.se/apidocs before production use.'
+  version: '3.0'
+  contact:
+    name: Fortnox Developer
+    url: https://www.fortnox.se/developer
+  license:
+    name: Fortnox API License / Terms
+    url: https://www.fortnox.se/developer
+servers:
+- url: https://api.fortnox.se/3
+  description: Fortnox REST API v3
+security:
+- accessToken: []
+  clientSecret: []
+tags:
+- name: Projects
+  description: Projects for tagging and reporting.
+paths:
+  /projects:
+    get:
+      operationId: listProjects
+      tags:
+      - Projects
+      summary: List projects
+      responses:
+        '200':
+          description: A list of projects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Projects:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Project'
+                  MetaInformation:
+                    $ref: '#/components/schemas/MetaInformation'
+    post:
+      operationId: createProject
+      tags:
+      - Projects
+      summary: Create a project
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Project:
+                  $ref: '#/components/schemas/Project'
+      responses:
+        '201':
+          $ref: '#/components/responses/ProjectResponse'
+  /projects/{ProjectNumber}:
+    parameters:
+    - name: ProjectNumber
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: getProject
+      tags:
+      - Projects
+      summary: Retrieve a project
+      responses:
+        '200':
+          $ref: '#/components/responses/ProjectResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateProject
+      tags:
+      - Projects
+      summary: Update a project
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Project:
+                  $ref: '#/components/schemas/Project'
+      responses:
+        '200':
+          $ref: '#/components/responses/ProjectResponse'
+    delete:
+      operationId: deleteProject
+      tags:
+      - Projects
+      summary: Delete a project
+      responses:
+        '204':
+          description: Project deleted.
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      description: Fortnox error envelope.
+      properties:
+        ErrorInformation:
+          type: object
+          properties:
+            Error:
+              type: integer
+            Message:
+              type: string
+            Code:
+              type: integer
+    Project:
+      type: object
+      description: A project used to tag records for reporting.
+      properties:
+        ProjectNumber:
+          type: string
+        Description:
+          type: string
+        Status:
+          type: string
+          enum:
+          - ONGOING
+          - COMPLETED
+          - NOTSTARTED
+        StartDate:
+          type: string
+          format: date
+        EndDate:
+          type: string
+          format: date
+        ProjectLeader:
+          type: string
+      required:
+      - Description
+    MetaInformation:
+      type: object
+      description: Pagination metadata returned on list endpoints.
+      properties:
+        '@TotalResources':
+          type: integer
+        '@TotalPages':
+          type: integer
+        '@CurrentPage':
+          type: integer
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ProjectResponse:
+      description: A single project.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Project:
+                $ref: '#/components/schemas/Project'
+  securitySchemes:
+    accessToken:
+      type: apiKey
+      in: header
+      name: Access-Token
+      description: OAuth2 Access-Token (Bearer JWT, valid 1 hour) obtained via the Authorization Code Flow from https://apps.fortnox.se/oauth-v1/token. Sent in the Access-Token header on every request.
+    clientSecret:
+      type: apiKey
+      in: header
+      name: Client-Secret
+      description: The Client-Secret issued to your registered Fortnox developer application. Sent in the Client-Secret header alongside the Access-Token on every request.
