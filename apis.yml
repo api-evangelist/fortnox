@@ -10,7 +10,20 @@ description: Fortnox is a Swedish cloud accounting, ERP, and business-administra
   Authorization Code Flow. Fortnox also publishes a duplex WebSocket event stream
   at wss://ws.fortnox.se/topics-v1 that pushes minimal change notifications across
   domains so integrations can react to changes instead of polling.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/fortnox.png
 tags:
 - Accounting
 - ERP
@@ -26,175 +39,6 @@ created: '2026-07-12'
 modified: '2026-07-12'
 specificationVersion: '0.19'
 apis:
-- aid: fortnox:fortnox-invoices-api
-  name: Fortnox Invoices API
-  tags:
-  - Invoices
-  - Billing
-  - Accounts Receivable
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.fortnox.se/developer/resources-rest-api/invoices/invoices
-  baseURL: https://api.fortnox.se/3
-  properties:
-  - url: https://www.fortnox.se/developer
-    type: Documentation
-  - url: https://www.fortnox.se/developer/resources-rest-api/invoices/invoices
-    type: APIReference
-  - url: openapi/fortnox-openapi.yml
-    type: OpenAPI
-  - url: collections/fortnox.postman_collection.json
-    type: PostmanCollection
-  - url: collections/fortnox.opencollection.json
-    type: OpenCollection
-  description: Create, read, update, cancel, and list customer invoices, plus actions
-    such as bookkeep, credit, e-mail, and print. Represents accounts-receivable sales
-    invoices in a Fortnox company file.
-- aid: fortnox:fortnox-customers-api
-  name: Fortnox Customers API
-  tags:
-  - Customers
-  - CRM
-  - Contacts
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.fortnox.se/developer/resources-rest-api/customers/customers
-  baseURL: https://api.fortnox.se/3
-  properties:
-  - url: https://www.fortnox.se/developer/resources-rest-api/customers/customers
-    type: APIReference
-  - url: openapi/fortnox-openapi.yml
-    type: OpenAPI
-  - url: collections/fortnox.postman_collection.json
-    type: PostmanCollection
-  - url: collections/fortnox.opencollection.json
-    type: OpenCollection
-  description: Manage the customer register - create, retrieve, update, delete, and
-    list customers with billing and delivery addresses, org/VAT numbers, terms, and
-    default accounts used across invoices, orders, and offers.
-- aid: fortnox:fortnox-articles-api
-  name: Fortnox Articles API
-  tags:
-  - Articles
-  - Products
-  - Inventory
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.fortnox.se/developer/resources-rest-api/articles/articles
-  baseURL: https://api.fortnox.se/3
-  properties:
-  - url: https://www.fortnox.se/developer/resources-rest-api/articles/articles
-    type: APIReference
-  - url: openapi/fortnox-openapi.yml
-    type: OpenAPI
-  - url: collections/fortnox.postman_collection.json
-    type: PostmanCollection
-  - url: collections/fortnox.opencollection.json
-    type: OpenCollection
-  description: Manage the article (product/service) register used as line items on
-    invoices, orders, and offers - pricing, units, stock quantities, sales and purchase
-    accounts, VAT, and EU/SE accounting settings.
-- aid: fortnox:fortnox-orders-api
-  name: Fortnox Orders API
-  tags:
-  - Orders
-  - Sales Orders
-  - Fulfillment
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.fortnox.se/developer/resources-rest-api/order/orders
-  baseURL: https://api.fortnox.se/3
-  properties:
-  - url: https://www.fortnox.se/developer/resources-rest-api/order/orders
-    type: APIReference
-  - url: openapi/fortnox-openapi.yml
-    type: OpenAPI
-  - url: collections/fortnox.postman_collection.json
-    type: PostmanCollection
-  - url: collections/fortnox.opencollection.json
-    type: OpenCollection
-  description: Create, read, update, and list sales orders, and convert an order into
-    an invoice. Orders carry customer, article line items, delivery details, and
-    status through the sales workflow.
-- aid: fortnox:fortnox-offers-api
-  name: Fortnox Offers API
-  tags:
-  - Offers
-  - Quotes
-  - Sales
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.fortnox.se/developer/resources-rest-api/offer/offers
-  baseURL: https://api.fortnox.se/3
-  properties:
-  - url: https://www.fortnox.se/developer/resources-rest-api/offer/offers
-    type: APIReference
-  - url: openapi/fortnox-openapi.yml
-    type: OpenAPI
-  - url: collections/fortnox.postman_collection.json
-    type: PostmanCollection
-  - url: collections/fortnox.opencollection.json
-    type: OpenCollection
-  description: Create, read, update, and list offers (quotations), and convert an
-    accepted offer into an order or invoice. Offers hold customer, article lines,
-    and validity for the pre-sales stage.
-- aid: fortnox:fortnox-bookkeeping-api
-  name: Fortnox Bookkeeping API
-  tags:
-  - Vouchers
-  - Accounts
-  - Ledger
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.fortnox.se/developer/resources-rest-api/vouchers/vouchers
-  baseURL: https://api.fortnox.se/3
-  properties:
-  - url: https://www.fortnox.se/developer/resources-rest-api/vouchers/vouchers
-    type: APIReference
-  - url: openapi/fortnox-openapi.yml
-    type: OpenAPI
-  - url: collections/fortnox.postman_collection.json
-    type: PostmanCollection
-  - url: collections/fortnox.opencollection.json
-    type: OpenCollection
-  description: Post and read accounting vouchers (double-entry journal entries) into
-    voucher series, and manage the chart of accounts and financial years that vouchers
-    are booked against. Core general-ledger surface of the Fortnox API.
-- aid: fortnox:fortnox-suppliers-api
-  name: Fortnox Suppliers & Supplier Invoices API
-  tags:
-  - Suppliers
-  - Supplier Invoices
-  - Accounts Payable
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.fortnox.se/developer/resources-rest-api/supplier-invoices/supplier-invoices
-  baseURL: https://api.fortnox.se/3
-  properties:
-  - url: https://www.fortnox.se/developer/resources-rest-api/suppliers/suppliers
-    type: APIReference
-  - url: openapi/fortnox-openapi.yml
-    type: OpenAPI
-  - url: collections/fortnox.postman_collection.json
-    type: PostmanCollection
-  - url: collections/fortnox.opencollection.json
-    type: OpenCollection
-  description: Manage the supplier register and inbound supplier invoices - create,
-    read, update, and list suppliers, and register, bookkeep, and pay supplier
-    invoices in the accounts-payable workflow.
-- aid: fortnox:fortnox-projects-api
-  name: Fortnox Projects API
-  tags:
-  - Projects
-  - Cost Centers
-  - Reporting
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.fortnox.se/developer/resources-rest-api/projects/projects
-  baseURL: https://api.fortnox.se/3
-  properties:
-  - url: https://www.fortnox.se/developer/resources-rest-api/projects/projects
-    type: APIReference
-  - url: openapi/fortnox-openapi.yml
-    type: OpenAPI
-  - url: collections/fortnox.postman_collection.json
-    type: PostmanCollection
-  - url: collections/fortnox.opencollection.json
-    type: OpenCollection
-  description: Create, read, update, delete, and list projects used to tag invoices,
-    vouchers, orders, and other records for project-based accounting and reporting.
 - aid: fortnox:fortnox-topics-websocket-api
   name: Fortnox Topics WebSocket API
   tags:
@@ -209,11 +53,363 @@ apis:
     type: Documentation
   - url: asyncapi/fortnox-asyncapi.yml
     type: AsyncAPI
-  description: Duplex WebSocket stream at wss://ws.fortnox.se/topics-v1 that pushes
-    minimal change-notification events across domains (invoices, supplier-invoices,
-    customers, articles, orders, offers, vouchers, projects, and more) so integrations
-    react to changes instead of polling the REST API. Kafka-backed, at-least-once
+  description: >-
+    Duplex WebSocket stream at wss://ws.fortnox.se/topics-v1 that pushes minimal change-notification events
+    across domains (invoices, supplier-invoices, customers, articles, orders, offers, vouchers, projects,
+    and more) so integrations react to changes instead of polling the REST API. Kafka-backed, at-least-once
     delivery, with per-topic offsets and up to 14-day replay.
+- aid: fortnox:fortnox-accounts-api
+  name: Fortnox Accounts API
+  description: Chart of accounts.
+  humanURL: https://www.fortnox.se/developer/resources-rest-api/invoices/invoices
+  baseURL: https://api.fortnox.se/3
+  tags:
+  - Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/fortnox-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://www.fortnox.se/developer
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/invoices/invoices
+  - type: PostmanCollection
+    url: collections/fortnox.postman_collection.json
+  - type: OpenCollection
+    url: collections/fortnox.opencollection.json
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/customers/customers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/articles/articles
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/order/orders
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/offer/offers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/vouchers/vouchers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/suppliers/suppliers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/projects/projects
+- aid: fortnox:fortnox-articles-api
+  name: Fortnox Articles API
+  description: Article (product/service) register.
+  humanURL: https://www.fortnox.se/developer/resources-rest-api/invoices/invoices
+  baseURL: https://api.fortnox.se/3
+  tags:
+  - Articles
+  properties:
+  - type: OpenAPI
+    url: openapi/fortnox-articles-api-openapi.yml
+  - type: Documentation
+    url: https://www.fortnox.se/developer
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/invoices/invoices
+  - type: PostmanCollection
+    url: collections/fortnox.postman_collection.json
+  - type: OpenCollection
+    url: collections/fortnox.opencollection.json
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/customers/customers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/articles/articles
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/order/orders
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/offer/offers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/vouchers/vouchers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/suppliers/suppliers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/projects/projects
+- aid: fortnox:fortnox-customers-api
+  name: Fortnox Customers API
+  description: Customer register.
+  humanURL: https://www.fortnox.se/developer/resources-rest-api/invoices/invoices
+  baseURL: https://api.fortnox.se/3
+  tags:
+  - Customers
+  properties:
+  - type: OpenAPI
+    url: openapi/fortnox-customers-api-openapi.yml
+  - type: Documentation
+    url: https://www.fortnox.se/developer
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/invoices/invoices
+  - type: PostmanCollection
+    url: collections/fortnox.postman_collection.json
+  - type: OpenCollection
+    url: collections/fortnox.opencollection.json
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/customers/customers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/articles/articles
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/order/orders
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/offer/offers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/vouchers/vouchers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/suppliers/suppliers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/projects/projects
+- aid: fortnox:fortnox-financial-years-api
+  name: Fortnox Financial Years API
+  description: Financial (accounting) years.
+  humanURL: https://www.fortnox.se/developer/resources-rest-api/invoices/invoices
+  baseURL: https://api.fortnox.se/3
+  tags:
+  - Financial Years
+  properties:
+  - type: OpenAPI
+    url: openapi/fortnox-financial-years-api-openapi.yml
+  - type: Documentation
+    url: https://www.fortnox.se/developer
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/invoices/invoices
+  - type: PostmanCollection
+    url: collections/fortnox.postman_collection.json
+  - type: OpenCollection
+    url: collections/fortnox.opencollection.json
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/customers/customers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/articles/articles
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/order/orders
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/offer/offers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/vouchers/vouchers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/suppliers/suppliers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/projects/projects
+- aid: fortnox:fortnox-invoices-api
+  name: Fortnox Invoices API
+  description: Accounts-receivable customer invoices.
+  humanURL: https://www.fortnox.se/developer/resources-rest-api/invoices/invoices
+  baseURL: https://api.fortnox.se/3
+  tags:
+  - Invoices
+  properties:
+  - type: OpenAPI
+    url: openapi/fortnox-invoices-api-openapi.yml
+  - type: Documentation
+    url: https://www.fortnox.se/developer
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/invoices/invoices
+  - type: PostmanCollection
+    url: collections/fortnox.postman_collection.json
+  - type: OpenCollection
+    url: collections/fortnox.opencollection.json
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/customers/customers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/articles/articles
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/order/orders
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/offer/offers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/vouchers/vouchers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/suppliers/suppliers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/projects/projects
+- aid: fortnox:fortnox-offers-api
+  name: Fortnox Offers API
+  description: Offers (quotations).
+  humanURL: https://www.fortnox.se/developer/resources-rest-api/invoices/invoices
+  baseURL: https://api.fortnox.se/3
+  tags:
+  - Offers
+  properties:
+  - type: OpenAPI
+    url: openapi/fortnox-offers-api-openapi.yml
+  - type: Documentation
+    url: https://www.fortnox.se/developer
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/invoices/invoices
+  - type: PostmanCollection
+    url: collections/fortnox.postman_collection.json
+  - type: OpenCollection
+    url: collections/fortnox.opencollection.json
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/customers/customers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/articles/articles
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/order/orders
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/offer/offers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/vouchers/vouchers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/suppliers/suppliers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/projects/projects
+- aid: fortnox:fortnox-orders-api
+  name: Fortnox Orders API
+  description: Sales orders.
+  humanURL: https://www.fortnox.se/developer/resources-rest-api/invoices/invoices
+  baseURL: https://api.fortnox.se/3
+  tags:
+  - Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/fortnox-orders-api-openapi.yml
+  - type: Documentation
+    url: https://www.fortnox.se/developer
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/invoices/invoices
+  - type: PostmanCollection
+    url: collections/fortnox.postman_collection.json
+  - type: OpenCollection
+    url: collections/fortnox.opencollection.json
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/customers/customers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/articles/articles
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/order/orders
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/offer/offers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/vouchers/vouchers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/suppliers/suppliers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/projects/projects
+- aid: fortnox:fortnox-projects-api
+  name: Fortnox Projects API
+  description: Projects for tagging and reporting.
+  humanURL: https://www.fortnox.se/developer/resources-rest-api/invoices/invoices
+  baseURL: https://api.fortnox.se/3
+  tags:
+  - Projects
+  properties:
+  - type: OpenAPI
+    url: openapi/fortnox-projects-api-openapi.yml
+  - type: Documentation
+    url: https://www.fortnox.se/developer
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/invoices/invoices
+  - type: PostmanCollection
+    url: collections/fortnox.postman_collection.json
+  - type: OpenCollection
+    url: collections/fortnox.opencollection.json
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/customers/customers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/articles/articles
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/order/orders
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/offer/offers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/vouchers/vouchers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/suppliers/suppliers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/projects/projects
+- aid: fortnox:fortnox-supplier-invoices-api
+  name: Fortnox Supplier Invoices API
+  description: Inbound accounts-payable supplier invoices.
+  humanURL: https://www.fortnox.se/developer/resources-rest-api/invoices/invoices
+  baseURL: https://api.fortnox.se/3
+  tags:
+  - Supplier Invoices
+  properties:
+  - type: OpenAPI
+    url: openapi/fortnox-supplier-invoices-api-openapi.yml
+  - type: Documentation
+    url: https://www.fortnox.se/developer
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/invoices/invoices
+  - type: PostmanCollection
+    url: collections/fortnox.postman_collection.json
+  - type: OpenCollection
+    url: collections/fortnox.opencollection.json
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/customers/customers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/articles/articles
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/order/orders
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/offer/offers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/vouchers/vouchers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/suppliers/suppliers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/projects/projects
+- aid: fortnox:fortnox-suppliers-api
+  name: Fortnox Suppliers API
+  description: Supplier register.
+  humanURL: https://www.fortnox.se/developer/resources-rest-api/invoices/invoices
+  baseURL: https://api.fortnox.se/3
+  tags:
+  - Suppliers
+  properties:
+  - type: OpenAPI
+    url: openapi/fortnox-suppliers-api-openapi.yml
+  - type: Documentation
+    url: https://www.fortnox.se/developer
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/invoices/invoices
+  - type: PostmanCollection
+    url: collections/fortnox.postman_collection.json
+  - type: OpenCollection
+    url: collections/fortnox.opencollection.json
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/customers/customers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/articles/articles
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/order/orders
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/offer/offers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/vouchers/vouchers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/suppliers/suppliers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/projects/projects
+- aid: fortnox:fortnox-vouchers-api
+  name: Fortnox Vouchers API
+  description: Accounting vouchers (journal entries).
+  humanURL: https://www.fortnox.se/developer/resources-rest-api/invoices/invoices
+  baseURL: https://api.fortnox.se/3
+  tags:
+  - Vouchers
+  properties:
+  - type: OpenAPI
+    url: openapi/fortnox-vouchers-api-openapi.yml
+  - type: Documentation
+    url: https://www.fortnox.se/developer
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/invoices/invoices
+  - type: PostmanCollection
+    url: collections/fortnox.postman_collection.json
+  - type: OpenCollection
+    url: collections/fortnox.opencollection.json
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/customers/customers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/articles/articles
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/order/orders
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/offer/offers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/vouchers/vouchers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/suppliers/suppliers
+  - type: APIReference
+    url: https://www.fortnox.se/developer/resources-rest-api/projects/projects
 common:
 - type: AgenticAccess
   url: agentic-access/fortnox-agentic-access.yml
