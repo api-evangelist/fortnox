@@ -1,0 +1,34 @@
+{
+  "provider": "fortnox",
+  "sources": [
+    "fortnox-accounts-api-openapi.yml",
+    "fortnox-articles-api-openapi.yml",
+    "fortnox-customers-api-openapi.yml",
+    "fortnox-financial-years-api-openapi.yml",
+    "fortnox-invoices-api-openapi.yml",
+    "fortnox-offers-api-openapi.yml",
+    "fortnox-orders-api-openapi.yml",
+    "fortnox-projects-api-openapi.yml",
+    "fortnox-supplier-invoices-api-openapi.yml",
+    "fortnox-suppliers-api-openapi.yml",
+    "fortnox-vouchers-api-openapi.yml"
+  ],
+  "outputs": [
+    "fortnox-accounts-api-openapi.yml",
+    "fortnox-articles-api-openapi.yml",
+    "fortnox-customers-api-openapi.yml",
+    "fortnox-financial-years-api-openapi.yml",
+    "fortnox-invoices-api-openapi.yml",
+    "fortnox-offers-api-openapi.yml",
+    "fortnox-orders-api-openapi.yml",
+    "fortnox-projects-api-openapi.yml",
+    "fortnox-supplier-invoices-api-openapi.yml",
+    "fortnox-suppliers-api-openapi.yml",
+    "fortnox-vouchers-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
