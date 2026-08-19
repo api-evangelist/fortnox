@@ -1,0 +1,52 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fortnox REST API (Representative Subset) Accounts Financial Years API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Access-Token",
+      "value": "{{Access-Token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Financial Years",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List financial years",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fortnox.se/3/financialyears"
+          },
+          "docs": "List financial years"
+        },
+        {
+          "info": {
+            "name": "Create a financial year",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.fortnox.se/3/financialyears",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a financial year"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,584 @@
+{
+  "item": [
+    {
+      "id": "22741d86-c78c-4164-af40-cd701de427a4",
+      "name": "Articles",
+      "description": {
+        "content": "Article (product/service) register.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cf804a5b-bb26-4d8d-a959-090cd282e3db",
+          "name": "List articles",
+          "request": {
+            "name": "List articles",
+            "description": {},
+            "url": {
+              "path": [
+                "articles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number for paginated results."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of records per page (max 500)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "90e16cd7-fed4-4599-bcd1-71a2de138d6e",
+              "name": "A list of articles.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "articles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Articles\": [\n    {\n      \"Description\": \"string\",\n      \"ArticleNumber\": \"string\",\n      \"Type\": \"STOCK\",\n      \"SalesPrice\": 6406.776000265607,\n      \"PurchasePrice\": 8077.183662052938,\n      \"Unit\": \"string\",\n      \"QuantityInStock\": 6591.394880504474,\n      \"SalesAccount\": 7448,\n      \"VAT\": 7280.984134069121\n    },\n    {\n      \"Description\": \"string\",\n      \"ArticleNumber\": \"string\",\n      \"Type\": \"SERVICE\",\n      \"SalesPrice\": 7463.454582150068,\n      \"PurchasePrice\": 7712.736807351869,\n      \"Unit\": \"string\",\n      \"QuantityInStock\": 6495.222672125374,\n      \"SalesAccount\": 1507,\n      \"VAT\": 4082.409840538722\n    }\n  ],\n  \"MetaInformation\": {\n    \"@TotalResources\": 3311,\n    \"@TotalPages\": 5460,\n    \"@CurrentPage\": 6576\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "74832ad1-85a3-4cf4-9dd4-77ed7833cd37",
+          "name": "Create an article",
+          "request": {
+            "name": "Create an article",
+            "description": {},
+            "url": {
+              "path": [
+                "articles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Article\": {\n    \"Description\": \"<string>\",\n    \"ArticleNumber\": \"<string>\",\n    \"Type\": \"<string>\",\n    \"SalesPrice\": \"<number>\",\n    \"PurchasePrice\": \"<number>\",\n    \"Unit\": \"<string>\",\n    \"QuantityInStock\": \"<number>\",\n    \"SalesAccount\": \"<integer>\",\n    \"VAT\": \"<number>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f3970925-de1b-4724-a837-55d6859875d4",
+              "name": "A single article.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "articles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Article\": {\n    \"Description\": \"<string>\",\n    \"ArticleNumber\": \"<string>\",\n    \"Type\": \"<string>\",\n    \"SalesPrice\": \"<number>\",\n    \"PurchasePrice\": \"<number>\",\n    \"Unit\": \"<string>\",\n    \"QuantityInStock\": \"<number>\",\n    \"SalesAccount\": \"<integer>\",\n    \"VAT\": \"<number>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Article\": {\n    \"Description\": \"<string>\",\n    \"ArticleNumber\": \"<string>\",\n    \"Type\": \"<string>\",\n    \"SalesPrice\": \"<number>\",\n    \"PurchasePrice\": \"<number>\",\n    \"Unit\": \"<string>\",\n    \"QuantityInStock\": \"<number>\",\n    \"SalesAccount\": \"<integer>\",\n    \"VAT\": \"<number>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3428d269-6366-47b6-a02a-19233b0c2f2b",
+          "name": "Retrieve an article",
+          "request": {
+            "name": "Retrieve an article",
+            "description": {},
+            "url": {
+              "path": [
+                "articles",
+                ":ArticleNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ArticleNumber",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ba150c1a-5ee8-46b1-9e6f-4d2fb4963367",
+              "name": "A single article.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "articles",
+                    ":ArticleNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ArticleNumber",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Article\": {\n    \"Description\": \"<string>\",\n    \"ArticleNumber\": \"<string>\",\n    \"Type\": \"<string>\",\n    \"SalesPrice\": \"<number>\",\n    \"PurchasePrice\": \"<number>\",\n    \"Unit\": \"<string>\",\n    \"QuantityInStock\": \"<number>\",\n    \"SalesAccount\": \"<integer>\",\n    \"VAT\": \"<number>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "46457f28-8400-4f84-8e36-c4b25fc44357",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "articles",
+                    ":ArticleNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ArticleNumber",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorInformation\": {\n    \"Error\": 7464,\n    \"Message\": \"string\",\n    \"Code\": 1283\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7527a612-0c26-4357-9cf0-bc505a84455a",
+          "name": "Update an article",
+          "request": {
+            "name": "Update an article",
+            "description": {},
+            "url": {
+              "path": [
+                "articles",
+                ":ArticleNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ArticleNumber",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Article\": {\n    \"Description\": \"<string>\",\n    \"ArticleNumber\": \"<string>\",\n    \"Type\": \"<string>\",\n    \"SalesPrice\": \"<number>\",\n    \"PurchasePrice\": \"<number>\",\n    \"Unit\": \"<string>\",\n    \"QuantityInStock\": \"<number>\",\n    \"SalesAccount\": \"<integer>\",\n    \"VAT\": \"<number>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fc2c15cb-3a90-4c2f-8557-c6be94031f0c",
+              "name": "A single article.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "articles",
+                    ":ArticleNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ArticleNumber",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Article\": {\n    \"Description\": \"<string>\",\n    \"ArticleNumber\": \"<string>\",\n    \"Type\": \"<string>\",\n    \"SalesPrice\": \"<number>\",\n    \"PurchasePrice\": \"<number>\",\n    \"Unit\": \"<string>\",\n    \"QuantityInStock\": \"<number>\",\n    \"SalesAccount\": \"<integer>\",\n    \"VAT\": \"<number>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Article\": {\n    \"Description\": \"<string>\",\n    \"ArticleNumber\": \"<string>\",\n    \"Type\": \"<string>\",\n    \"SalesPrice\": \"<number>\",\n    \"PurchasePrice\": \"<number>\",\n    \"Unit\": \"<string>\",\n    \"QuantityInStock\": \"<number>\",\n    \"SalesAccount\": \"<integer>\",\n    \"VAT\": \"<number>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "953700c3-d6c3-4ed3-83ad-b69ed1c5b4a2",
+          "name": "Delete an article",
+          "request": {
+            "name": "Delete an article",
+            "description": {},
+            "url": {
+              "path": [
+                "articles",
+                ":ArticleNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ArticleNumber",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "39207844-2c1c-49a7-a551-fbec15bc2e83",
+              "name": "Article deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "articles",
+                    ":ArticleNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ArticleNumber",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.fortnox.se/3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Access-Token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "86fc74be-8139-41ce-86af-71f42b3e1d4f",
+    "name": "Fortnox REST API (Representative Subset) Accounts Articles API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Grounded OpenAPI description of the Fortnox REST API - the Swedish cloud accounting/ERP platform for SMBs and accounting bureaus. Base URL is https://api.fortnox.se/3/. Authentication is OAuth2 Authorization Code Flow: each request carries the Access-Token (Bearer JWT, 1h) header plus the Client-Secret header issued to your Fortnox app. The old fixed Access-Token/Client-Secret integration keys were deprecated 2025-04-30.\n\nSCOPE / FIDELITY NOTE: The Fortnox API exposes 40+ resources. This document ships a solid, representative SUBSET (Invoices, Customers, Articles, Orders, Offers, Vouchers, Accounts, Financial Years, Suppliers, Supplier Invoices, Projects) with pragmatic, partial field-level schemas. Paths, methods, identifiers, the wrapper-object response envelope (e.g. { \"Invoice\": {...} }, { \"Invoices\": [...] }), and auth are grounded in Fortnox's developer documentation. Per-field property coverage is intentionally partial and MODELED/summarized from the docs, not transcribed field-for-field for every resource. Verify exact field sets and validation against https://api.fortnox.se/apidocs before production use.\n\nContact Support:\n Name: Fortnox Developer",
+      "type": "text/plain"
+    }
+  }
+}

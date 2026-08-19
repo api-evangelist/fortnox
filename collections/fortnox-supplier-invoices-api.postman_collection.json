@@ -1,0 +1,387 @@
+{
+  "item": [
+    {
+      "id": "8640c414-feee-49ae-a71d-84a6560ff1a5",
+      "name": "Supplier Invoices",
+      "description": {
+        "content": "Inbound accounts-payable supplier invoices.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3dbd36ac-f15c-45d1-9757-48d2c5454393",
+          "name": "List supplier invoices",
+          "request": {
+            "name": "List supplier invoices",
+            "description": {},
+            "url": {
+              "path": [
+                "supplierinvoices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number for paginated results."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of records per page (max 500)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e7cd553e-55ef-498e-92a9-7d1d8f95ee58",
+              "name": "A list of supplier invoices.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "supplierinvoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"SupplierInvoices\": [\n    {\n      \"SupplierNumber\": \"string\",\n      \"GivenNumber\": \"string\",\n      \"InvoiceNumber\": \"string\",\n      \"InvoiceDate\": \"2015-09-08\",\n      \"DueDate\": \"1958-02-04\",\n      \"Total\": 2949.829038102618,\n      \"VAT\": 5854.597774573287,\n      \"Currency\": \"string\",\n      \"Booked\": false\n    },\n    {\n      \"SupplierNumber\": \"string\",\n      \"GivenNumber\": \"string\",\n      \"InvoiceNumber\": \"string\",\n      \"InvoiceDate\": \"1969-08-10\",\n      \"DueDate\": \"1982-09-10\",\n      \"Total\": 9030.211438230554,\n      \"VAT\": 9539.714117709975,\n      \"Currency\": \"string\",\n      \"Booked\": true\n    }\n  ],\n  \"MetaInformation\": {\n    \"@TotalResources\": 7557,\n    \"@TotalPages\": 2116,\n    \"@CurrentPage\": 1424\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0f534462-544e-435a-a682-0c48f2325be8",
+          "name": "Create a supplier invoice",
+          "request": {
+            "name": "Create a supplier invoice",
+            "description": {},
+            "url": {
+              "path": [
+                "supplierinvoices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"SupplierInvoice\": {\n    \"SupplierNumber\": \"<string>\",\n    \"InvoiceNumber\": \"<string>\",\n    \"InvoiceDate\": \"<date>\",\n    \"DueDate\": \"<date>\",\n    \"Total\": \"<number>\",\n    \"VAT\": \"<number>\",\n    \"Currency\": \"<string>\",\n    \"Booked\": \"<boolean>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dcc0f08e-a45b-4649-ae56-90c35da7e097",
+              "name": "A single supplier invoice.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "supplierinvoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"SupplierInvoice\": {\n    \"SupplierNumber\": \"<string>\",\n    \"InvoiceNumber\": \"<string>\",\n    \"InvoiceDate\": \"<date>\",\n    \"DueDate\": \"<date>\",\n    \"Total\": \"<number>\",\n    \"VAT\": \"<number>\",\n    \"Currency\": \"<string>\",\n    \"Booked\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"SupplierInvoice\": {\n    \"SupplierNumber\": \"<string>\",\n    \"GivenNumber\": \"string\",\n    \"InvoiceNumber\": \"<string>\",\n    \"InvoiceDate\": \"<date>\",\n    \"DueDate\": \"<date>\",\n    \"Total\": \"<number>\",\n    \"VAT\": \"<number>\",\n    \"Currency\": \"<string>\",\n    \"Booked\": \"<boolean>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6389807d-f2a9-4cb6-be3f-450391207673",
+          "name": "Retrieve a supplier invoice",
+          "request": {
+            "name": "Retrieve a supplier invoice",
+            "description": {},
+            "url": {
+              "path": [
+                "supplierinvoices",
+                ":GivenNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "GivenNumber",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "40e2add4-7448-4717-b760-fe6d7a55c1ec",
+              "name": "A single supplier invoice.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "supplierinvoices",
+                    ":GivenNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "GivenNumber",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"SupplierInvoice\": {\n    \"SupplierNumber\": \"<string>\",\n    \"GivenNumber\": \"string\",\n    \"InvoiceNumber\": \"<string>\",\n    \"InvoiceDate\": \"<date>\",\n    \"DueDate\": \"<date>\",\n    \"Total\": \"<number>\",\n    \"VAT\": \"<number>\",\n    \"Currency\": \"<string>\",\n    \"Booked\": \"<boolean>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "82765770-16ea-4ec9-98b3-1227c84fb0df",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "supplierinvoices",
+                    ":GivenNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "GivenNumber",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorInformation\": {\n    \"Error\": 9277,\n    \"Message\": \"string\",\n    \"Code\": 8765\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.fortnox.se/3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Access-Token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "692cc747-d7ff-4f6d-a047-7dcfaa226fc0",
+    "name": "Fortnox REST API (Representative Subset) Accounts Supplier Invoices API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Grounded OpenAPI description of the Fortnox REST API - the Swedish cloud accounting/ERP platform for SMBs and accounting bureaus. Base URL is https://api.fortnox.se/3/. Authentication is OAuth2 Authorization Code Flow: each request carries the Access-Token (Bearer JWT, 1h) header plus the Client-Secret header issued to your Fortnox app. The old fixed Access-Token/Client-Secret integration keys were deprecated 2025-04-30.\n\nSCOPE / FIDELITY NOTE: The Fortnox API exposes 40+ resources. This document ships a solid, representative SUBSET (Invoices, Customers, Articles, Orders, Offers, Vouchers, Accounts, Financial Years, Suppliers, Supplier Invoices, Projects) with pragmatic, partial field-level schemas. Paths, methods, identifiers, the wrapper-object response envelope (e.g. { \"Invoice\": {...} }, { \"Invoices\": [...] }), and auth are grounded in Fortnox's developer documentation. Per-field property coverage is intentionally partial and MODELED/summarized from the docs, not transcribed field-for-field for every resource. Verify exact field sets and validation against https://api.fortnox.se/apidocs before production use.\n\nContact Support:\n Name: Fortnox Developer",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,894 @@
+{
+  "item": [
+    {
+      "id": "bb82deeb-211b-4e69-a982-d4b23a782b39",
+      "name": "Invoices",
+      "description": {
+        "content": "Accounts-receivable customer invoices.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "edc7aa42-ef06-46a1-8033-c6ae75627f5f",
+          "name": "List invoices",
+          "request": {
+            "name": "List invoices",
+            "description": {
+              "content": "Lists invoices. Supports filtering and pagination via query parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "invoices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number for paginated results."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of records per page (max 500)."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "Predefined filter such as cancelled, fullypaid, unpaid, unpaidoverdue, unbooked."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "65c0dbc5-f929-4916-a48b-5fe1e05befd4",
+              "name": "A list of invoices.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Invoices\": [\n    {\n      \"DocumentNumber\": \"string\",\n      \"CustomerNumber\": \"string\",\n      \"CustomerName\": \"string\",\n      \"InvoiceDate\": \"1963-08-29\",\n      \"Total\": 862.711277268996,\n      \"Balance\": 5747.157773069222,\n      \"Currency\": \"string\"\n    },\n    {\n      \"DocumentNumber\": \"string\",\n      \"CustomerNumber\": \"string\",\n      \"CustomerName\": \"string\",\n      \"InvoiceDate\": \"2013-11-20\",\n      \"Total\": 5657.368667106501,\n      \"Balance\": 8985.199351762689,\n      \"Currency\": \"string\"\n    }\n  ],\n  \"MetaInformation\": {\n    \"@TotalResources\": 1118,\n    \"@TotalPages\": 8553,\n    \"@CurrentPage\": 4064\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a783cdad-4e38-403c-b3dc-fac6857b1d0a",
+              "name": "Missing or invalid Access-Token / Client-Secret.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorInformation\": {\n    \"Error\": 6409,\n    \"Message\": \"string\",\n    \"Code\": 7818\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d830a5a-e34f-418e-8ffa-062ceaecacd7",
+              "name": "Rate limit exceeded (300 requests/minute per access-token; ~25 per 5s sliding window).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorInformation\": {\n    \"Error\": 6409,\n    \"Message\": \"string\",\n    \"Code\": 7818\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "78e7d870-7915-475d-a24c-f7cb2915c012",
+          "name": "Create an invoice",
+          "request": {
+            "name": "Create an invoice",
+            "description": {
+              "content": "Creates a new invoice. The payload is wrapped in an `Invoice` object.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "invoices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Invoice\": {\n    \"CustomerNumber\": \"<string>\",\n    \"CustomerName\": \"<string>\",\n    \"InvoiceDate\": \"<date>\",\n    \"DueDate\": \"<date>\",\n    \"Currency\": \"<string>\",\n    \"Total\": \"<number>\",\n    \"Balance\": \"<number>\",\n    \"Booked\": \"<boolean>\",\n    \"Cancelled\": \"<boolean>\",\n    \"InvoiceRows\": [\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      },\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dab50a29-92cc-410c-9f00-8813f6ef4fc3",
+              "name": "A single invoice.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Invoice\": {\n    \"CustomerNumber\": \"<string>\",\n    \"CustomerName\": \"<string>\",\n    \"InvoiceDate\": \"<date>\",\n    \"DueDate\": \"<date>\",\n    \"Currency\": \"SEK\",\n    \"Total\": \"<number>\",\n    \"Balance\": \"<number>\",\n    \"Booked\": \"<boolean>\",\n    \"Cancelled\": \"<boolean>\",\n    \"InvoiceRows\": [\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      },\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Invoice\": {\n    \"CustomerNumber\": \"<string>\",\n    \"DocumentNumber\": \"string\",\n    \"CustomerName\": \"<string>\",\n    \"InvoiceDate\": \"<date>\",\n    \"DueDate\": \"<date>\",\n    \"Currency\": \"SEK\",\n    \"Total\": \"<number>\",\n    \"Balance\": \"<number>\",\n    \"Booked\": \"<boolean>\",\n    \"Cancelled\": \"<boolean>\",\n    \"InvoiceRows\": [\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      },\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e4baf5f-34e3-4bd0-a02f-3543b03fb803",
+              "name": "Malformed request or validation error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Invoice\": {\n    \"CustomerNumber\": \"<string>\",\n    \"CustomerName\": \"<string>\",\n    \"InvoiceDate\": \"<date>\",\n    \"DueDate\": \"<date>\",\n    \"Currency\": \"SEK\",\n    \"Total\": \"<number>\",\n    \"Balance\": \"<number>\",\n    \"Booked\": \"<boolean>\",\n    \"Cancelled\": \"<boolean>\",\n    \"InvoiceRows\": [\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      },\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorInformation\": {\n    \"Error\": 6409,\n    \"Message\": \"string\",\n    \"Code\": 7818\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "267335a4-2b57-4b54-a70c-cf818724be9a",
+              "name": "Missing or invalid Access-Token / Client-Secret.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Invoice\": {\n    \"CustomerNumber\": \"<string>\",\n    \"CustomerName\": \"<string>\",\n    \"InvoiceDate\": \"<date>\",\n    \"DueDate\": \"<date>\",\n    \"Currency\": \"SEK\",\n    \"Total\": \"<number>\",\n    \"Balance\": \"<number>\",\n    \"Booked\": \"<boolean>\",\n    \"Cancelled\": \"<boolean>\",\n    \"InvoiceRows\": [\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      },\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorInformation\": {\n    \"Error\": 6409,\n    \"Message\": \"string\",\n    \"Code\": 7818\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c94c551-d4c8-44c3-9950-70ffe6d83b9e",
+              "name": "Rate limit exceeded (300 requests/minute per access-token; ~25 per 5s sliding window).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Invoice\": {\n    \"CustomerNumber\": \"<string>\",\n    \"CustomerName\": \"<string>\",\n    \"InvoiceDate\": \"<date>\",\n    \"DueDate\": \"<date>\",\n    \"Currency\": \"SEK\",\n    \"Total\": \"<number>\",\n    \"Balance\": \"<number>\",\n    \"Booked\": \"<boolean>\",\n    \"Cancelled\": \"<boolean>\",\n    \"InvoiceRows\": [\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      },\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorInformation\": {\n    \"Error\": 6409,\n    \"Message\": \"string\",\n    \"Code\": 7818\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "904952c6-3fa0-4841-9180-3e51901ba3d1",
+          "name": "Retrieve an invoice",
+          "request": {
+            "name": "Retrieve an invoice",
+            "description": {},
+            "url": {
+              "path": [
+                "invoices",
+                ":DocumentNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "DocumentNumber",
+                  "description": "(Required) The document number identifying the invoice/order/offer."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "caaaf6c3-ce6a-469e-a71f-ecbb94cdf387",
+              "name": "A single invoice.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    ":DocumentNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "DocumentNumber",
+                      "description": "(Required) The document number identifying the invoice/order/offer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Invoice\": {\n    \"CustomerNumber\": \"<string>\",\n    \"DocumentNumber\": \"string\",\n    \"CustomerName\": \"<string>\",\n    \"InvoiceDate\": \"<date>\",\n    \"DueDate\": \"<date>\",\n    \"Currency\": \"SEK\",\n    \"Total\": \"<number>\",\n    \"Balance\": \"<number>\",\n    \"Booked\": \"<boolean>\",\n    \"Cancelled\": \"<boolean>\",\n    \"InvoiceRows\": [\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      },\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "84f30170-1c96-4cde-b394-7d726aee55d7",
+              "name": "Missing or invalid Access-Token / Client-Secret.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    ":DocumentNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "DocumentNumber",
+                      "description": "(Required) The document number identifying the invoice/order/offer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorInformation\": {\n    \"Error\": 6409,\n    \"Message\": \"string\",\n    \"Code\": 7818\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9081d3ed-3629-40b7-abd2-fc522dbc1780",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    ":DocumentNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "DocumentNumber",
+                      "description": "(Required) The document number identifying the invoice/order/offer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorInformation\": {\n    \"Error\": 6409,\n    \"Message\": \"string\",\n    \"Code\": 7818\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b2a2edda-6d5d-44b2-8258-5748dac78478",
+          "name": "Update an invoice",
+          "request": {
+            "name": "Update an invoice",
+            "description": {},
+            "url": {
+              "path": [
+                "invoices",
+                ":DocumentNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "DocumentNumber",
+                  "description": "(Required) The document number identifying the invoice/order/offer."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Invoice\": {\n    \"CustomerNumber\": \"<string>\",\n    \"CustomerName\": \"<string>\",\n    \"InvoiceDate\": \"<date>\",\n    \"DueDate\": \"<date>\",\n    \"Currency\": \"<string>\",\n    \"Total\": \"<number>\",\n    \"Balance\": \"<number>\",\n    \"Booked\": \"<boolean>\",\n    \"Cancelled\": \"<boolean>\",\n    \"InvoiceRows\": [\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      },\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7b608995-ddd2-463f-81fa-0501a36a61df",
+              "name": "A single invoice.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    ":DocumentNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "DocumentNumber",
+                      "description": "(Required) The document number identifying the invoice/order/offer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Invoice\": {\n    \"CustomerNumber\": \"<string>\",\n    \"CustomerName\": \"<string>\",\n    \"InvoiceDate\": \"<date>\",\n    \"DueDate\": \"<date>\",\n    \"Currency\": \"SEK\",\n    \"Total\": \"<number>\",\n    \"Balance\": \"<number>\",\n    \"Booked\": \"<boolean>\",\n    \"Cancelled\": \"<boolean>\",\n    \"InvoiceRows\": [\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      },\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Invoice\": {\n    \"CustomerNumber\": \"<string>\",\n    \"DocumentNumber\": \"string\",\n    \"CustomerName\": \"<string>\",\n    \"InvoiceDate\": \"<date>\",\n    \"DueDate\": \"<date>\",\n    \"Currency\": \"SEK\",\n    \"Total\": \"<number>\",\n    \"Balance\": \"<number>\",\n    \"Booked\": \"<boolean>\",\n    \"Cancelled\": \"<boolean>\",\n    \"InvoiceRows\": [\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      },\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3c9b7659-4b4f-4479-ac65-5abe560eeb50",
+              "name": "Missing or invalid Access-Token / Client-Secret.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    ":DocumentNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "DocumentNumber",
+                      "description": "(Required) The document number identifying the invoice/order/offer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Invoice\": {\n    \"CustomerNumber\": \"<string>\",\n    \"CustomerName\": \"<string>\",\n    \"InvoiceDate\": \"<date>\",\n    \"DueDate\": \"<date>\",\n    \"Currency\": \"SEK\",\n    \"Total\": \"<number>\",\n    \"Balance\": \"<number>\",\n    \"Booked\": \"<boolean>\",\n    \"Cancelled\": \"<boolean>\",\n    \"InvoiceRows\": [\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      },\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorInformation\": {\n    \"Error\": 6409,\n    \"Message\": \"string\",\n    \"Code\": 7818\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.fortnox.se/3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Access-Token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "795173ad-c6bc-42c1-a16b-28103bf0e1ae",
+    "name": "Fortnox REST API (Representative Subset) Accounts Invoices API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Grounded OpenAPI description of the Fortnox REST API - the Swedish cloud accounting/ERP platform for SMBs and accounting bureaus. Base URL is https://api.fortnox.se/3/. Authentication is OAuth2 Authorization Code Flow: each request carries the Access-Token (Bearer JWT, 1h) header plus the Client-Secret header issued to your Fortnox app. The old fixed Access-Token/Client-Secret integration keys were deprecated 2025-04-30.\n\nSCOPE / FIDELITY NOTE: The Fortnox API exposes 40+ resources. This document ships a solid, representative SUBSET (Invoices, Customers, Articles, Orders, Offers, Vouchers, Accounts, Financial Years, Suppliers, Supplier Invoices, Projects) with pragmatic, partial field-level schemas. Paths, methods, identifiers, the wrapper-object response envelope (e.g. { \"Invoice\": {...} }, { \"Invoices\": [...] }), and auth are grounded in Fortnox's developer documentation. Per-field property coverage is intentionally partial and MODELED/summarized from the docs, not transcribed field-for-field for every resource. Verify exact field sets and validation against https://api.fortnox.se/apidocs before production use.\n\nContact Support:\n Name: Fortnox Developer",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,501 @@
+{
+  "item": [
+    {
+      "id": "b33baca4-2052-44ad-856a-338c81d1d95e",
+      "name": "Orders",
+      "description": {
+        "content": "Sales orders.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e8e81381-da48-4304-b943-935b19449902",
+          "name": "List orders",
+          "request": {
+            "name": "List orders",
+            "description": {},
+            "url": {
+              "path": [
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number for paginated results."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of records per page (max 500)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "824349fb-9f70-4d1a-b45c-42972bc9aa2c",
+              "name": "A list of orders.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Orders\": [\n    {\n      \"DocumentNumber\": \"string\",\n      \"CustomerNumber\": \"string\",\n      \"CustomerName\": \"string\",\n      \"OrderDate\": \"1958-04-02\",\n      \"Total\": 8644.088276988106\n    },\n    {\n      \"DocumentNumber\": \"string\",\n      \"CustomerNumber\": \"string\",\n      \"CustomerName\": \"string\",\n      \"OrderDate\": \"1951-07-03\",\n      \"Total\": 6105.4026730632895\n    }\n  ],\n  \"MetaInformation\": {\n    \"@TotalResources\": 1557,\n    \"@TotalPages\": 7632,\n    \"@CurrentPage\": 7849\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4d8a17b6-5d58-4915-9650-87922a64687d",
+          "name": "Create an order",
+          "request": {
+            "name": "Create an order",
+            "description": {},
+            "url": {
+              "path": [
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Order\": {\n    \"CustomerNumber\": \"<string>\",\n    \"CustomerName\": \"<string>\",\n    \"OrderDate\": \"<date>\",\n    \"DeliveryDate\": \"<date>\",\n    \"Currency\": \"<string>\",\n    \"Total\": \"<number>\",\n    \"OrderRows\": [\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      },\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9f009e69-a3d5-4eda-b737-f62f3ea6b58b",
+              "name": "A single order.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Order\": {\n    \"CustomerNumber\": \"<string>\",\n    \"CustomerName\": \"<string>\",\n    \"OrderDate\": \"<date>\",\n    \"DeliveryDate\": \"<date>\",\n    \"Currency\": \"<string>\",\n    \"Total\": \"<number>\",\n    \"OrderRows\": [\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      },\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Order\": {\n    \"CustomerNumber\": \"<string>\",\n    \"DocumentNumber\": \"string\",\n    \"CustomerName\": \"<string>\",\n    \"OrderDate\": \"<date>\",\n    \"DeliveryDate\": \"<date>\",\n    \"Currency\": \"<string>\",\n    \"Total\": \"<number>\",\n    \"OrderRows\": [\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      },\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "82341e9c-ce29-4fa4-b91b-bfa9fdce9374",
+          "name": "Retrieve an order",
+          "request": {
+            "name": "Retrieve an order",
+            "description": {},
+            "url": {
+              "path": [
+                "orders",
+                ":DocumentNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "DocumentNumber",
+                  "description": "(Required) The document number identifying the invoice/order/offer."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7b696e5d-9409-4cb6-956f-dc080db424ba",
+              "name": "A single order.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":DocumentNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "DocumentNumber",
+                      "description": "(Required) The document number identifying the invoice/order/offer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Order\": {\n    \"CustomerNumber\": \"<string>\",\n    \"DocumentNumber\": \"string\",\n    \"CustomerName\": \"<string>\",\n    \"OrderDate\": \"<date>\",\n    \"DeliveryDate\": \"<date>\",\n    \"Currency\": \"<string>\",\n    \"Total\": \"<number>\",\n    \"OrderRows\": [\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      },\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7e7f1357-93dc-40c3-932e-9abacab9d3bd",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":DocumentNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "DocumentNumber",
+                      "description": "(Required) The document number identifying the invoice/order/offer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorInformation\": {\n    \"Error\": 4698,\n    \"Message\": \"string\",\n    \"Code\": 6954\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5f97a0e4-e271-48b1-a6d1-ce2ffa6ef9c9",
+          "name": "Update an order",
+          "request": {
+            "name": "Update an order",
+            "description": {},
+            "url": {
+              "path": [
+                "orders",
+                ":DocumentNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "DocumentNumber",
+                  "description": "(Required) The document number identifying the invoice/order/offer."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Order\": {\n    \"CustomerNumber\": \"<string>\",\n    \"CustomerName\": \"<string>\",\n    \"OrderDate\": \"<date>\",\n    \"DeliveryDate\": \"<date>\",\n    \"Currency\": \"<string>\",\n    \"Total\": \"<number>\",\n    \"OrderRows\": [\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      },\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6de78aea-c0d4-4296-8600-ea1bdf72a47b",
+              "name": "A single order.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":DocumentNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "DocumentNumber",
+                      "description": "(Required) The document number identifying the invoice/order/offer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Order\": {\n    \"CustomerNumber\": \"<string>\",\n    \"CustomerName\": \"<string>\",\n    \"OrderDate\": \"<date>\",\n    \"DeliveryDate\": \"<date>\",\n    \"Currency\": \"<string>\",\n    \"Total\": \"<number>\",\n    \"OrderRows\": [\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      },\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Order\": {\n    \"CustomerNumber\": \"<string>\",\n    \"DocumentNumber\": \"string\",\n    \"CustomerName\": \"<string>\",\n    \"OrderDate\": \"<date>\",\n    \"DeliveryDate\": \"<date>\",\n    \"Currency\": \"<string>\",\n    \"Total\": \"<number>\",\n    \"OrderRows\": [\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      },\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.fortnox.se/3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Access-Token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8dbf4018-d2ec-417b-be75-b8f460bb1729",
+    "name": "Fortnox REST API (Representative Subset) Accounts Orders API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Grounded OpenAPI description of the Fortnox REST API - the Swedish cloud accounting/ERP platform for SMBs and accounting bureaus. Base URL is https://api.fortnox.se/3/. Authentication is OAuth2 Authorization Code Flow: each request carries the Access-Token (Bearer JWT, 1h) header plus the Client-Secret header issued to your Fortnox app. The old fixed Access-Token/Client-Secret integration keys were deprecated 2025-04-30.\n\nSCOPE / FIDELITY NOTE: The Fortnox API exposes 40+ resources. This document ships a solid, representative SUBSET (Invoices, Customers, Articles, Orders, Offers, Vouchers, Accounts, Financial Years, Suppliers, Supplier Invoices, Projects) with pragmatic, partial field-level schemas. Paths, methods, identifiers, the wrapper-object response envelope (e.g. { \"Invoice\": {...} }, { \"Invoices\": [...] }), and auth are grounded in Fortnox's developer documentation. Per-field property coverage is intentionally partial and MODELED/summarized from the docs, not transcribed field-for-field for every resource. Verify exact field sets and validation against https://api.fortnox.se/apidocs before production use.\n\nContact Support:\n Name: Fortnox Developer",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,420 @@
+{
+  "item": [
+    {
+      "id": "8124c304-8c4e-4446-9f1d-cb57a8d29e85",
+      "name": "Vouchers",
+      "description": {
+        "content": "Accounting vouchers (journal entries).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9ac4ee4f-769e-41d8-82a8-4e94a31410d7",
+          "name": "List vouchers",
+          "request": {
+            "name": "List vouchers",
+            "description": {},
+            "url": {
+              "path": [
+                "vouchers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "financialyear",
+                  "value": "<integer>",
+                  "description": "Financial year ID to scope the vouchers to."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "64a893e0-1003-4f13-b0e7-003b8a21e470",
+              "name": "A list of vouchers.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vouchers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "financialyear",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Vouchers\": [\n    {\n      \"VoucherSeries\": \"string\",\n      \"TransactionDate\": \"1957-07-01\",\n      \"VoucherRows\": [\n        {\n          \"Account\": 2021,\n          \"Debit\": 476.8957734075774,\n          \"Credit\": 2096.5315178239985,\n          \"Description\": \"string\",\n          \"TransactionInformation\": \"string\"\n        },\n        {\n          \"Account\": 459,\n          \"Debit\": 4601.1736008655,\n          \"Credit\": 5544.378470523282,\n          \"Description\": \"string\",\n          \"TransactionInformation\": \"string\"\n        }\n      ],\n      \"VoucherNumber\": 4882,\n      \"Description\": \"string\",\n      \"Year\": 9893\n    },\n    {\n      \"VoucherSeries\": \"string\",\n      \"TransactionDate\": \"1969-06-07\",\n      \"VoucherRows\": [\n        {\n          \"Account\": 2882,\n          \"Debit\": 9235.527512005207,\n          \"Credit\": 7418.847447346177,\n          \"Description\": \"string\",\n          \"TransactionInformation\": \"string\"\n        },\n        {\n          \"Account\": 2015,\n          \"Debit\": 6583.654348827289,\n          \"Credit\": 9736.718333420253,\n          \"Description\": \"string\",\n          \"TransactionInformation\": \"string\"\n        }\n      ],\n      \"VoucherNumber\": 7801,\n      \"Description\": \"string\",\n      \"Year\": 2995\n    }\n  ],\n  \"MetaInformation\": {\n    \"@TotalResources\": 3385,\n    \"@TotalPages\": 8131,\n    \"@CurrentPage\": 1903\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "52aad7f9-49ff-414f-ba39-d2579de53111",
+          "name": "Create a voucher",
+          "request": {
+            "name": "Create a voucher",
+            "description": {
+              "content": "Posts a double-entry voucher into a voucher series.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vouchers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Voucher\": {\n    \"VoucherSeries\": \"<string>\",\n    \"TransactionDate\": \"<date>\",\n    \"VoucherRows\": [\n      {\n        \"Account\": \"<integer>\",\n        \"Debit\": \"<number>\",\n        \"Credit\": \"<number>\",\n        \"Description\": \"<string>\",\n        \"TransactionInformation\": \"<string>\"\n      },\n      {\n        \"Account\": \"<integer>\",\n        \"Debit\": \"<number>\",\n        \"Credit\": \"<number>\",\n        \"Description\": \"<string>\",\n        \"TransactionInformation\": \"<string>\"\n      }\n    ],\n    \"Description\": \"<string>\",\n    \"Year\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "addb0ff1-f49b-49a0-b34d-59609343acad",
+              "name": "A single voucher.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vouchers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Voucher\": {\n    \"VoucherSeries\": \"<string>\",\n    \"TransactionDate\": \"<date>\",\n    \"VoucherRows\": [\n      {\n        \"Account\": \"<integer>\",\n        \"Debit\": \"<number>\",\n        \"Credit\": \"<number>\",\n        \"Description\": \"<string>\",\n        \"TransactionInformation\": \"<string>\"\n      },\n      {\n        \"Account\": \"<integer>\",\n        \"Debit\": \"<number>\",\n        \"Credit\": \"<number>\",\n        \"Description\": \"<string>\",\n        \"TransactionInformation\": \"<string>\"\n      }\n    ],\n    \"Description\": \"<string>\",\n    \"Year\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Voucher\": {\n    \"VoucherSeries\": \"<string>\",\n    \"TransactionDate\": \"<date>\",\n    \"VoucherRows\": [\n      {\n        \"Account\": \"<integer>\",\n        \"Debit\": \"<number>\",\n        \"Credit\": \"<number>\",\n        \"Description\": \"<string>\",\n        \"TransactionInformation\": \"<string>\"\n      },\n      {\n        \"Account\": \"<integer>\",\n        \"Debit\": \"<number>\",\n        \"Credit\": \"<number>\",\n        \"Description\": \"<string>\",\n        \"TransactionInformation\": \"<string>\"\n      }\n    ],\n    \"VoucherNumber\": 3283,\n    \"Description\": \"<string>\",\n    \"Year\": \"<integer>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "45f6ead5-ba3f-4d41-aa0e-70efd19882ba",
+          "name": "Retrieve a voucher",
+          "request": {
+            "name": "Retrieve a voucher",
+            "description": {},
+            "url": {
+              "path": [
+                "vouchers",
+                ":VoucherSeries",
+                ":VoucherNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "financialyear",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "VoucherSeries",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "VoucherNumber",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ce0d80de-11f6-41f9-82bc-4ced09c0ba8e",
+              "name": "A single voucher.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vouchers",
+                    ":VoucherSeries",
+                    ":VoucherNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "financialyear",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "VoucherSeries",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "VoucherNumber",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Voucher\": {\n    \"VoucherSeries\": \"<string>\",\n    \"TransactionDate\": \"<date>\",\n    \"VoucherRows\": [\n      {\n        \"Account\": \"<integer>\",\n        \"Debit\": \"<number>\",\n        \"Credit\": \"<number>\",\n        \"Description\": \"<string>\",\n        \"TransactionInformation\": \"<string>\"\n      },\n      {\n        \"Account\": \"<integer>\",\n        \"Debit\": \"<number>\",\n        \"Credit\": \"<number>\",\n        \"Description\": \"<string>\",\n        \"TransactionInformation\": \"<string>\"\n      }\n    ],\n    \"VoucherNumber\": 3283,\n    \"Description\": \"<string>\",\n    \"Year\": \"<integer>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55ff97a2-1a58-4f95-9378-2c1edbd9bf0b",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vouchers",
+                    ":VoucherSeries",
+                    ":VoucherNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "financialyear",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "VoucherSeries",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "VoucherNumber",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorInformation\": {\n    \"Error\": 4110,\n    \"Message\": \"string\",\n    \"Code\": 466\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.fortnox.se/3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Access-Token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "255f601c-58b6-4d17-99d9-cb71c8ff868e",
+    "name": "Fortnox REST API (Representative Subset) Accounts Vouchers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Grounded OpenAPI description of the Fortnox REST API - the Swedish cloud accounting/ERP platform for SMBs and accounting bureaus. Base URL is https://api.fortnox.se/3/. Authentication is OAuth2 Authorization Code Flow: each request carries the Access-Token (Bearer JWT, 1h) header plus the Client-Secret header issued to your Fortnox app. The old fixed Access-Token/Client-Secret integration keys were deprecated 2025-04-30.\n\nSCOPE / FIDELITY NOTE: The Fortnox API exposes 40+ resources. This document ships a solid, representative SUBSET (Invoices, Customers, Articles, Orders, Offers, Vouchers, Accounts, Financial Years, Suppliers, Supplier Invoices, Projects) with pragmatic, partial field-level schemas. Paths, methods, identifiers, the wrapper-object response envelope (e.g. { \"Invoice\": {...} }, { \"Invoices\": [...] }), and auth are grounded in Fortnox's developer documentation. Per-field property coverage is intentionally partial and MODELED/summarized from the docs, not transcribed field-for-field for every resource. Verify exact field sets and validation against https://api.fortnox.se/apidocs before production use.\n\nContact Support:\n Name: Fortnox Developer",
+      "type": "text/plain"
+    }
+  }
+}

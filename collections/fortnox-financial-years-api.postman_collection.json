@@ -1,0 +1,220 @@
+{
+  "item": [
+    {
+      "id": "f1cb24e5-b587-4347-9b29-7f77b5165b36",
+      "name": "Financial Years",
+      "description": {
+        "content": "Financial (accounting) years.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d7611176-78cc-4515-af99-582f70d46cf8",
+          "name": "List financial years",
+          "request": {
+            "name": "List financial years",
+            "description": {},
+            "url": {
+              "path": [
+                "financialyears"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ab17c556-923a-48bf-90b2-f543c894e040",
+              "name": "A list of financial years.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "financialyears"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"FinancialYears\": [\n    {\n      \"FromDate\": \"2020-05-26\",\n      \"ToDate\": \"1999-04-13\",\n      \"Id\": 9274,\n      \"AccountingMethod\": \"CASH\",\n      \"accountCharts\": \"string\"\n    },\n    {\n      \"FromDate\": \"1994-07-29\",\n      \"ToDate\": \"1981-12-21\",\n      \"Id\": 4389,\n      \"AccountingMethod\": \"ACCRUAL\",\n      \"accountCharts\": \"string\"\n    }\n  ],\n  \"MetaInformation\": {\n    \"@TotalResources\": 3485,\n    \"@TotalPages\": 2650,\n    \"@CurrentPage\": 5405\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2fd5ff84-838d-4c5c-8317-cad0a0651bd1",
+          "name": "Create a financial year",
+          "request": {
+            "name": "Create a financial year",
+            "description": {},
+            "url": {
+              "path": [
+                "financialyears"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"FinancialYear\": {\n    \"FromDate\": \"<date>\",\n    \"ToDate\": \"<date>\",\n    \"AccountingMethod\": \"<string>\",\n    \"accountCharts\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "37322150-9b4b-4953-8963-2a3313b2a444",
+              "name": "Financial year created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "financialyears"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"FinancialYear\": {\n    \"FromDate\": \"<date>\",\n    \"ToDate\": \"<date>\",\n    \"AccountingMethod\": \"<string>\",\n    \"accountCharts\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"FinancialYear\": {\n    \"FromDate\": \"<date>\",\n    \"ToDate\": \"<date>\",\n    \"Id\": 9514,\n    \"AccountingMethod\": \"<string>\",\n    \"accountCharts\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.fortnox.se/3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Access-Token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "97a55433-b2a7-4f19-8b3a-321731c69a45",
+    "name": "Fortnox REST API (Representative Subset) Accounts Financial Years API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Grounded OpenAPI description of the Fortnox REST API - the Swedish cloud accounting/ERP platform for SMBs and accounting bureaus. Base URL is https://api.fortnox.se/3/. Authentication is OAuth2 Authorization Code Flow: each request carries the Access-Token (Bearer JWT, 1h) header plus the Client-Secret header issued to your Fortnox app. The old fixed Access-Token/Client-Secret integration keys were deprecated 2025-04-30.\n\nSCOPE / FIDELITY NOTE: The Fortnox API exposes 40+ resources. This document ships a solid, representative SUBSET (Invoices, Customers, Articles, Orders, Offers, Vouchers, Accounts, Financial Years, Suppliers, Supplier Invoices, Projects) with pragmatic, partial field-level schemas. Paths, methods, identifiers, the wrapper-object response envelope (e.g. { \"Invoice\": {...} }, { \"Invoices\": [...] }), and auth are grounded in Fortnox's developer documentation. Per-field property coverage is intentionally partial and MODELED/summarized from the docs, not transcribed field-for-field for every resource. Verify exact field sets and validation against https://api.fortnox.se/apidocs before production use.\n\nContact Support:\n Name: Fortnox Developer",
+      "type": "text/plain"
+    }
+  }
+}

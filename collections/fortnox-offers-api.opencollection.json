@@ -1,0 +1,85 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fortnox REST API (Representative Subset) Accounts Offers API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Access-Token",
+      "value": "{{Access-Token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Offers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List offers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fortnox.se/3/offers",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records per page (max 500)."
+              }
+            ]
+          },
+          "docs": "List offers"
+        },
+        {
+          "info": {
+            "name": "Create an offer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.fortnox.se/3/offers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an offer"
+        },
+        {
+          "info": {
+            "name": "Retrieve an offer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fortnox.se/3/offers/:DocumentNumber",
+            "params": [
+              {
+                "name": "DocumentNumber",
+                "value": "",
+                "type": "path",
+                "description": "The document number identifying the invoice/order/offer."
+              }
+            ]
+          },
+          "docs": "Retrieve an offer"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

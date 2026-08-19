@@ -1,0 +1,501 @@
+{
+  "item": [
+    {
+      "id": "ae0e8dd9-16ca-4108-a2a2-9c364c90c67d",
+      "name": "Suppliers",
+      "description": {
+        "content": "Supplier register.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9551dc90-3356-4b77-92ce-a0015ca03bda",
+          "name": "List suppliers",
+          "request": {
+            "name": "List suppliers",
+            "description": {},
+            "url": {
+              "path": [
+                "suppliers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number for paginated results."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of records per page (max 500)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b549de89-f790-4748-883f-28e7713b5917",
+              "name": "A list of suppliers.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "suppliers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Suppliers\": [\n    {\n      \"Name\": \"string\",\n      \"SupplierNumber\": \"string\",\n      \"OrganisationNumber\": \"string\",\n      \"Email\": \"string\",\n      \"Address1\": \"string\",\n      \"City\": \"string\",\n      \"ZipCode\": \"string\",\n      \"CountryCode\": \"string\",\n      \"Currency\": \"string\",\n      \"BG\": \"string\",\n      \"PG\": \"string\",\n      \"VATNumber\": \"string\"\n    },\n    {\n      \"Name\": \"string\",\n      \"SupplierNumber\": \"string\",\n      \"OrganisationNumber\": \"string\",\n      \"Email\": \"string\",\n      \"Address1\": \"string\",\n      \"City\": \"string\",\n      \"ZipCode\": \"string\",\n      \"CountryCode\": \"string\",\n      \"Currency\": \"string\",\n      \"BG\": \"string\",\n      \"PG\": \"string\",\n      \"VATNumber\": \"string\"\n    }\n  ],\n  \"MetaInformation\": {\n    \"@TotalResources\": 5029,\n    \"@TotalPages\": 3780,\n    \"@CurrentPage\": 4998\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e6b7a98f-220c-4dc2-b64f-3be7293e0205",
+          "name": "Create a supplier",
+          "request": {
+            "name": "Create a supplier",
+            "description": {},
+            "url": {
+              "path": [
+                "suppliers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Supplier\": {\n    \"Name\": \"<string>\",\n    \"SupplierNumber\": \"<string>\",\n    \"OrganisationNumber\": \"<string>\",\n    \"Email\": \"<string>\",\n    \"Address1\": \"<string>\",\n    \"City\": \"<string>\",\n    \"ZipCode\": \"<string>\",\n    \"CountryCode\": \"<string>\",\n    \"Currency\": \"<string>\",\n    \"BG\": \"<string>\",\n    \"PG\": \"<string>\",\n    \"VATNumber\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c4adb8f4-4203-406e-a3a2-9c5347504305",
+              "name": "A single supplier.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "suppliers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Supplier\": {\n    \"Name\": \"<string>\",\n    \"SupplierNumber\": \"<string>\",\n    \"OrganisationNumber\": \"<string>\",\n    \"Email\": \"<string>\",\n    \"Address1\": \"<string>\",\n    \"City\": \"<string>\",\n    \"ZipCode\": \"<string>\",\n    \"CountryCode\": \"<string>\",\n    \"Currency\": \"<string>\",\n    \"BG\": \"<string>\",\n    \"PG\": \"<string>\",\n    \"VATNumber\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Supplier\": {\n    \"Name\": \"<string>\",\n    \"SupplierNumber\": \"<string>\",\n    \"OrganisationNumber\": \"<string>\",\n    \"Email\": \"<string>\",\n    \"Address1\": \"<string>\",\n    \"City\": \"<string>\",\n    \"ZipCode\": \"<string>\",\n    \"CountryCode\": \"<string>\",\n    \"Currency\": \"<string>\",\n    \"BG\": \"<string>\",\n    \"PG\": \"<string>\",\n    \"VATNumber\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9f4fcf0d-89a9-4550-9a3e-0c41e7c4c0ea",
+          "name": "Retrieve a supplier",
+          "request": {
+            "name": "Retrieve a supplier",
+            "description": {},
+            "url": {
+              "path": [
+                "suppliers",
+                ":SupplierNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "SupplierNumber",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "91167cd9-233b-4da2-b3d5-bae014659340",
+              "name": "A single supplier.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "suppliers",
+                    ":SupplierNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "SupplierNumber",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Supplier\": {\n    \"Name\": \"<string>\",\n    \"SupplierNumber\": \"<string>\",\n    \"OrganisationNumber\": \"<string>\",\n    \"Email\": \"<string>\",\n    \"Address1\": \"<string>\",\n    \"City\": \"<string>\",\n    \"ZipCode\": \"<string>\",\n    \"CountryCode\": \"<string>\",\n    \"Currency\": \"<string>\",\n    \"BG\": \"<string>\",\n    \"PG\": \"<string>\",\n    \"VATNumber\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "90330c3c-081d-487a-946b-81574681d23e",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "suppliers",
+                    ":SupplierNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "SupplierNumber",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorInformation\": {\n    \"Error\": 8309,\n    \"Message\": \"string\",\n    \"Code\": 2254\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ff4f3113-c5a6-46da-a8ad-c1cd04e5e2da",
+          "name": "Update a supplier",
+          "request": {
+            "name": "Update a supplier",
+            "description": {},
+            "url": {
+              "path": [
+                "suppliers",
+                ":SupplierNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "SupplierNumber",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Supplier\": {\n    \"Name\": \"<string>\",\n    \"SupplierNumber\": \"<string>\",\n    \"OrganisationNumber\": \"<string>\",\n    \"Email\": \"<string>\",\n    \"Address1\": \"<string>\",\n    \"City\": \"<string>\",\n    \"ZipCode\": \"<string>\",\n    \"CountryCode\": \"<string>\",\n    \"Currency\": \"<string>\",\n    \"BG\": \"<string>\",\n    \"PG\": \"<string>\",\n    \"VATNumber\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "25a0ac94-20e4-4052-93d0-f7059ff89ef4",
+              "name": "A single supplier.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "suppliers",
+                    ":SupplierNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "SupplierNumber",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Supplier\": {\n    \"Name\": \"<string>\",\n    \"SupplierNumber\": \"<string>\",\n    \"OrganisationNumber\": \"<string>\",\n    \"Email\": \"<string>\",\n    \"Address1\": \"<string>\",\n    \"City\": \"<string>\",\n    \"ZipCode\": \"<string>\",\n    \"CountryCode\": \"<string>\",\n    \"Currency\": \"<string>\",\n    \"BG\": \"<string>\",\n    \"PG\": \"<string>\",\n    \"VATNumber\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Supplier\": {\n    \"Name\": \"<string>\",\n    \"SupplierNumber\": \"<string>\",\n    \"OrganisationNumber\": \"<string>\",\n    \"Email\": \"<string>\",\n    \"Address1\": \"<string>\",\n    \"City\": \"<string>\",\n    \"ZipCode\": \"<string>\",\n    \"CountryCode\": \"<string>\",\n    \"Currency\": \"<string>\",\n    \"BG\": \"<string>\",\n    \"PG\": \"<string>\",\n    \"VATNumber\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.fortnox.se/3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Access-Token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "403f9fd6-565f-443d-9aeb-801ae066ad3c",
+    "name": "Fortnox REST API (Representative Subset) Accounts Suppliers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Grounded OpenAPI description of the Fortnox REST API - the Swedish cloud accounting/ERP platform for SMBs and accounting bureaus. Base URL is https://api.fortnox.se/3/. Authentication is OAuth2 Authorization Code Flow: each request carries the Access-Token (Bearer JWT, 1h) header plus the Client-Secret header issued to your Fortnox app. The old fixed Access-Token/Client-Secret integration keys were deprecated 2025-04-30.\n\nSCOPE / FIDELITY NOTE: The Fortnox API exposes 40+ resources. This document ships a solid, representative SUBSET (Invoices, Customers, Articles, Orders, Offers, Vouchers, Accounts, Financial Years, Suppliers, Supplier Invoices, Projects) with pragmatic, partial field-level schemas. Paths, methods, identifiers, the wrapper-object response envelope (e.g. { \"Invoice\": {...} }, { \"Invoices\": [...] }), and auth are grounded in Fortnox's developer documentation. Per-field property coverage is intentionally partial and MODELED/summarized from the docs, not transcribed field-for-field for every resource. Verify exact field sets and validation against https://api.fortnox.se/apidocs before production use.\n\nContact Support:\n Name: Fortnox Developer",
+      "type": "text/plain"
+    }
+  }
+}

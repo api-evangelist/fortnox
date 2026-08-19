@@ -1,0 +1,387 @@
+{
+  "item": [
+    {
+      "id": "0ccf52f1-5eb0-430b-a7aa-907217b42b5f",
+      "name": "Offers",
+      "description": {
+        "content": "Offers (quotations).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "89e0033e-a5d4-4eca-a370-c292056378e8",
+          "name": "List offers",
+          "request": {
+            "name": "List offers",
+            "description": {},
+            "url": {
+              "path": [
+                "offers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number for paginated results."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of records per page (max 500)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "04acf9ae-8e2d-4358-9021-e56f927bfbc9",
+              "name": "A list of offers.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Offers\": [\n    {\n      \"DocumentNumber\": \"string\",\n      \"CustomerNumber\": \"string\",\n      \"CustomerName\": \"string\",\n      \"OfferDate\": \"1994-07-03\",\n      \"Total\": 6977.741648695694\n    },\n    {\n      \"DocumentNumber\": \"string\",\n      \"CustomerNumber\": \"string\",\n      \"CustomerName\": \"string\",\n      \"OfferDate\": \"2022-01-18\",\n      \"Total\": 3940.5475473897923\n    }\n  ],\n  \"MetaInformation\": {\n    \"@TotalResources\": 3740,\n    \"@TotalPages\": 742,\n    \"@CurrentPage\": 9151\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "701e477f-667f-4365-a520-f8e3397d6762",
+          "name": "Create an offer",
+          "request": {
+            "name": "Create an offer",
+            "description": {},
+            "url": {
+              "path": [
+                "offers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Offer\": {\n    \"CustomerNumber\": \"<string>\",\n    \"CustomerName\": \"<string>\",\n    \"OfferDate\": \"<date>\",\n    \"ExpireDate\": \"<date>\",\n    \"Currency\": \"<string>\",\n    \"Total\": \"<number>\",\n    \"OfferRows\": [\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      },\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4f9e7a64-d07d-4edd-ac69-32311ef1f83c",
+              "name": "A single offer.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Offer\": {\n    \"CustomerNumber\": \"<string>\",\n    \"CustomerName\": \"<string>\",\n    \"OfferDate\": \"<date>\",\n    \"ExpireDate\": \"<date>\",\n    \"Currency\": \"<string>\",\n    \"Total\": \"<number>\",\n    \"OfferRows\": [\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      },\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Offer\": {\n    \"CustomerNumber\": \"<string>\",\n    \"DocumentNumber\": \"string\",\n    \"CustomerName\": \"<string>\",\n    \"OfferDate\": \"<date>\",\n    \"ExpireDate\": \"<date>\",\n    \"Currency\": \"<string>\",\n    \"Total\": \"<number>\",\n    \"OfferRows\": [\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      },\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f9e1233b-6689-48bd-b8c8-3acada1d3318",
+          "name": "Retrieve an offer",
+          "request": {
+            "name": "Retrieve an offer",
+            "description": {},
+            "url": {
+              "path": [
+                "offers",
+                ":DocumentNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "DocumentNumber",
+                  "description": "(Required) The document number identifying the invoice/order/offer."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "de4590de-3404-401d-9acb-4130c03b68a3",
+              "name": "A single offer.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "offers",
+                    ":DocumentNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "DocumentNumber",
+                      "description": "(Required) The document number identifying the invoice/order/offer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Offer\": {\n    \"CustomerNumber\": \"<string>\",\n    \"DocumentNumber\": \"string\",\n    \"CustomerName\": \"<string>\",\n    \"OfferDate\": \"<date>\",\n    \"ExpireDate\": \"<date>\",\n    \"Currency\": \"<string>\",\n    \"Total\": \"<number>\",\n    \"OfferRows\": [\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      },\n      {\n        \"ArticleNumber\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"DeliveredQuantity\": \"<string>\",\n        \"Price\": \"<number>\",\n        \"VAT\": \"<number>\",\n        \"AccountNumber\": \"<integer>\",\n        \"Unit\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f0cd2036-8e33-4ccb-bda1-a3ed8dfa83ad",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "offers",
+                    ":DocumentNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "DocumentNumber",
+                      "description": "(Required) The document number identifying the invoice/order/offer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorInformation\": {\n    \"Error\": 6318,\n    \"Message\": \"string\",\n    \"Code\": 5999\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.fortnox.se/3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Access-Token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "cb66dde4-eb14-4be6-a99b-3d24411a21c3",
+    "name": "Fortnox REST API (Representative Subset) Accounts Offers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Grounded OpenAPI description of the Fortnox REST API - the Swedish cloud accounting/ERP platform for SMBs and accounting bureaus. Base URL is https://api.fortnox.se/3/. Authentication is OAuth2 Authorization Code Flow: each request carries the Access-Token (Bearer JWT, 1h) header plus the Client-Secret header issued to your Fortnox app. The old fixed Access-Token/Client-Secret integration keys were deprecated 2025-04-30.\n\nSCOPE / FIDELITY NOTE: The Fortnox API exposes 40+ resources. This document ships a solid, representative SUBSET (Invoices, Customers, Articles, Orders, Offers, Vouchers, Accounts, Financial Years, Suppliers, Supplier Invoices, Projects) with pragmatic, partial field-level schemas. Paths, methods, identifiers, the wrapper-object response envelope (e.g. { \"Invoice\": {...} }, { \"Invoices\": [...] }), and auth are grounded in Fortnox's developer documentation. Per-field property coverage is intentionally partial and MODELED/summarized from the docs, not transcribed field-for-field for every resource. Verify exact field sets and validation against https://api.fortnox.se/apidocs before production use.\n\nContact Support:\n Name: Fortnox Developer",
+      "type": "text/plain"
+    }
+  }
+}

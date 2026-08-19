@@ -1,0 +1,88 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fortnox REST API (Representative Subset) Accounts Vouchers API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Access-Token",
+      "value": "{{Access-Token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Vouchers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List vouchers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fortnox.se/3/vouchers",
+            "params": [
+              {
+                "name": "financialyear",
+                "value": "",
+                "type": "query",
+                "description": "Financial year ID to scope the vouchers to."
+              }
+            ]
+          },
+          "docs": "List vouchers"
+        },
+        {
+          "info": {
+            "name": "Create a voucher",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.fortnox.se/3/vouchers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Posts a double-entry voucher into a voucher series."
+        },
+        {
+          "info": {
+            "name": "Retrieve a voucher",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fortnox.se/3/vouchers/:VoucherSeries/:VoucherNumber",
+            "params": [
+              {
+                "name": "VoucherSeries",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "VoucherNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "financialyear",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve a voucher"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

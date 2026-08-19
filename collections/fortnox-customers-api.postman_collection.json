@@ -1,0 +1,745 @@
+{
+  "item": [
+    {
+      "id": "df9c765f-aee5-4e11-918f-012b156349de",
+      "name": "Customers",
+      "description": {
+        "content": "Customer register.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a25d6f8a-7e5f-411f-9e12-5807ee3b65fe",
+          "name": "List customers",
+          "request": {
+            "name": "List customers",
+            "description": {},
+            "url": {
+              "path": [
+                "customers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number for paginated results."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of records per page (max 500)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4fbb08aa-7ebd-4b18-8ca7-4666a68d7c9f",
+              "name": "A list of customers.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Customers\": [\n    {\n      \"Name\": \"string\",\n      \"CustomerNumber\": \"string\",\n      \"OrganisationNumber\": \"string\",\n      \"Email\": \"string\",\n      \"Address1\": \"string\",\n      \"City\": \"string\",\n      \"ZipCode\": \"string\",\n      \"CountryCode\": \"string\",\n      \"Currency\": \"string\",\n      \"VATNumber\": \"string\",\n      \"Type\": \"PRIVATE\"\n    },\n    {\n      \"Name\": \"string\",\n      \"CustomerNumber\": \"string\",\n      \"OrganisationNumber\": \"string\",\n      \"Email\": \"string\",\n      \"Address1\": \"string\",\n      \"City\": \"string\",\n      \"ZipCode\": \"string\",\n      \"CountryCode\": \"string\",\n      \"Currency\": \"string\",\n      \"VATNumber\": \"string\",\n      \"Type\": \"COMPANY\"\n    }\n  ],\n  \"MetaInformation\": {\n    \"@TotalResources\": 6147,\n    \"@TotalPages\": 9343,\n    \"@CurrentPage\": 7775\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "43ff26e1-5be2-4cab-86d4-906bc4d49789",
+              "name": "Missing or invalid Access-Token / Client-Secret.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorInformation\": {\n    \"Error\": 9496,\n    \"Message\": \"string\",\n    \"Code\": 3799\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cca00555-1ad5-48e1-8854-90e041abe098",
+          "name": "Create a customer",
+          "request": {
+            "name": "Create a customer",
+            "description": {},
+            "url": {
+              "path": [
+                "customers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Customer\": {\n    \"Name\": \"<string>\",\n    \"CustomerNumber\": \"<string>\",\n    \"OrganisationNumber\": \"<string>\",\n    \"Email\": \"<string>\",\n    \"Address1\": \"<string>\",\n    \"City\": \"<string>\",\n    \"ZipCode\": \"<string>\",\n    \"CountryCode\": \"<string>\",\n    \"Currency\": \"<string>\",\n    \"VATNumber\": \"<string>\",\n    \"Type\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ae0c500b-a922-4e84-b86d-1c042a58df8f",
+              "name": "A single customer.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Customer\": {\n    \"Name\": \"<string>\",\n    \"CustomerNumber\": \"<string>\",\n    \"OrganisationNumber\": \"<string>\",\n    \"Email\": \"<string>\",\n    \"Address1\": \"<string>\",\n    \"City\": \"<string>\",\n    \"ZipCode\": \"<string>\",\n    \"CountryCode\": \"<string>\",\n    \"Currency\": \"<string>\",\n    \"VATNumber\": \"<string>\",\n    \"Type\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Customer\": {\n    \"Name\": \"<string>\",\n    \"CustomerNumber\": \"<string>\",\n    \"OrganisationNumber\": \"<string>\",\n    \"Email\": \"<string>\",\n    \"Address1\": \"<string>\",\n    \"City\": \"<string>\",\n    \"ZipCode\": \"<string>\",\n    \"CountryCode\": \"<string>\",\n    \"Currency\": \"<string>\",\n    \"VATNumber\": \"<string>\",\n    \"Type\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bd67fee3-d14a-45bf-a1e6-4ae16ea63ac0",
+              "name": "Missing or invalid Access-Token / Client-Secret.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Customer\": {\n    \"Name\": \"<string>\",\n    \"CustomerNumber\": \"<string>\",\n    \"OrganisationNumber\": \"<string>\",\n    \"Email\": \"<string>\",\n    \"Address1\": \"<string>\",\n    \"City\": \"<string>\",\n    \"ZipCode\": \"<string>\",\n    \"CountryCode\": \"<string>\",\n    \"Currency\": \"<string>\",\n    \"VATNumber\": \"<string>\",\n    \"Type\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorInformation\": {\n    \"Error\": 9496,\n    \"Message\": \"string\",\n    \"Code\": 3799\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0ba6d788-ef7a-4b82-9415-3f2032465e3a",
+          "name": "Retrieve a customer",
+          "request": {
+            "name": "Retrieve a customer",
+            "description": {},
+            "url": {
+              "path": [
+                "customers",
+                ":CustomerNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "CustomerNumber",
+                  "description": "(Required) The customer number."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a3bb03c4-c520-4415-954d-3eeaad87f01c",
+              "name": "A single customer.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":CustomerNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "CustomerNumber",
+                      "description": "(Required) The customer number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Customer\": {\n    \"Name\": \"<string>\",\n    \"CustomerNumber\": \"<string>\",\n    \"OrganisationNumber\": \"<string>\",\n    \"Email\": \"<string>\",\n    \"Address1\": \"<string>\",\n    \"City\": \"<string>\",\n    \"ZipCode\": \"<string>\",\n    \"CountryCode\": \"<string>\",\n    \"Currency\": \"<string>\",\n    \"VATNumber\": \"<string>\",\n    \"Type\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33b6b0b3-1c20-491d-99fa-320d7263c4ba",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":CustomerNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "CustomerNumber",
+                      "description": "(Required) The customer number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorInformation\": {\n    \"Error\": 9496,\n    \"Message\": \"string\",\n    \"Code\": 3799\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dc8ab82d-9426-42e2-bad4-8e5878c065de",
+          "name": "Update a customer",
+          "request": {
+            "name": "Update a customer",
+            "description": {},
+            "url": {
+              "path": [
+                "customers",
+                ":CustomerNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "CustomerNumber",
+                  "description": "(Required) The customer number."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Customer\": {\n    \"Name\": \"<string>\",\n    \"CustomerNumber\": \"<string>\",\n    \"OrganisationNumber\": \"<string>\",\n    \"Email\": \"<string>\",\n    \"Address1\": \"<string>\",\n    \"City\": \"<string>\",\n    \"ZipCode\": \"<string>\",\n    \"CountryCode\": \"<string>\",\n    \"Currency\": \"<string>\",\n    \"VATNumber\": \"<string>\",\n    \"Type\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "258bcdc8-d931-4289-88c9-605f3b633fae",
+              "name": "A single customer.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":CustomerNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "CustomerNumber",
+                      "description": "(Required) The customer number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Customer\": {\n    \"Name\": \"<string>\",\n    \"CustomerNumber\": \"<string>\",\n    \"OrganisationNumber\": \"<string>\",\n    \"Email\": \"<string>\",\n    \"Address1\": \"<string>\",\n    \"City\": \"<string>\",\n    \"ZipCode\": \"<string>\",\n    \"CountryCode\": \"<string>\",\n    \"Currency\": \"<string>\",\n    \"VATNumber\": \"<string>\",\n    \"Type\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Customer\": {\n    \"Name\": \"<string>\",\n    \"CustomerNumber\": \"<string>\",\n    \"OrganisationNumber\": \"<string>\",\n    \"Email\": \"<string>\",\n    \"Address1\": \"<string>\",\n    \"City\": \"<string>\",\n    \"ZipCode\": \"<string>\",\n    \"CountryCode\": \"<string>\",\n    \"Currency\": \"<string>\",\n    \"VATNumber\": \"<string>\",\n    \"Type\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fef36224-32ef-4181-b0a5-c3d6bcf029d7",
+          "name": "Delete a customer",
+          "request": {
+            "name": "Delete a customer",
+            "description": {},
+            "url": {
+              "path": [
+                "customers",
+                ":CustomerNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "CustomerNumber",
+                  "description": "(Required) The customer number."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b1465244-b5c8-43d3-b744-285b7769726b",
+              "name": "Customer deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":CustomerNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "CustomerNumber",
+                      "description": "(Required) The customer number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "247bfab9-7d9d-43ba-894b-e0add9c85c1e",
+              "name": "Missing or invalid Access-Token / Client-Secret.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":CustomerNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "CustomerNumber",
+                      "description": "(Required) The customer number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Access-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorInformation\": {\n    \"Error\": 9496,\n    \"Message\": \"string\",\n    \"Code\": 3799\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.fortnox.se/3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Access-Token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "fb384210-48a4-4658-9bca-dc1617192114",
+    "name": "Fortnox REST API (Representative Subset) Accounts Customers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Grounded OpenAPI description of the Fortnox REST API - the Swedish cloud accounting/ERP platform for SMBs and accounting bureaus. Base URL is https://api.fortnox.se/3/. Authentication is OAuth2 Authorization Code Flow: each request carries the Access-Token (Bearer JWT, 1h) header plus the Client-Secret header issued to your Fortnox app. The old fixed Access-Token/Client-Secret integration keys were deprecated 2025-04-30.\n\nSCOPE / FIDELITY NOTE: The Fortnox API exposes 40+ resources. This document ships a solid, representative SUBSET (Invoices, Customers, Articles, Orders, Offers, Vouchers, Accounts, Financial Years, Suppliers, Supplier Invoices, Projects) with pragmatic, partial field-level schemas. Paths, methods, identifiers, the wrapper-object response envelope (e.g. { \"Invoice\": {...} }, { \"Invoices\": [...] }), and auth are grounded in Fortnox's developer documentation. Per-field property coverage is intentionally partial and MODELED/summarized from the docs, not transcribed field-for-field for every resource. Verify exact field sets and validation against https://api.fortnox.se/apidocs before production use.\n\nContact Support:\n Name: Fortnox Developer",
+      "type": "text/plain"
+    }
+  }
+}
