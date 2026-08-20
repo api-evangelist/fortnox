@@ -34,6 +34,17 @@ tags:
 - Finance
 - Vouchers
 - Customers
+- Software-as-a-Service
+tags_raw:
+- Accounting
+- ERP
+- Invoicing
+- Bookkeeping
+- Sweden
+- Nordics
+- Finance
+- Vouchers
+- Customers
 - SaaS
 created: '2026-07-12'
 modified: '2026-07-12'
@@ -42,6 +53,10 @@ apis:
 - aid: fortnox:fortnox-topics-websocket-api
   name: Fortnox Topics WebSocket API
   tags:
+  - WebSocket
+  - Event
+  - Change Notifications
+  tags_raw:
   - WebSocket
   - Events
   - Change Notifications
@@ -64,6 +79,8 @@ apis:
   humanURL: https://www.fortnox.se/developer/resources-rest-api/invoices/invoices
   baseURL: https://api.fortnox.se/3
   tags:
+  - Account
+  tags_raw:
   - Accounts
   properties:
   - type: OpenAPI
@@ -256,6 +273,8 @@ apis:
   humanURL: https://www.fortnox.se/developer/resources-rest-api/invoices/invoices
   baseURL: https://api.fortnox.se/3
   tags:
+  - Order
+  tags_raw:
   - Orders
   properties:
   - type: OpenAPI
@@ -288,6 +307,8 @@ apis:
   humanURL: https://www.fortnox.se/developer/resources-rest-api/invoices/invoices
   baseURL: https://api.fortnox.se/3
   tags:
+  - Project
+  tags_raw:
   - Projects
   properties:
   - type: OpenAPI
