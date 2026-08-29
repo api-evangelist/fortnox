@@ -10,6 +10,18 @@ description: Fortnox is a Swedish cloud accounting, ERP, and business-administra
   Authorization Code Flow. Fortnox also publishes a duplex WebSocket event stream
   at wss://ws.fortnox.se/topics-v1 that pushes minimal change notifications across
   domains so integrations can react to changes instead of polling.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
