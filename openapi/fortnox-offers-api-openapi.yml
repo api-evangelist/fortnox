@@ -1,10 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Fortnox REST API (Representative Subset) Accounts Offers API
-  description: 'Grounded OpenAPI description of the Fortnox REST API - the Swedish cloud accounting/ERP platform for SMBs and accounting bureaus. Base URL is https://api.fortnox.se/3/. Authentication is OAuth2 Authorization Code Flow: each request carries the Access-Token (Bearer JWT, 1h) header plus the Client-Secret header issued to your Fortnox app. The old fixed Access-Token/Client-Secret integration keys were deprecated 2025-04-30.
-
-
-    SCOPE / FIDELITY NOTE: The Fortnox API exposes 40+ resources. This document ships a solid, representative SUBSET (Invoices, Customers, Articles, Orders, Offers, Vouchers, Accounts, Financial Years, Suppliers, Supplier Invoices, Projects) with pragmatic, partial field-level schemas. Paths, methods, identifiers, the wrapper-object response envelope (e.g. { "Invoice": {...} }, { "Invoices": [...] }), and auth are grounded in Fortnox''s developer documentation. Per-field property coverage is intentionally partial and MODELED/summarized from the docs, not transcribed field-for-field for every resource. Verify exact field sets and validation against https://api.fortnox.se/apidocs before production use.'
+  title: Fortnox REST API (Representative Subset) Offers API
+  description: Grounded OpenAPI description of the Fortnox REST API - the Swedish cloud accounting/ERP platform for SMBs and accounting bureaus.
   version: '3.0'
   contact:
     name: Fortnox Developer
@@ -77,6 +74,29 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: Fortnox error envelope.
+      properties:
+        ErrorInformation:
+          type: object
+          properties:
+            Error:
+              type: integer
+            Message:
+              type: string
+            Code:
+              type: integer
+    MetaInformation:
+      type: object
+      description: Pagination metadata returned on list endpoints.
+      properties:
+        '@TotalResources':
+          type: integer
+        '@TotalPages':
+          type: integer
+        '@CurrentPage':
+          type: integer
     Offer:
       type: object
       description: An offer (quotation).
@@ -104,19 +124,6 @@ components:
             $ref: '#/components/schemas/InvoiceRow'
       required:
       - CustomerNumber
-    ErrorResponse:
-      type: object
-      description: Fortnox error envelope.
-      properties:
-        ErrorInformation:
-          type: object
-          properties:
-            Error:
-              type: integer
-            Message:
-              type: string
-            Code:
-              type: integer
     OfferListItem:
       type: object
       properties:
@@ -149,16 +156,6 @@ components:
           type: integer
         Unit:
           type: string
-    MetaInformation:
-      type: object
-      description: Pagination metadata returned on list endpoints.
-      properties:
-        '@TotalResources':
-          type: integer
-        '@TotalPages':
-          type: integer
-        '@CurrentPage':
-          type: integer
   parameters:
     DocumentNumber:
       name: DocumentNumber

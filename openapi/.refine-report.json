@@ -1,17 +1,7 @@
 {
   "provider": "fortnox",
   "sources": [
-    "fortnox-accounts-api-openapi.yml",
-    "fortnox-articles-api-openapi.yml",
-    "fortnox-customers-api-openapi.yml",
-    "fortnox-financial-years-api-openapi.yml",
-    "fortnox-invoices-api-openapi.yml",
-    "fortnox-offers-api-openapi.yml",
-    "fortnox-orders-api-openapi.yml",
-    "fortnox-projects-api-openapi.yml",
-    "fortnox-supplier-invoices-api-openapi.yml",
-    "fortnox-suppliers-api-openapi.yml",
-    "fortnox-vouchers-api-openapi.yml"
+    "_original/fortnox-openapi.yml"
   ],
   "outputs": [
     "fortnox-accounts-api-openapi.yml",
@@ -29,6 +19,22 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "fortnox-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "fortnox-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "fortnox-articles-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "fortnox-customers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "fortnox-financial-years-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "fortnox-invoices-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "fortnox-offers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "fortnox-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "fortnox-projects-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "fortnox-supplier-invoices-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "fortnox-suppliers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "fortnox-vouchers-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
