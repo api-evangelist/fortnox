@@ -90,36 +90,7 @@ paths:
         '200':
           $ref: '#/components/responses/OrderResponse'
 components:
-  responses:
-    OrderResponse:
-      description: A single order.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              Order:
-                $ref: '#/components/schemas/Order'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    ErrorResponse:
-      type: object
-      description: Fortnox error envelope.
-      properties:
-        ErrorInformation:
-          type: object
-          properties:
-            Error:
-              type: integer
-            Message:
-              type: string
-            Code:
-              type: integer
     MetaInformation:
       type: object
       description: Pagination metadata returned on list endpoints.
@@ -171,6 +142,19 @@ components:
           format: date
         Total:
           type: number
+    ErrorResponse:
+      type: object
+      description: Fortnox error envelope.
+      properties:
+        ErrorInformation:
+          type: object
+          properties:
+            Error:
+              type: integer
+            Message:
+              type: string
+            Code:
+              type: integer
     InvoiceRow:
       type: object
       description: A single line item on an invoice, order, or offer.
@@ -211,6 +195,22 @@ components:
       schema:
         type: integer
         maximum: 500
+  responses:
+    OrderResponse:
+      description: A single order.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Order:
+                $ref: '#/components/schemas/Order'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     accessToken:
       type: apiKey

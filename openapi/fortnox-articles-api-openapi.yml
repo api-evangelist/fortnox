@@ -103,19 +103,6 @@ paths:
           description: Article deleted.
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      description: Fortnox error envelope.
-      properties:
-        ErrorInformation:
-          type: object
-          properties:
-            Error:
-              type: integer
-            Message:
-              type: string
-            Code:
-              type: integer
     MetaInformation:
       type: object
       description: Pagination metadata returned on list endpoints.
@@ -153,22 +140,19 @@ components:
           type: number
       required:
       - Description
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    ArticleResponse:
-      description: A single article.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              Article:
-                $ref: '#/components/schemas/Article'
+    ErrorResponse:
+      type: object
+      description: Fortnox error envelope.
+      properties:
+        ErrorInformation:
+          type: object
+          properties:
+            Error:
+              type: integer
+            Message:
+              type: string
+            Code:
+              type: integer
   parameters:
     page:
       name: page
@@ -184,6 +168,22 @@ components:
       schema:
         type: integer
         maximum: 500
+  responses:
+    ArticleResponse:
+      description: A single article.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Article:
+                $ref: '#/components/schemas/Article'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     accessToken:
       type: apiKey

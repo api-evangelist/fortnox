@@ -104,29 +104,17 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  parameters:
-    CustomerNumber:
-      name: CustomerNumber
-      in: path
-      required: true
-      description: The customer number.
-      schema:
-        type: string
-    page:
-      name: page
-      in: query
-      description: Page number for paginated results.
-      schema:
-        type: integer
-        minimum: 1
-    limit:
-      name: limit
-      in: query
-      description: Number of records per page (max 500).
-      schema:
-        type: integer
-        maximum: 500
   schemas:
+    MetaInformation:
+      type: object
+      description: Pagination metadata returned on list endpoints.
+      properties:
+        '@TotalResources':
+          type: integer
+        '@TotalPages':
+          type: integer
+        '@CurrentPage':
+          type: integer
     ErrorResponse:
       type: object
       description: Fortnox error envelope.
@@ -140,16 +128,6 @@ components:
               type: string
             Code:
               type: integer
-    MetaInformation:
-      type: object
-      description: Pagination metadata returned on list endpoints.
-      properties:
-        '@TotalResources':
-          type: integer
-        '@TotalPages':
-          type: integer
-        '@CurrentPage':
-          type: integer
     Customer:
       type: object
       description: A customer in the customer register.
@@ -181,13 +159,29 @@ components:
           - PRIVATE
       required:
       - Name
+  parameters:
+    page:
+      name: page
+      in: query
+      description: Page number for paginated results.
+      schema:
+        type: integer
+        minimum: 1
+    CustomerNumber:
+      name: CustomerNumber
+      in: path
+      required: true
+      description: The customer number.
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      description: Number of records per page (max 500).
+      schema:
+        type: integer
+        maximum: 500
   responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     CustomerResponse:
       description: A single customer.
       content:
@@ -197,6 +191,12 @@ components:
             properties:
               Customer:
                 $ref: '#/components/schemas/Customer'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Missing or invalid Access-Token / Client-Secret.
       content:

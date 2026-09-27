@@ -65,6 +65,16 @@ paths:
                     $ref: '#/components/schemas/FinancialYear'
 components:
   schemas:
+    MetaInformation:
+      type: object
+      description: Pagination metadata returned on list endpoints.
+      properties:
+        '@TotalResources':
+          type: integer
+        '@TotalPages':
+          type: integer
+        '@CurrentPage':
+          type: integer
     FinancialYear:
       type: object
       description: A financial (accounting) year.
@@ -88,16 +98,6 @@ components:
       required:
       - FromDate
       - ToDate
-    MetaInformation:
-      type: object
-      description: Pagination metadata returned on list endpoints.
-      properties:
-        '@TotalResources':
-          type: integer
-        '@TotalPages':
-          type: integer
-        '@CurrentPage':
-          type: integer
   securitySchemes:
     accessToken:
       type: apiKey

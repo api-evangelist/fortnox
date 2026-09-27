@@ -74,19 +74,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      description: Fortnox error envelope.
-      properties:
-        ErrorInformation:
-          type: object
-          properties:
-            Error:
-              type: integer
-            Message:
-              type: string
-            Code:
-              type: integer
     MetaInformation:
       type: object
       description: Pagination metadata returned on list endpoints.
@@ -97,6 +84,20 @@ components:
           type: integer
         '@CurrentPage':
           type: integer
+    OfferListItem:
+      type: object
+      properties:
+        DocumentNumber:
+          type: string
+        CustomerNumber:
+          type: string
+        CustomerName:
+          type: string
+        OfferDate:
+          type: string
+          format: date
+        Total:
+          type: number
     Offer:
       type: object
       description: An offer (quotation).
@@ -124,20 +125,19 @@ components:
             $ref: '#/components/schemas/InvoiceRow'
       required:
       - CustomerNumber
-    OfferListItem:
+    ErrorResponse:
       type: object
+      description: Fortnox error envelope.
       properties:
-        DocumentNumber:
-          type: string
-        CustomerNumber:
-          type: string
-        CustomerName:
-          type: string
-        OfferDate:
-          type: string
-          format: date
-        Total:
-          type: number
+        ErrorInformation:
+          type: object
+          properties:
+            Error:
+              type: integer
+            Message:
+              type: string
+            Code:
+              type: integer
     InvoiceRow:
       type: object
       description: A single line item on an invoice, order, or offer.
@@ -179,12 +179,6 @@ components:
         type: integer
         maximum: 500
   responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     OfferResponse:
       description: A single offer.
       content:
@@ -194,6 +188,12 @@ components:
             properties:
               Offer:
                 $ref: '#/components/schemas/Offer'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     accessToken:
       type: apiKey

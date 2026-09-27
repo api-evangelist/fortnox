@@ -109,6 +109,16 @@ components:
               Account:
                 $ref: '#/components/schemas/Account'
   schemas:
+    MetaInformation:
+      type: object
+      description: Pagination metadata returned on list endpoints.
+      properties:
+        '@TotalResources':
+          type: integer
+        '@TotalPages':
+          type: integer
+        '@CurrentPage':
+          type: integer
     Account:
       type: object
       description: An account in the chart of accounts.
@@ -128,16 +138,6 @@ components:
       required:
       - Number
       - Description
-    MetaInformation:
-      type: object
-      description: Pagination metadata returned on list endpoints.
-      properties:
-        '@TotalResources':
-          type: integer
-        '@TotalPages':
-          type: integer
-        '@CurrentPage':
-          type: integer
   securitySchemes:
     accessToken:
       type: apiKey

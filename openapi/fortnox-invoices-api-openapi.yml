@@ -111,41 +111,48 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    BadRequest:
-      description: Malformed request or validation error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    InvoiceResponse:
-      description: A single invoice.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              Invoice:
-                $ref: '#/components/schemas/Invoice'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    TooManyRequests:
-      description: Rate limit exceeded (300 requests/minute per access-token; ~25 per 5s sliding window).
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Missing or invalid Access-Token / Client-Secret.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    MetaInformation:
+      type: object
+      description: Pagination metadata returned on list endpoints.
+      properties:
+        '@TotalResources':
+          type: integer
+        '@TotalPages':
+          type: integer
+        '@CurrentPage':
+          type: integer
+    InvoiceRow:
+      type: object
+      description: A single line item on an invoice, order, or offer.
+      properties:
+        ArticleNumber:
+          type: string
+        Description:
+          type: string
+        DeliveredQuantity:
+          type: string
+        Price:
+          type: number
+        VAT:
+          type: number
+        AccountNumber:
+          type: integer
+        Unit:
+          type: string
+    ErrorResponse:
+      type: object
+      description: Fortnox error envelope.
+      properties:
+        ErrorInformation:
+          type: object
+          properties:
+            Error:
+              type: integer
+            Message:
+              type: string
+            Code:
+              type: integer
     Invoice:
       type: object
       description: Accounts-receivable customer invoice. Partial/modeled field set - see https://api.fortnox.se/apidocs for the full schema.
@@ -180,29 +187,6 @@ components:
             $ref: '#/components/schemas/InvoiceRow'
       required:
       - CustomerNumber
-    ErrorResponse:
-      type: object
-      description: Fortnox error envelope.
-      properties:
-        ErrorInformation:
-          type: object
-          properties:
-            Error:
-              type: integer
-            Message:
-              type: string
-            Code:
-              type: integer
-    MetaInformation:
-      type: object
-      description: Pagination metadata returned on list endpoints.
-      properties:
-        '@TotalResources':
-          type: integer
-        '@TotalPages':
-          type: integer
-        '@CurrentPage':
-          type: integer
     InvoiceListItem:
       type: object
       properties:
@@ -221,24 +205,40 @@ components:
           type: number
         Currency:
           type: string
-    InvoiceRow:
-      type: object
-      description: A single line item on an invoice, order, or offer.
-      properties:
-        ArticleNumber:
-          type: string
-        Description:
-          type: string
-        DeliveredQuantity:
-          type: string
-        Price:
-          type: number
-        VAT:
-          type: number
-        AccountNumber:
-          type: integer
-        Unit:
-          type: string
+  responses:
+    InvoiceResponse:
+      description: A single invoice.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Invoice:
+                $ref: '#/components/schemas/Invoice'
+    BadRequest:
+      description: Malformed request or validation error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Missing or invalid Access-Token / Client-Secret.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    TooManyRequests:
+      description: Rate limit exceeded (300 requests/minute per access-token; ~25 per 5s sliding window).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
     DocumentNumber:
       name: DocumentNumber

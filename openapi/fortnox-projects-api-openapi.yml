@@ -100,6 +100,16 @@ paths:
           description: Project deleted.
 components:
   schemas:
+    MetaInformation:
+      type: object
+      description: Pagination metadata returned on list endpoints.
+      properties:
+        '@TotalResources':
+          type: integer
+        '@TotalPages':
+          type: integer
+        '@CurrentPage':
+          type: integer
     Project:
       type: object
       description: A project used to tag records for reporting.
@@ -137,16 +147,6 @@ components:
               type: string
             Code:
               type: integer
-    MetaInformation:
-      type: object
-      description: Pagination metadata returned on list endpoints.
-      properties:
-        '@TotalResources':
-          type: integer
-        '@TotalPages':
-          type: integer
-        '@CurrentPage':
-          type: integer
   responses:
     NotFound:
       description: The requested resource was not found.
