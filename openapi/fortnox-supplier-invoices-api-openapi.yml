@@ -77,6 +77,22 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    SupplierInvoiceResponse:
+      description: A single supplier invoice.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              SupplierInvoice:
+                $ref: '#/components/schemas/SupplierInvoice'
   schemas:
     MetaInformation:
       type: object
@@ -88,6 +104,19 @@ components:
           type: integer
         '@CurrentPage':
           type: integer
+    ErrorResponse:
+      type: object
+      description: Fortnox error envelope.
+      properties:
+        ErrorInformation:
+          type: object
+          properties:
+            Error:
+              type: integer
+            Message:
+              type: string
+            Code:
+              type: integer
     SupplierInvoice:
       type: object
       description: An inbound supplier (accounts-payable) invoice.
@@ -115,27 +144,7 @@ components:
           type: boolean
       required:
       - SupplierNumber
-    ErrorResponse:
-      type: object
-      description: Fortnox error envelope.
-      properties:
-        ErrorInformation:
-          type: object
-          properties:
-            Error:
-              type: integer
-            Message:
-              type: string
-            Code:
-              type: integer
   parameters:
-    page:
-      name: page
-      in: query
-      description: Page number for paginated results.
-      schema:
-        type: integer
-        minimum: 1
     limit:
       name: limit
       in: query
@@ -143,22 +152,13 @@ components:
       schema:
         type: integer
         maximum: 500
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    SupplierInvoiceResponse:
-      description: A single supplier invoice.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              SupplierInvoice:
-                $ref: '#/components/schemas/SupplierInvoice'
+    page:
+      name: page
+      in: query
+      description: Page number for paginated results.
+      schema:
+        type: integer
+        minimum: 1
   securitySchemes:
     accessToken:
       type: apiKey

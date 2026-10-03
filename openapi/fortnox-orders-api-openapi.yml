@@ -90,6 +90,22 @@ paths:
         '200':
           $ref: '#/components/responses/OrderResponse'
 components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    OrderResponse:
+      description: A single order.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Order:
+                $ref: '#/components/schemas/Order'
   schemas:
     MetaInformation:
       type: object
@@ -101,6 +117,19 @@ components:
           type: integer
         '@CurrentPage':
           type: integer
+    ErrorResponse:
+      type: object
+      description: Fortnox error envelope.
+      properties:
+        ErrorInformation:
+          type: object
+          properties:
+            Error:
+              type: integer
+            Message:
+              type: string
+            Code:
+              type: integer
     Order:
       type: object
       description: A sales order.
@@ -128,33 +157,6 @@ components:
             $ref: '#/components/schemas/InvoiceRow'
       required:
       - CustomerNumber
-    OrderListItem:
-      type: object
-      properties:
-        DocumentNumber:
-          type: string
-        CustomerNumber:
-          type: string
-        CustomerName:
-          type: string
-        OrderDate:
-          type: string
-          format: date
-        Total:
-          type: number
-    ErrorResponse:
-      type: object
-      description: Fortnox error envelope.
-      properties:
-        ErrorInformation:
-          type: object
-          properties:
-            Error:
-              type: integer
-            Message:
-              type: string
-            Code:
-              type: integer
     InvoiceRow:
       type: object
       description: A single line item on an invoice, order, or offer.
@@ -173,6 +175,20 @@ components:
           type: integer
         Unit:
           type: string
+    OrderListItem:
+      type: object
+      properties:
+        DocumentNumber:
+          type: string
+        CustomerNumber:
+          type: string
+        CustomerName:
+          type: string
+        OrderDate:
+          type: string
+          format: date
+        Total:
+          type: number
   parameters:
     DocumentNumber:
       name: DocumentNumber
@@ -181,13 +197,6 @@ components:
       description: The document number identifying the invoice/order/offer.
       schema:
         type: string
-    page:
-      name: page
-      in: query
-      description: Page number for paginated results.
-      schema:
-        type: integer
-        minimum: 1
     limit:
       name: limit
       in: query
@@ -195,22 +204,13 @@ components:
       schema:
         type: integer
         maximum: 500
-  responses:
-    OrderResponse:
-      description: A single order.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              Order:
-                $ref: '#/components/schemas/Order'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+    page:
+      name: page
+      in: query
+      description: Page number for paginated results.
+      schema:
+        type: integer
+        minimum: 1
   securitySchemes:
     accessToken:
       type: apiKey

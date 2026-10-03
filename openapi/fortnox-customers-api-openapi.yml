@@ -104,6 +104,28 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    CustomerResponse:
+      description: A single customer.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Customer:
+                $ref: '#/components/schemas/Customer'
+    Unauthorized:
+      description: Missing or invalid Access-Token / Client-Secret.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
     MetaInformation:
       type: object
@@ -160,13 +182,6 @@ components:
       required:
       - Name
   parameters:
-    page:
-      name: page
-      in: query
-      description: Page number for paginated results.
-      schema:
-        type: integer
-        minimum: 1
     CustomerNumber:
       name: CustomerNumber
       in: path
@@ -181,28 +196,13 @@ components:
       schema:
         type: integer
         maximum: 500
-  responses:
-    CustomerResponse:
-      description: A single customer.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              Customer:
-                $ref: '#/components/schemas/Customer'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Missing or invalid Access-Token / Client-Secret.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+    page:
+      name: page
+      in: query
+      description: Page number for paginated results.
+      schema:
+        type: integer
+        minimum: 1
   securitySchemes:
     accessToken:
       type: apiKey

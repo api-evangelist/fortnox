@@ -102,6 +102,22 @@ paths:
         '204':
           description: Article deleted.
 components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ArticleResponse:
+      description: A single article.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Article:
+                $ref: '#/components/schemas/Article'
   schemas:
     MetaInformation:
       type: object
@@ -113,6 +129,19 @@ components:
           type: integer
         '@CurrentPage':
           type: integer
+    ErrorResponse:
+      type: object
+      description: Fortnox error envelope.
+      properties:
+        ErrorInformation:
+          type: object
+          properties:
+            Error:
+              type: integer
+            Message:
+              type: string
+            Code:
+              type: integer
     Article:
       type: object
       description: A product or service article.
@@ -140,27 +169,7 @@ components:
           type: number
       required:
       - Description
-    ErrorResponse:
-      type: object
-      description: Fortnox error envelope.
-      properties:
-        ErrorInformation:
-          type: object
-          properties:
-            Error:
-              type: integer
-            Message:
-              type: string
-            Code:
-              type: integer
   parameters:
-    page:
-      name: page
-      in: query
-      description: Page number for paginated results.
-      schema:
-        type: integer
-        minimum: 1
     limit:
       name: limit
       in: query
@@ -168,22 +177,13 @@ components:
       schema:
         type: integer
         maximum: 500
-  responses:
-    ArticleResponse:
-      description: A single article.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              Article:
-                $ref: '#/components/schemas/Article'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+    page:
+      name: page
+      in: query
+      description: Page number for paginated results.
+      schema:
+        type: integer
+        minimum: 1
   securitySchemes:
     accessToken:
       type: apiKey

@@ -98,27 +98,7 @@ paths:
         '200':
           $ref: '#/components/responses/AccountResponse'
 components:
-  responses:
-    AccountResponse:
-      description: A single account.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              Account:
-                $ref: '#/components/schemas/Account'
   schemas:
-    MetaInformation:
-      type: object
-      description: Pagination metadata returned on list endpoints.
-      properties:
-        '@TotalResources':
-          type: integer
-        '@TotalPages':
-          type: integer
-        '@CurrentPage':
-          type: integer
     Account:
       type: object
       description: An account in the chart of accounts.
@@ -138,6 +118,26 @@ components:
       required:
       - Number
       - Description
+    MetaInformation:
+      type: object
+      description: Pagination metadata returned on list endpoints.
+      properties:
+        '@TotalResources':
+          type: integer
+        '@TotalPages':
+          type: integer
+        '@CurrentPage':
+          type: integer
+  responses:
+    AccountResponse:
+      description: A single account.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Account:
+                $ref: '#/components/schemas/Account'
   securitySchemes:
     accessToken:
       type: apiKey

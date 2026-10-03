@@ -73,6 +73,22 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    OfferResponse:
+      description: A single offer.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Offer:
+                $ref: '#/components/schemas/Offer'
   schemas:
     MetaInformation:
       type: object
@@ -84,20 +100,19 @@ components:
           type: integer
         '@CurrentPage':
           type: integer
-    OfferListItem:
+    ErrorResponse:
       type: object
+      description: Fortnox error envelope.
       properties:
-        DocumentNumber:
-          type: string
-        CustomerNumber:
-          type: string
-        CustomerName:
-          type: string
-        OfferDate:
-          type: string
-          format: date
-        Total:
-          type: number
+        ErrorInformation:
+          type: object
+          properties:
+            Error:
+              type: integer
+            Message:
+              type: string
+            Code:
+              type: integer
     Offer:
       type: object
       description: An offer (quotation).
@@ -125,19 +140,6 @@ components:
             $ref: '#/components/schemas/InvoiceRow'
       required:
       - CustomerNumber
-    ErrorResponse:
-      type: object
-      description: Fortnox error envelope.
-      properties:
-        ErrorInformation:
-          type: object
-          properties:
-            Error:
-              type: integer
-            Message:
-              type: string
-            Code:
-              type: integer
     InvoiceRow:
       type: object
       description: A single line item on an invoice, order, or offer.
@@ -156,6 +158,20 @@ components:
           type: integer
         Unit:
           type: string
+    OfferListItem:
+      type: object
+      properties:
+        DocumentNumber:
+          type: string
+        CustomerNumber:
+          type: string
+        CustomerName:
+          type: string
+        OfferDate:
+          type: string
+          format: date
+        Total:
+          type: number
   parameters:
     DocumentNumber:
       name: DocumentNumber
@@ -164,13 +180,6 @@ components:
       description: The document number identifying the invoice/order/offer.
       schema:
         type: string
-    page:
-      name: page
-      in: query
-      description: Page number for paginated results.
-      schema:
-        type: integer
-        minimum: 1
     limit:
       name: limit
       in: query
@@ -178,22 +187,13 @@ components:
       schema:
         type: integer
         maximum: 500
-  responses:
-    OfferResponse:
-      description: A single offer.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              Offer:
-                $ref: '#/components/schemas/Offer'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+    page:
+      name: page
+      in: query
+      description: Page number for paginated results.
+      schema:
+        type: integer
+        minimum: 1
   securitySchemes:
     accessToken:
       type: apiKey

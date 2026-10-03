@@ -90,31 +90,23 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    VoucherResponse:
+      description: A single voucher.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Voucher:
+                $ref: '#/components/schemas/Voucher'
   schemas:
-    Voucher:
-      type: object
-      description: A double-entry accounting voucher (journal entry).
-      properties:
-        VoucherSeries:
-          type: string
-        VoucherNumber:
-          type: integer
-          readOnly: true
-        TransactionDate:
-          type: string
-          format: date
-        Description:
-          type: string
-        Year:
-          type: integer
-        VoucherRows:
-          type: array
-          items:
-            $ref: '#/components/schemas/VoucherRow'
-      required:
-      - VoucherSeries
-      - TransactionDate
-      - VoucherRows
     MetaInformation:
       type: object
       description: Pagination metadata returned on list endpoints.
@@ -152,22 +144,30 @@ components:
           type: string
         TransactionInformation:
           type: string
-  responses:
-    VoucherResponse:
-      description: A single voucher.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              Voucher:
-                $ref: '#/components/schemas/Voucher'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+    Voucher:
+      type: object
+      description: A double-entry accounting voucher (journal entry).
+      properties:
+        VoucherSeries:
+          type: string
+        VoucherNumber:
+          type: integer
+          readOnly: true
+        TransactionDate:
+          type: string
+          format: date
+        Description:
+          type: string
+        Year:
+          type: integer
+        VoucherRows:
+          type: array
+          items:
+            $ref: '#/components/schemas/VoucherRow'
+      required:
+      - VoucherSeries
+      - TransactionDate
+      - VoucherRows
   securitySchemes:
     accessToken:
       type: apiKey

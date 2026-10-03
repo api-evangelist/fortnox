@@ -94,6 +94,22 @@ paths:
         '200':
           $ref: '#/components/responses/SupplierResponse'
 components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    SupplierResponse:
+      description: A single supplier.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Supplier:
+                $ref: '#/components/schemas/Supplier'
   schemas:
     MetaInformation:
       type: object
@@ -105,6 +121,19 @@ components:
           type: integer
         '@CurrentPage':
           type: integer
+    ErrorResponse:
+      type: object
+      description: Fortnox error envelope.
+      properties:
+        ErrorInformation:
+          type: object
+          properties:
+            Error:
+              type: integer
+            Message:
+              type: string
+            Code:
+              type: integer
     Supplier:
       type: object
       description: A supplier in the supplier register.
@@ -135,43 +164,7 @@ components:
           type: string
       required:
       - Name
-    ErrorResponse:
-      type: object
-      description: Fortnox error envelope.
-      properties:
-        ErrorInformation:
-          type: object
-          properties:
-            Error:
-              type: integer
-            Message:
-              type: string
-            Code:
-              type: integer
-  responses:
-    SupplierResponse:
-      description: A single supplier.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              Supplier:
-                $ref: '#/components/schemas/Supplier'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   parameters:
-    page:
-      name: page
-      in: query
-      description: Page number for paginated results.
-      schema:
-        type: integer
-        minimum: 1
     limit:
       name: limit
       in: query
@@ -179,6 +172,13 @@ components:
       schema:
         type: integer
         maximum: 500
+    page:
+      name: page
+      in: query
+      description: Page number for paginated results.
+      schema:
+        type: integer
+        minimum: 1
   securitySchemes:
     accessToken:
       type: apiKey
