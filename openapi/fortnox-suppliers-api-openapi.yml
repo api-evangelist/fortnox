@@ -94,33 +94,7 @@ paths:
         '200':
           $ref: '#/components/responses/SupplierResponse'
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    SupplierResponse:
-      description: A single supplier.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              Supplier:
-                $ref: '#/components/schemas/Supplier'
   schemas:
-    MetaInformation:
-      type: object
-      description: Pagination metadata returned on list endpoints.
-      properties:
-        '@TotalResources':
-          type: integer
-        '@TotalPages':
-          type: integer
-        '@CurrentPage':
-          type: integer
     ErrorResponse:
       type: object
       description: Fortnox error envelope.
@@ -164,14 +138,17 @@ components:
           type: string
       required:
       - Name
+    MetaInformation:
+      type: object
+      description: Pagination metadata returned on list endpoints.
+      properties:
+        '@TotalResources':
+          type: integer
+        '@TotalPages':
+          type: integer
+        '@CurrentPage':
+          type: integer
   parameters:
-    limit:
-      name: limit
-      in: query
-      description: Number of records per page (max 500).
-      schema:
-        type: integer
-        maximum: 500
     page:
       name: page
       in: query
@@ -179,6 +156,29 @@ components:
       schema:
         type: integer
         minimum: 1
+    limit:
+      name: limit
+      in: query
+      description: Number of records per page (max 500).
+      schema:
+        type: integer
+        maximum: 500
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    SupplierResponse:
+      description: A single supplier.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Supplier:
+                $ref: '#/components/schemas/Supplier'
   securitySchemes:
     accessToken:
       type: apiKey

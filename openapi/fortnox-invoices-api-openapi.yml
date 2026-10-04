@@ -111,69 +111,7 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    InvoiceResponse:
-      description: A single invoice.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              Invoice:
-                $ref: '#/components/schemas/Invoice'
-    Unauthorized:
-      description: Missing or invalid Access-Token / Client-Secret.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Malformed request or validation error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    TooManyRequests:
-      description: Rate limit exceeded (300 requests/minute per access-token; ~25 per 5s sliding window).
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    InvoiceListItem:
-      type: object
-      properties:
-        DocumentNumber:
-          type: string
-        CustomerNumber:
-          type: string
-        CustomerName:
-          type: string
-        InvoiceDate:
-          type: string
-          format: date
-        Total:
-          type: number
-        Balance:
-          type: number
-        Currency:
-          type: string
-    MetaInformation:
-      type: object
-      description: Pagination metadata returned on list endpoints.
-      properties:
-        '@TotalResources':
-          type: integer
-        '@TotalPages':
-          type: integer
-        '@CurrentPage':
-          type: integer
     ErrorResponse:
       type: object
       description: Fortnox error envelope.
@@ -239,7 +177,42 @@ components:
             $ref: '#/components/schemas/InvoiceRow'
       required:
       - CustomerNumber
+    InvoiceListItem:
+      type: object
+      properties:
+        DocumentNumber:
+          type: string
+        CustomerNumber:
+          type: string
+        CustomerName:
+          type: string
+        InvoiceDate:
+          type: string
+          format: date
+        Total:
+          type: number
+        Balance:
+          type: number
+        Currency:
+          type: string
+    MetaInformation:
+      type: object
+      description: Pagination metadata returned on list endpoints.
+      properties:
+        '@TotalResources':
+          type: integer
+        '@TotalPages':
+          type: integer
+        '@CurrentPage':
+          type: integer
   parameters:
+    page:
+      name: page
+      in: query
+      description: Page number for paginated results.
+      schema:
+        type: integer
+        minimum: 1
     DocumentNumber:
       name: DocumentNumber
       in: path
@@ -254,13 +227,40 @@ components:
       schema:
         type: integer
         maximum: 500
-    page:
-      name: page
-      in: query
-      description: Page number for paginated results.
-      schema:
-        type: integer
-        minimum: 1
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Missing or invalid Access-Token / Client-Secret.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Malformed request or validation error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    TooManyRequests:
+      description: Rate limit exceeded (300 requests/minute per access-token; ~25 per 5s sliding window).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InvoiceResponse:
+      description: A single invoice.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Invoice:
+                $ref: '#/components/schemas/Invoice'
   securitySchemes:
     accessToken:
       type: apiKey

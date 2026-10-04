@@ -99,6 +99,16 @@ paths:
           $ref: '#/components/responses/AccountResponse'
 components:
   schemas:
+    MetaInformation:
+      type: object
+      description: Pagination metadata returned on list endpoints.
+      properties:
+        '@TotalResources':
+          type: integer
+        '@TotalPages':
+          type: integer
+        '@CurrentPage':
+          type: integer
     Account:
       type: object
       description: An account in the chart of accounts.
@@ -118,16 +128,6 @@ components:
       required:
       - Number
       - Description
-    MetaInformation:
-      type: object
-      description: Pagination metadata returned on list endpoints.
-      properties:
-        '@TotalResources':
-          type: integer
-        '@TotalPages':
-          type: integer
-        '@CurrentPage':
-          type: integer
   responses:
     AccountResponse:
       description: A single account.

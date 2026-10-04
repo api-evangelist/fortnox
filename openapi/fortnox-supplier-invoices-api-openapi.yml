@@ -77,33 +77,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    SupplierInvoiceResponse:
-      description: A single supplier invoice.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              SupplierInvoice:
-                $ref: '#/components/schemas/SupplierInvoice'
   schemas:
-    MetaInformation:
-      type: object
-      description: Pagination metadata returned on list endpoints.
-      properties:
-        '@TotalResources':
-          type: integer
-        '@TotalPages':
-          type: integer
-        '@CurrentPage':
-          type: integer
     ErrorResponse:
       type: object
       description: Fortnox error envelope.
@@ -117,6 +91,16 @@ components:
               type: string
             Code:
               type: integer
+    MetaInformation:
+      type: object
+      description: Pagination metadata returned on list endpoints.
+      properties:
+        '@TotalResources':
+          type: integer
+        '@TotalPages':
+          type: integer
+        '@CurrentPage':
+          type: integer
     SupplierInvoice:
       type: object
       description: An inbound supplier (accounts-payable) invoice.
@@ -145,13 +129,6 @@ components:
       required:
       - SupplierNumber
   parameters:
-    limit:
-      name: limit
-      in: query
-      description: Number of records per page (max 500).
-      schema:
-        type: integer
-        maximum: 500
     page:
       name: page
       in: query
@@ -159,6 +136,29 @@ components:
       schema:
         type: integer
         minimum: 1
+    limit:
+      name: limit
+      in: query
+      description: Number of records per page (max 500).
+      schema:
+        type: integer
+        maximum: 500
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    SupplierInvoiceResponse:
+      description: A single supplier invoice.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              SupplierInvoice:
+                $ref: '#/components/schemas/SupplierInvoice'
   securitySchemes:
     accessToken:
       type: apiKey

@@ -99,33 +99,7 @@ paths:
         '204':
           description: Project deleted.
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    ProjectResponse:
-      description: A single project.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              Project:
-                $ref: '#/components/schemas/Project'
   schemas:
-    MetaInformation:
-      type: object
-      description: Pagination metadata returned on list endpoints.
-      properties:
-        '@TotalResources':
-          type: integer
-        '@TotalPages':
-          type: integer
-        '@CurrentPage':
-          type: integer
     ErrorResponse:
       type: object
       description: Fortnox error envelope.
@@ -163,6 +137,32 @@ components:
           type: string
       required:
       - Description
+    MetaInformation:
+      type: object
+      description: Pagination metadata returned on list endpoints.
+      properties:
+        '@TotalResources':
+          type: integer
+        '@TotalPages':
+          type: integer
+        '@CurrentPage':
+          type: integer
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ProjectResponse:
+      description: A single project.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Project:
+                $ref: '#/components/schemas/Project'
   securitySchemes:
     accessToken:
       type: apiKey

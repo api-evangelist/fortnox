@@ -102,33 +102,7 @@ paths:
         '204':
           description: Article deleted.
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    ArticleResponse:
-      description: A single article.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              Article:
-                $ref: '#/components/schemas/Article'
   schemas:
-    MetaInformation:
-      type: object
-      description: Pagination metadata returned on list endpoints.
-      properties:
-        '@TotalResources':
-          type: integer
-        '@TotalPages':
-          type: integer
-        '@CurrentPage':
-          type: integer
     ErrorResponse:
       type: object
       description: Fortnox error envelope.
@@ -169,14 +143,17 @@ components:
           type: number
       required:
       - Description
+    MetaInformation:
+      type: object
+      description: Pagination metadata returned on list endpoints.
+      properties:
+        '@TotalResources':
+          type: integer
+        '@TotalPages':
+          type: integer
+        '@CurrentPage':
+          type: integer
   parameters:
-    limit:
-      name: limit
-      in: query
-      description: Number of records per page (max 500).
-      schema:
-        type: integer
-        maximum: 500
     page:
       name: page
       in: query
@@ -184,6 +161,29 @@ components:
       schema:
         type: integer
         minimum: 1
+    limit:
+      name: limit
+      in: query
+      description: Number of records per page (max 500).
+      schema:
+        type: integer
+        maximum: 500
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ArticleResponse:
+      description: A single article.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Article:
+                $ref: '#/components/schemas/Article'
   securitySchemes:
     accessToken:
       type: apiKey

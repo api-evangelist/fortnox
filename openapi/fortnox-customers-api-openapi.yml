@@ -104,39 +104,7 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    CustomerResponse:
-      description: A single customer.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              Customer:
-                $ref: '#/components/schemas/Customer'
-    Unauthorized:
-      description: Missing or invalid Access-Token / Client-Secret.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    MetaInformation:
-      type: object
-      description: Pagination metadata returned on list endpoints.
-      properties:
-        '@TotalResources':
-          type: integer
-        '@TotalPages':
-          type: integer
-        '@CurrentPage':
-          type: integer
     ErrorResponse:
       type: object
       description: Fortnox error envelope.
@@ -150,6 +118,16 @@ components:
               type: string
             Code:
               type: integer
+    MetaInformation:
+      type: object
+      description: Pagination metadata returned on list endpoints.
+      properties:
+        '@TotalResources':
+          type: integer
+        '@TotalPages':
+          type: integer
+        '@CurrentPage':
+          type: integer
     Customer:
       type: object
       description: A customer in the customer register.
@@ -181,21 +159,29 @@ components:
           - PRIVATE
       required:
       - Name
+  responses:
+    CustomerResponse:
+      description: A single customer.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Customer:
+                $ref: '#/components/schemas/Customer'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Missing or invalid Access-Token / Client-Secret.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
-    CustomerNumber:
-      name: CustomerNumber
-      in: path
-      required: true
-      description: The customer number.
-      schema:
-        type: string
-    limit:
-      name: limit
-      in: query
-      description: Number of records per page (max 500).
-      schema:
-        type: integer
-        maximum: 500
     page:
       name: page
       in: query
@@ -203,6 +189,20 @@ components:
       schema:
         type: integer
         minimum: 1
+    limit:
+      name: limit
+      in: query
+      description: Number of records per page (max 500).
+      schema:
+        type: integer
+        maximum: 500
+    CustomerNumber:
+      name: CustomerNumber
+      in: path
+      required: true
+      description: The customer number.
+      schema:
+        type: string
   securitySchemes:
     accessToken:
       type: apiKey

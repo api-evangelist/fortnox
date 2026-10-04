@@ -73,33 +73,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    OfferResponse:
-      description: A single offer.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              Offer:
-                $ref: '#/components/schemas/Offer'
   schemas:
-    MetaInformation:
-      type: object
-      description: Pagination metadata returned on list endpoints.
-      properties:
-        '@TotalResources':
-          type: integer
-        '@TotalPages':
-          type: integer
-        '@CurrentPage':
-          type: integer
     ErrorResponse:
       type: object
       description: Fortnox error envelope.
@@ -113,6 +87,34 @@ components:
               type: string
             Code:
               type: integer
+    InvoiceRow:
+      type: object
+      description: A single line item on an invoice, order, or offer.
+      properties:
+        ArticleNumber:
+          type: string
+        Description:
+          type: string
+        DeliveredQuantity:
+          type: string
+        Price:
+          type: number
+        VAT:
+          type: number
+        AccountNumber:
+          type: integer
+        Unit:
+          type: string
+    MetaInformation:
+      type: object
+      description: Pagination metadata returned on list endpoints.
+      properties:
+        '@TotalResources':
+          type: integer
+        '@TotalPages':
+          type: integer
+        '@CurrentPage':
+          type: integer
     Offer:
       type: object
       description: An offer (quotation).
@@ -140,24 +142,6 @@ components:
             $ref: '#/components/schemas/InvoiceRow'
       required:
       - CustomerNumber
-    InvoiceRow:
-      type: object
-      description: A single line item on an invoice, order, or offer.
-      properties:
-        ArticleNumber:
-          type: string
-        Description:
-          type: string
-        DeliveredQuantity:
-          type: string
-        Price:
-          type: number
-        VAT:
-          type: number
-        AccountNumber:
-          type: integer
-        Unit:
-          type: string
     OfferListItem:
       type: object
       properties:
@@ -173,6 +157,13 @@ components:
         Total:
           type: number
   parameters:
+    page:
+      name: page
+      in: query
+      description: Page number for paginated results.
+      schema:
+        type: integer
+        minimum: 1
     DocumentNumber:
       name: DocumentNumber
       in: path
@@ -187,13 +178,22 @@ components:
       schema:
         type: integer
         maximum: 500
-    page:
-      name: page
-      in: query
-      description: Page number for paginated results.
-      schema:
-        type: integer
-        minimum: 1
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    OfferResponse:
+      description: A single offer.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Offer:
+                $ref: '#/components/schemas/Offer'
   securitySchemes:
     accessToken:
       type: apiKey
