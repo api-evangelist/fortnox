@@ -446,6 +446,9 @@ apis:
   - type: APIReference
     url: https://www.fortnox.se/developer/resources-rest-api/projects/projects
 common:
+- type: CapabilityMap
+  url: capabilities/fortnox-capability-edges.yml
+  name: Fortnox Business Capability Map
 - type: AgenticAccess
   url: agentic-access/fortnox-agentic-access.yml
 - type: DomainSecurity
