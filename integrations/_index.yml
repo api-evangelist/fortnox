@@ -73,7 +73,7 @@
     app_slug: fortnox-1
     beta: false
     builder: unknown (not in the directory record)
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: fortnox-pipedream
   label: Pipedream
@@ -99,5 +99,5 @@
     actions: true
     sources: false
     builder: Pipedream repo (component)
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
