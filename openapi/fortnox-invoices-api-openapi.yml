@@ -111,20 +111,41 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    TooManyRequests:
+      description: Rate limit exceeded (300 requests/minute per access-token; ~25 per 5s sliding window).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Malformed request or validation error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Missing or invalid Access-Token / Client-Secret.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InvoiceResponse:
+      description: A single invoice.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Invoice:
+                $ref: '#/components/schemas/Invoice'
   schemas:
-    ErrorResponse:
-      type: object
-      description: Fortnox error envelope.
-      properties:
-        ErrorInformation:
-          type: object
-          properties:
-            Error:
-              type: integer
-            Message:
-              type: string
-            Code:
-              type: integer
     InvoiceRow:
       type: object
       description: A single line item on an invoice, order, or offer.
@@ -177,6 +198,19 @@ components:
             $ref: '#/components/schemas/InvoiceRow'
       required:
       - CustomerNumber
+    ErrorResponse:
+      type: object
+      description: Fortnox error envelope.
+      properties:
+        ErrorInformation:
+          type: object
+          properties:
+            Error:
+              type: integer
+            Message:
+              type: string
+            Code:
+              type: integer
     InvoiceListItem:
       type: object
       properties:
@@ -206,13 +240,6 @@ components:
         '@CurrentPage':
           type: integer
   parameters:
-    page:
-      name: page
-      in: query
-      description: Page number for paginated results.
-      schema:
-        type: integer
-        minimum: 1
     DocumentNumber:
       name: DocumentNumber
       in: path
@@ -227,40 +254,13 @@ components:
       schema:
         type: integer
         maximum: 500
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Missing or invalid Access-Token / Client-Secret.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Malformed request or validation error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    TooManyRequests:
-      description: Rate limit exceeded (300 requests/minute per access-token; ~25 per 5s sliding window).
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    InvoiceResponse:
-      description: A single invoice.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              Invoice:
-                $ref: '#/components/schemas/Invoice'
+    page:
+      name: page
+      in: query
+      description: Page number for paginated results.
+      schema:
+        type: integer
+        minimum: 1
   securitySchemes:
     accessToken:
       type: apiKey

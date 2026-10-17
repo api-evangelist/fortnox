@@ -98,6 +98,16 @@ paths:
         '200':
           $ref: '#/components/responses/AccountResponse'
 components:
+  responses:
+    AccountResponse:
+      description: A single account.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Account:
+                $ref: '#/components/schemas/Account'
   schemas:
     MetaInformation:
       type: object
@@ -128,16 +138,6 @@ components:
       required:
       - Number
       - Description
-  responses:
-    AccountResponse:
-      description: A single account.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              Account:
-                $ref: '#/components/schemas/Account'
   securitySchemes:
     accessToken:
       type: apiKey

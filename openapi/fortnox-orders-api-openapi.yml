@@ -91,19 +91,24 @@ paths:
           $ref: '#/components/responses/OrderResponse'
 components:
   schemas:
-    ErrorResponse:
+    InvoiceRow:
       type: object
-      description: Fortnox error envelope.
+      description: A single line item on an invoice, order, or offer.
       properties:
-        ErrorInformation:
-          type: object
-          properties:
-            Error:
-              type: integer
-            Message:
-              type: string
-            Code:
-              type: integer
+        ArticleNumber:
+          type: string
+        Description:
+          type: string
+        DeliveredQuantity:
+          type: string
+        Price:
+          type: number
+        VAT:
+          type: number
+        AccountNumber:
+          type: integer
+        Unit:
+          type: string
     Order:
       type: object
       description: A sales order.
@@ -131,24 +136,19 @@ components:
             $ref: '#/components/schemas/InvoiceRow'
       required:
       - CustomerNumber
-    InvoiceRow:
+    ErrorResponse:
       type: object
-      description: A single line item on an invoice, order, or offer.
+      description: Fortnox error envelope.
       properties:
-        ArticleNumber:
-          type: string
-        Description:
-          type: string
-        DeliveredQuantity:
-          type: string
-        Price:
-          type: number
-        VAT:
-          type: number
-        AccountNumber:
-          type: integer
-        Unit:
-          type: string
+        ErrorInformation:
+          type: object
+          properties:
+            Error:
+              type: integer
+            Message:
+              type: string
+            Code:
+              type: integer
     MetaInformation:
       type: object
       description: Pagination metadata returned on list endpoints.
@@ -173,28 +173,6 @@ components:
           format: date
         Total:
           type: number
-  parameters:
-    page:
-      name: page
-      in: query
-      description: Page number for paginated results.
-      schema:
-        type: integer
-        minimum: 1
-    DocumentNumber:
-      name: DocumentNumber
-      in: path
-      required: true
-      description: The document number identifying the invoice/order/offer.
-      schema:
-        type: string
-    limit:
-      name: limit
-      in: query
-      description: Number of records per page (max 500).
-      schema:
-        type: integer
-        maximum: 500
   responses:
     NotFound:
       description: The requested resource was not found.
@@ -211,6 +189,28 @@ components:
             properties:
               Order:
                 $ref: '#/components/schemas/Order'
+  parameters:
+    DocumentNumber:
+      name: DocumentNumber
+      in: path
+      required: true
+      description: The document number identifying the invoice/order/offer.
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      description: Number of records per page (max 500).
+      schema:
+        type: integer
+        maximum: 500
+    page:
+      name: page
+      in: query
+      description: Page number for paginated results.
+      schema:
+        type: integer
+        minimum: 1
   securitySchemes:
     accessToken:
       type: apiKey

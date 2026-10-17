@@ -73,20 +73,29 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  parameters:
+    page:
+      name: page
+      in: query
+      description: Page number for paginated results.
+      schema:
+        type: integer
+        minimum: 1
+    DocumentNumber:
+      name: DocumentNumber
+      in: path
+      required: true
+      description: The document number identifying the invoice/order/offer.
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      description: Number of records per page (max 500).
+      schema:
+        type: integer
+        maximum: 500
   schemas:
-    ErrorResponse:
-      type: object
-      description: Fortnox error envelope.
-      properties:
-        ErrorInformation:
-          type: object
-          properties:
-            Error:
-              type: integer
-            Message:
-              type: string
-            Code:
-              type: integer
     InvoiceRow:
       type: object
       description: A single line item on an invoice, order, or offer.
@@ -105,6 +114,19 @@ components:
           type: integer
         Unit:
           type: string
+    ErrorResponse:
+      type: object
+      description: Fortnox error envelope.
+      properties:
+        ErrorInformation:
+          type: object
+          properties:
+            Error:
+              type: integer
+            Message:
+              type: string
+            Code:
+              type: integer
     MetaInformation:
       type: object
       description: Pagination metadata returned on list endpoints.
@@ -156,28 +178,6 @@ components:
           format: date
         Total:
           type: number
-  parameters:
-    page:
-      name: page
-      in: query
-      description: Page number for paginated results.
-      schema:
-        type: integer
-        minimum: 1
-    DocumentNumber:
-      name: DocumentNumber
-      in: path
-      required: true
-      description: The document number identifying the invoice/order/offer.
-      schema:
-        type: string
-    limit:
-      name: limit
-      in: query
-      description: Number of records per page (max 500).
-      schema:
-        type: integer
-        maximum: 500
   responses:
     NotFound:
       description: The requested resource was not found.

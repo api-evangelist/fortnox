@@ -90,7 +90,37 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    VoucherResponse:
+      description: A single voucher.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Voucher:
+                $ref: '#/components/schemas/Voucher'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    VoucherRow:
+      type: object
+      description: A single debit/credit line in a voucher.
+      properties:
+        Account:
+          type: integer
+        Debit:
+          type: number
+        Credit:
+          type: number
+        Description:
+          type: string
+        TransactionInformation:
+          type: string
     ErrorResponse:
       type: object
       description: Fortnox error envelope.
@@ -104,6 +134,16 @@ components:
               type: string
             Code:
               type: integer
+    MetaInformation:
+      type: object
+      description: Pagination metadata returned on list endpoints.
+      properties:
+        '@TotalResources':
+          type: integer
+        '@TotalPages':
+          type: integer
+        '@CurrentPage':
+          type: integer
     Voucher:
       type: object
       description: A double-entry accounting voucher (journal entry).
@@ -128,46 +168,6 @@ components:
       - VoucherSeries
       - TransactionDate
       - VoucherRows
-    MetaInformation:
-      type: object
-      description: Pagination metadata returned on list endpoints.
-      properties:
-        '@TotalResources':
-          type: integer
-        '@TotalPages':
-          type: integer
-        '@CurrentPage':
-          type: integer
-    VoucherRow:
-      type: object
-      description: A single debit/credit line in a voucher.
-      properties:
-        Account:
-          type: integer
-        Debit:
-          type: number
-        Credit:
-          type: number
-        Description:
-          type: string
-        TransactionInformation:
-          type: string
-  responses:
-    VoucherResponse:
-      description: A single voucher.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              Voucher:
-                $ref: '#/components/schemas/Voucher'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     accessToken:
       type: apiKey
