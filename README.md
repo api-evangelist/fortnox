@@ -1,4 +1,4 @@
-# Fortnox (fortnox)
+# Fortnox
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,116 +64,156 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Fortnox is a Swedish cloud accounting, ERP, and business-administration platform for small and medium-sized businesses and accounting bureaus (Sweden / Nordics). Its REST API at `https://api.fortnox.se/3/` programmatically manages accounting and financial data - invoices, customers, articles, orders, offers, vouchers, accounts, suppliers, supplier invoices, projects, and financial years. Fortnox also publishes a real duplex WebSocket event stream at `wss://ws.fortnox.se/topics-v1` that pushes minimal change notifications across domains so integrations can react to changes instead of polling.
+Fortnox is a Swedish cloud accounting, ERP, and business-administration platform for small and medium-sized businesses and accounting bureaus. Its REST API at https://api.fortnox.se/3/ programmatically manages accounting and financial data - invoices, customers, articles, orders, offers, vouchers, accounts, suppliers, supplier invoices, projects, and financial years - authenticated with OAuth2 Authorization Code Flow. Fortnox also publishes a duplex WebSocket event stream at wss://ws.fortnox.se/topics-v1 that pushes minimal change notifications across domains so integrations can react to changes instead of polling.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/fortnox/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/fortnox/refs/heads/main/apis.yml)
+**Areas:** Accounting · ERP · Invoicing · Bookkeeping · Sweden · Nordic · Finance · Vouchers · Customers · Software-as-a-Service · Real-Time
 
-## Access Model (Honest Up Front)
+## Fortnox on APIs.io
 
-- **This is a proprietary commercial SaaS API, not open source and not a public open-data API.** You must register a developer application in the Fortnox Developer Portal and have each end customer authorize your app.
-- **Authentication is OAuth2 (Authorization Code Flow).** The end customer authorizes your integration; you exchange an Authorization-Code for an Access-Token (Bearer JWT, valid 1 hour) and a Refresh-Token (valid 45 days).
-  - Authorization endpoint: `https://apps.fortnox.se/oauth-v1/auth`
-  - Token endpoint: `https://apps.fortnox.se/oauth-v1/token`
-- **Every REST call carries two headers:** the `Access-Token` header (the Bearer JWT) **and** the `Client-Secret` header from your Fortnox app.
-- **Legacy auth is gone.** The old fixed `Access-Token` / `Client-Secret` credential pair (long-lived integration keys) was fully deprecated on **30 April 2025**; all integrations must use OAuth2.
-- **Rate limit:** 300 requests/minute per access-token (enforced as a sliding window of ~25 requests per 5 seconds, per client-id + tenant). Exceeding it returns HTTP 429.
-- **Marketplace economics:** Fortnox operates a developer marketplace; paid integrations are billed to the customer with a revenue-share (developer receives ~75% of the integration revenue).
+Everything profiled for Fortnox is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/fortnox/](https://apis.io/providers/fortnox/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (12)
 
-- Accounting
-- ERP
-- Invoicing
-- Bookkeeping
-- Sweden
-- Nordics
-- Finance
-- Vouchers
-- Customers
-- SaaS
+- [Fortnox Topics WebSocket API](https://apis.io/apis/fortnox/fortnox-topics-websocket-api/) — Duplex WebSocket stream at wss://ws.fortnox.se/topics-v1 that pushes minimal change-notification events across domains (invoices, supplier-invoices,…
+- [Fortnox Accounts API](https://apis.io/apis/fortnox/fortnox-accounts-api/) — Chart of accounts.
+- [Fortnox Articles API](https://apis.io/apis/fortnox/fortnox-articles-api/) — Article (product/service) register.
+- [Fortnox Customers API](https://apis.io/apis/fortnox/fortnox-customers-api/) — Customer register.
+- [Fortnox Financial Years API](https://apis.io/apis/fortnox/fortnox-financial-years-api/) — Financial (accounting) years.
+- [Fortnox Invoices API](https://apis.io/apis/fortnox/fortnox-invoices-api/) — Accounts-receivable customer invoices.
+- [Fortnox Offers API](https://apis.io/apis/fortnox/fortnox-offers-api/) — Offers (quotations).
+- [Fortnox Orders API](https://apis.io/apis/fortnox/fortnox-orders-api/) — Sales orders.
+- [Fortnox Projects API](https://apis.io/apis/fortnox/fortnox-projects-api/) — Projects for tagging and reporting.
+- [Fortnox Supplier Invoices API](https://apis.io/apis/fortnox/fortnox-supplier-invoices-api/) — Inbound accounts-payable supplier invoices.
+- [Fortnox Suppliers API](https://apis.io/apis/fortnox/fortnox-suppliers-api/) — Supplier register.
+- [Fortnox Vouchers API](https://apis.io/apis/fortnox/fortnox-vouchers-api/) — Accounting vouchers (journal entries).
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-07-12
-- **Modified:** 2026-07-12
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### AsyncAPI (1)
 
-### Fortnox Invoices API
+Event-driven and webhook contracts.
 
-Create, read, update, cancel, and list customer invoices, plus actions such as bookkeep, credit, e-mail, and print. Accounts-receivable sales invoices in a Fortnox company file.
+- [Fortnox Topics WebSocket API](https://apis.io/asyncapis/fortnox/fortnox-asyncapi/)
 
-- **Human URL:** [https://www.fortnox.se/developer/resources-rest-api/invoices/invoices](https://www.fortnox.se/developer/resources-rest-api/invoices/invoices)
-- **Base URL:** `https://api.fortnox.se/3`
+#### Event channels (1)
 
-### Fortnox Customers API
+Individual events and webhooks the provider emits.
 
-Manage the customer register - create, retrieve, update, delete, and list customers with addresses, org/VAT numbers, terms, and default accounts used across invoices, orders, and offers.
+- [/topics-v1](https://apis.io/channels/fortnox/topics-v1/)
 
-- **Human URL:** [https://www.fortnox.se/developer/resources-rest-api/customers/customers](https://www.fortnox.se/developer/resources-rest-api/customers/customers)
-- **Base URL:** `https://api.fortnox.se/3`
+#### Agentic access (1)
 
-### Fortnox Articles API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-Manage the article (product/service) register used as line items on invoices, orders, and offers - pricing, units, stock quantities, sales/purchase accounts, and VAT settings.
+- [Fortnox Agentic Access](https://apis.io/agentic-access/fortnox/fortnox-agentic-access/)
 
-- **Human URL:** [https://www.fortnox.se/developer/resources-rest-api/articles/articles](https://www.fortnox.se/developer/resources-rest-api/articles/articles)
-- **Base URL:** `https://api.fortnox.se/3`
+#### Collections (12)
 
-### Fortnox Orders API
+Postman and Open Collection request collections.
 
-Create, read, update, and list sales orders, and convert an order into an invoice. Orders carry customer, article lines, delivery details, and workflow status.
+- [Fortnox REST API](https://apis.io/collections/fortnox/open-fortnox/)
+- [Fortnox REST API (Representative Subset) Accounts API](https://apis.io/collections/fortnox/open-fortnox-accounts-api/)
+- [Fortnox REST API (Representative Subset) Accounts Articles API](https://apis.io/collections/fortnox/open-fortnox-articles-api/)
+- [Fortnox REST API (Representative Subset) Accounts Customers API](https://apis.io/collections/fortnox/open-fortnox-customers-api/)
+- [Fortnox REST API (Representative Subset) Accounts Financial Years API](https://apis.io/collections/fortnox/open-fortnox-financial-years-api/)
+- [Fortnox REST API (Representative Subset) Accounts Invoices API](https://apis.io/collections/fortnox/open-fortnox-invoices-api/)
+- [Fortnox REST API (Representative Subset) Accounts Offers API](https://apis.io/collections/fortnox/open-fortnox-offers-api/)
+- [Fortnox REST API (Representative Subset) Accounts Orders API](https://apis.io/collections/fortnox/open-fortnox-orders-api/)
+- [Fortnox REST API (Representative Subset) Accounts Projects API](https://apis.io/collections/fortnox/open-fortnox-projects-api/)
+- [Fortnox REST API (Representative Subset) Accounts Supplier Invoices API](https://apis.io/collections/fortnox/open-fortnox-supplier-invoices-api/)
+- [Fortnox REST API (Representative Subset) Accounts Suppliers API](https://apis.io/collections/fortnox/open-fortnox-suppliers-api/)
+- [Fortnox REST API (Representative Subset) Accounts Vouchers API](https://apis.io/collections/fortnox/open-fortnox-vouchers-api/)
 
-- **Human URL:** [https://www.fortnox.se/developer/resources-rest-api/order/orders](https://www.fortnox.se/developer/resources-rest-api/order/orders)
-- **Base URL:** `https://api.fortnox.se/3`
+#### Governance rules (1)
 
-### Fortnox Offers API
+Spectral rulesets for the provider's contracts.
 
-Create, read, update, and list offers (quotations), and convert an accepted offer into an order or invoice.
+- [Fortnox — asyncapi rules](https://apis.io/rules/fortnox/fortnox-asyncapi-spectral-rules/)
 
-- **Human URL:** [https://www.fortnox.se/developer/resources-rest-api/offer/offers](https://www.fortnox.se/developer/resources-rest-api/offer/offers)
-- **Base URL:** `https://api.fortnox.se/3`
+#### Security (2)
 
-### Fortnox Bookkeeping API
+Authentication, trust centre, and vulnerability disclosure.
 
-Post and read accounting vouchers (double-entry journal entries) into voucher series, and manage the chart of accounts and financial years vouchers are booked against. The general-ledger core of the API.
+- [Fortnox Authentication](https://apis.io/security/fortnox/fortnox-authentication/)
+- [Fortnox Domain Security](https://apis.io/security/fortnox/fortnox-domain-security/)
 
-- **Human URL:** [https://www.fortnox.se/developer/resources-rest-api/vouchers/vouchers](https://www.fortnox.se/developer/resources-rest-api/vouchers/vouchers)
-- **Base URL:** `https://api.fortnox.se/3`
+#### Plans and pricing (1)
 
-### Fortnox Suppliers & Supplier Invoices API
+Published plans, tiers and prices.
 
-Manage the supplier register and inbound supplier invoices - create, read, update, and list suppliers, and register, bookkeep, and pay supplier invoices in the accounts-payable workflow.
+- [Fortnox Plans Pricing](https://apis.io/plans/fortnox/fortnox-plans-pricing/)
 
-- **Human URL:** [https://www.fortnox.se/developer/resources-rest-api/supplier-invoices/supplier-invoices](https://www.fortnox.se/developer/resources-rest-api/supplier-invoices/supplier-invoices)
-- **Base URL:** `https://api.fortnox.se/3`
+#### Rate limits (1)
 
-### Fortnox Projects API
+Published request limits.
 
-Create, read, update, delete, and list projects used to tag invoices, vouchers, orders, and other records for project-based accounting and reporting.
+- [Fortnox Rate Limits](https://apis.io/rate-limits/fortnox/fortnox-rate-limits/)
 
-- **Human URL:** [https://www.fortnox.se/developer/resources-rest-api/projects/projects](https://www.fortnox.se/developer/resources-rest-api/projects/projects)
-- **Base URL:** `https://api.fortnox.se/3`
+#### FinOps (1)
 
-### Fortnox Topics WebSocket API
+What the API costs to run, by operation.
 
-Duplex WebSocket stream at `wss://ws.fortnox.se/topics-v1` that pushes minimal change-notification events across domains (invoices, supplier-invoices, customers, articles, orders, offers, vouchers, projects, and more) so integrations react to changes instead of polling. Kafka-backed, at-least-once delivery, per-topic offsets, up to 14-day replay.
+- [Fortnox Finops](https://apis.io/finops/fortnox/fortnox-finops/)
 
-- **Human URL:** [https://www.fortnox.se/developer/guides-and-good-to-know/websockets](https://www.fortnox.se/developer/guides-and-good-to-know/websockets)
-- **Base URL:** `wss://ws.fortnox.se/topics-v1`
+## Where to find this API
 
-## Common Properties
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-- [Domain Security](security/fortnox-domain-security.yml)
-- [Authentication](authentication/fortnox-authentication.yml)
-- [LinkedIn](https://www.linkedin.com/company/fortnox-ab)
 - [Website](https://www.fortnox.se)
 - [Documentation](https://www.fortnox.se/developer)
-- [Plans](plans/fortnox-plans-pricing.yml)
-- [Rate Limits](rate-limits/fortnox-rate-limits.yml)
-- [Fin Ops](finops/fortnox-finops.yml)
+- [Blog](https://www.fortnox.se/developer/blog)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 27.9** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 54.4 |
+| Contract governance | 13.6 |
+| Operational transparency | 5.3 |
+| Developer ergonomics | 25.0 |
+| Access clarity | 7.9 |
+
+**Agent readiness 19.0** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 11.8** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/fortnox/](https://apis.io/providers/fortnox/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Fortnox: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/fortnox/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
